@@ -118,3 +118,9 @@ function checkPassReqs(password) {
     }
     return true;
 }
+
+app.get('/all', (req, res) => {
+    userData.find({}, (err, data) => {
+        res.json(data);
+    });
+});
