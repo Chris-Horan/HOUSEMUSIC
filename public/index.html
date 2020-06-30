@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>Test</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Assignment 2">
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    </head>
+    <body>
+        <div id="insert">
+            <label for="userName">Username:</label>
+            <input type="text" id="userName"/>
+
+            <label for="sizeIns">Email Address:</label>
+            <input type="text" id="email"/>
+
+            <label for="password">Password:</label>
+            <input type="text" id="password"/>
+
+            <button onclick="addUser()">Add User</button>
+        </div>
+        <br><br><br>
+        <div id="changepw">
+            <label for="userNamepw">Username:</label>
+            <input type="text" id="userNamepw"/>
+
+            <label for="passwordpw">New Password:</label>
+            <input type="text" id="passwordpw"/>
+
+            <button onclick="changePw()">Change Password</button>
+        </div>
+        <br><br><br>
+        <div id="removeuser">
+            <label for="userNamerem">Username:</label>
+            <input type="text" id="userNamerem"/>
+
+            <button onclick="removeUser()">Remove User</button>
+        </div>
+    </body>
+</html>

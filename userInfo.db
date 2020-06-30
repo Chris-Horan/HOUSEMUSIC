@@ -1,0 +1,8 @@
+{"userName":"sdhjaskd","password":"123123123","email":"asd@dsasd.com","userType":"user","_id":"3rOKyL26Viuo3nZJ"}
+{"userName":"sdhj","password":"123123123","email":"asd@dsdsasd.com","userType":"user","_id":"OohgqyXBsQo0eLsL"}
+{"userName":"newusER","password":"short334","email":"tes@ttest.com","userType":"user","_id":"T8Ki5rxrImwfMEQP"}
+{"userName":"newusEr","password":"short334","email":"testtest.com","userType":"user","_id":"cFcwmFRhDEfLmQb9"}
+{"userName":"choran","password":"123456789","email":"chris@hi.com","userType":"user","_id":"j79vJFfJsV7cHs58"}
+{"userName":"chris","password":"testtestest%$#$%","email":"fhdjsk@fhjas.com","userType":"user","_id":"nrmNebivncXreOty"}
+{"$$indexCreated":{"fieldName":"userName","unique":true,"sparse":false}}
+{"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}

@@ -1,0 +1,1 @@
+Folder containing all frontend resources (html, css, js).

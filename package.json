@@ -1,0 +1,29 @@
+{
+  "name": "housemusic",
+  "version": "1.0.0",
+  "description": "Music sampling app.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"No tests yet\"",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chris-Horan/HOUSEMUSIC.git"
+  },
+  "keywords": [
+    "music",
+    "sampling",
+    "beat"
+  ],
+  "author": "Chris Horan, Shresth Kapila, Derrick Cham, Shiyi Chen, Harry Preet Singh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Chris-Horan/HOUSEMUSIC/issues"
+  },
+  "homepage": "https://github.com/Chris-Horan/HOUSEMUSIC#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nedb": "^1.8.0"
+  }
+}
