@@ -15,6 +15,7 @@ function addUser() {
         }
     };
     fetch('/addUser', options);
+    buildTable();
 }
 
 function changePw() {
@@ -29,6 +30,7 @@ function changePw() {
         }
     };
     fetch('/changePassword', options);
+    buildTable();
 }
 
 function removeUser() {
@@ -42,6 +44,7 @@ function removeUser() {
         }
     };
     fetch('/removeUser', options);
+    buildTable();
 }
 
 async function buildTable() {
