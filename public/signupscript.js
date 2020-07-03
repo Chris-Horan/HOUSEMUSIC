@@ -4,10 +4,10 @@ function signup() {
     var password = document.getElementById("Password").value;
     var data = {userName, email, password};
     if(checkPassReqs(password) == false){
-     return false
+     return false;
 	}
     if(checkUserReqs(userName, email) == false){
-     return false
+     return false;
 	}
     var options = {
         method: 'POST',

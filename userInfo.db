@@ -4,3 +4,4 @@
 {"userName":"choran","password":"123456789","email":"chris@hi.com","userType":"user","_id":"j79vJFfJsV7cHs58"}
 {"$$indexCreated":{"fieldName":"userName","unique":true,"sparse":false}}
 {"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
+{"userName":"chris","password":"chrischris","email":"chris@chris.com","userType":"user","_id":"BwiKXQ9YuTpYjciF"}

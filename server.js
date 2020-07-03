@@ -31,20 +31,18 @@ userData.ensureIndex({fieldName: 'email', unique: true}, function(err){});
 // Handles the /addUser post request
 app.post('/addUser', (req, res) => {
     console.log('Add user request.');
-    if(checkUserReqs(req)) {
-        userData.insert({userName: req.body.userName, password: req.body.password, email: req.body.email, userType: 'user'}, function(err) {
-            if(err) {
-                console.log("Add user failed.");
-                console.log("Error: ", err.errorType);
-                if(err.errorType === 'uniqueViolated') {
-                    console.log("This username or email address already has an account associated with it.");
-                }
+    userData.insert({userName: req.body.userName, password: req.body.password, email: req.body.email, userType: 'user'}, function(err) {
+        if(err) {
+            console.log("Add user failed.");
+            console.log("Error: ", err.errorType);
+            if(err.errorType === 'uniqueViolated') {
+                console.log("This username or email address already has an account associated with it.");
             }
-            else {
-                console.log("Add user successful: ", req.body.userName);
-            }
-        });
-    }
+        }
+        else {
+            console.log("Add user successful: ", req.body.userName);
+        }
+    });
 });
 
 // Handles user authentication
@@ -59,20 +57,18 @@ app.post('/authenticateUser', (req, res) => {
 // Handles the /changePassword post request
 app.post('/changePassword', (req, res) => {
     console.log('Change password request.');
-    if(checkPassReqs(req.body.password)) {
-        userData.update(
-            {userName: req.body.userName},
-            { $set: {password: req.body.password}}, function(err) {
-                if(err) {
-                    console.log("Password update failed.");
-                }
-                else {
-                    console.log("Password update successful");
-                }
+    userData.update(
+        {userName: req.body.userName},
+        { $set: {password: req.body.password}}, function(err) {
+            if(err) {
+                console.log("Password update failed.");
             }
-        );
-        userData.persistence.compactDatafile();
-    }
+            else {
+                console.log("Password update successful");
+            }
+        }
+    );
+    userData.persistence.compactDatafile();
 });
 
 //Handles the /removeUser post request
