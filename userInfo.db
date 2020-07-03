@@ -2,7 +2,8 @@
 {"userName":"chris","password":"chrischris","email":"chris@chris.com","userType":"user","_id":"BwiKXQ9YuTpYjciF"}
 {"userName":"ssddccf","password":"csdfgh","email":"asd@122.com","userType":"user","_id":"LryG2NkIHMurLyH3"}
 {"userName":"newusER","password":"short334","email":"tes@ttest.com","userType":"user","_id":"T8Ki5rxrImwfMEQP"}
+{"userName":"pooollll","password":"qwertyuiop","email":"pollloppp@kkks.com","userType":"user","_id":"YFInqw3oT3XLr2s7"}
+{"userName":"newtest","password":"testtest","email":"new@new.new","userType":"user","_id":"fAcf2e9MmzO5gMvh"}
 {"userName":"choran","password":"123456789","email":"chris@hi.com","userType":"user","_id":"j79vJFfJsV7cHs58"}
 {"$$indexCreated":{"fieldName":"userName","unique":true,"sparse":false}}
 {"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
-{"userName":"newtest","password":"testtest","email":"new@new.new","userType":"user","_id":"fAcf2e9MmzO5gMvh"}

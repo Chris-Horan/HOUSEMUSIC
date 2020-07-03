@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path')
 const app = express();
 const DataStore = require('nedb');
 const PORT = process.env.PORT || 5000;
@@ -15,6 +16,9 @@ userData.loadDatabase();
 
 // Direct node to frontend resources folder (html, css, js)
 app.use(express.static(__dirname + '/public'));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 // Set max json request size
 app.use(express.json({limit: '10kb'}));
@@ -38,6 +42,12 @@ app.post('/addUser', (req, res) => {
             // Report error
             if(err.errorType === 'uniqueViolated') {
                 console.log("This username or email address already has an account associated with it.");
+                // alert("This username or email is already taken, try another one.")
+                console.log("first")  // just to check
+                res.status(404).send("Sorry can't find that!");
+                res.render('error.ejs') 
+                console.log("last") // just to check 
+                // it does render but does not reach the .ejs file check console
             }
         }
         else {
