@@ -35,6 +35,7 @@ app.post('/addUser', (req, res) => {
         if(err) {
             console.log("Add user failed.");
             console.log("Error: ", err.errorType);
+            // Report error
             if(err.errorType === 'uniqueViolated') {
                 console.log("This username or email address already has an account associated with it.");
             }
@@ -48,10 +49,25 @@ app.post('/addUser', (req, res) => {
 // Handles user authentication
 app.post('/authenticateUser', (req, res) => {
     console.log('User authentication request.');
-    userData.find({userName: req.body.userName}, function(err, data) {
-        res.json(data);
-        console.log('Responded with user data.')
+    userData.count({userName: req.body.userName}, function(err, count) {
+        if(count==1) {
+            userData.find({userName: req.body.userName}, function(err, data) {
+                if(data[0].password == req.body.password) {
+                    res.json(data);
+                    console.log('Responded with user data.')
+                }
+                // Report error
+                else {
+                    console.log('Authentication failed');
+                }
+            });
+        }
+        // Report error
+        else {
+            console.log("User does not exist");
+        }
     });
+    
 });
 
 // Handles the /changePassword post request
@@ -60,6 +76,7 @@ app.post('/changePassword', (req, res) => {
     userData.update(
         {userName: req.body.userName},
         { $set: {password: req.body.password}}, function(err) {
+            // Report error
             if(err) {
                 console.log("Password update failed.");
             }
@@ -76,6 +93,7 @@ app.post('/removeUser', (req, res) => {
     console.log('Remove user request.');
     userData.remove(
         {userName: req.body.userName}, function(err) {
+            // Report error
             if(err) {
                 console.log("Remove user failed.");
             }
