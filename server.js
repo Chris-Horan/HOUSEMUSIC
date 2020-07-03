@@ -47,6 +47,15 @@ app.post('/addUser', (req, res) => {
     }
 });
 
+// Handles user authentication
+app.post('/authenticateUser', (req, res) => {
+    console.log('User authentication request.');
+    userData.find({userName: req.body.userName}, function(err, data) {
+        res.json(data);
+        console.log('Responded with user data.')
+    });
+});
+
 // Handles the /changePassword post request
 app.post('/changePassword', (req, res) => {
     console.log('Change password request.');
@@ -82,43 +91,45 @@ app.post('/removeUser', (req, res) => {
     userData.persistence.compactDatafile();
 });
 
-// Ensures that 
-function checkUserReqs(req) {
-    var userName = req.body.userName;
-    var password = req.body.password;
-    var email = req.body.email;
-    var alphanumeric = /^[0-9a-zA-Z]+$/;
-    var verifyPassword = /^[0-9a-zA-Z!@#$%^&*()]+$/;
-    var verifyEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if(userName.length < 4 || userName.length > 16) {
-        throw "Username must be 4 to 16 characters long.";
-    }
-    if(!alphanumeric.test(userName)) {
-        throw "Username must contain only letters and numbers.";
-    }
-    if(password.length < 6 || password.length > 25) {
-        throw "Password must contain between 6 and 25 characters.";
-    }
-    if(!verifyPassword.test(password)) {
-        throw "Password must contain only numbers, letters, and common symbols (!@#$%^&*).";
-    }
-    if(!verifyEmail.test(email)) {
-        throw "Invalid email address.";
-    }
-    return true;
-}
+// // Checks username requirements
+// function checkUserReqs(req) {
+//     var userName = req.body.userName;
+//     var password = req.body.password;
+//     var email = req.body.email;
+//     var alphanumeric = /^[0-9a-zA-Z]+$/;
+//     var verifyPassword = /^[0-9a-zA-Z!@#$%^&*()]+$/;
+//     var verifyEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+//     if(userName.length < 4 || userName.length > 16) {
+//         throw "Username must be 4 to 16 characters long.";
+//     }
+//     if(!alphanumeric.test(userName)) {
+//         throw "Username must contain only letters and numbers.";
+//     }
+//     if(password.length < 6 || password.length > 25) {
+//         throw "Password must contain between 6 and 25 characters.";
+//     }
+//     if(!verifyPassword.test(password)) {
+//         throw "Password must contain only numbers, letters, and common symbols (!@#$%^&*).";
+//     }
+//     if(!verifyEmail.test(email)) {
+//         throw "Invalid email address.";
+//     }
+//     return true;
+// }
 
-function checkPassReqs(password) {
-    var verifyPassword = /^[0-9a-zA-Z!@#$%^&*()]+$/;
-    if(password.length < 6 || password.length > 25) {
-        throw "Password must contain between 6 and 25 characters.";
-    }
-    if(!verifyPassword.test(password)) {
-        throw "Password must contain only numbers, letters, and common symbols (!@#$%^&*).";
-    }
-    return true;
-}
+// // Checks password requirements
+// function checkPassReqs(password) {
+//     var verifyPassword = /^[0-9a-zA-Z!@#$%^&*()]+$/;
+//     if(password.length < 6 || password.length > 25) {
+//         throw "Password must contain between 6 and 25 characters.";
+//     }
+//     if(!verifyPassword.test(password)) {
+//         throw "Password must contain only numbers, letters, and common symbols (!@#$%^&*).";
+//     }
+//     return true;
+// }
 
+// Sends all userData in a response
 app.get('/all', (req, res) => {
     userData.find({}, (err, data) => {
         res.json(data);
