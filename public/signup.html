@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="stylesheets/signup.css"/>
     <title>SignUp</title>
+    <script src="signupscript.js"></script>
   </head>
   <body>
     <div id="signUpBox">
@@ -13,18 +14,18 @@
         <form action="" method="post">
           <!-- username -->
           <div class="inputText">
-            <input type="text" placeholder="Username"/>
+            <input type="text" placeholder="Username" id="Username"/>
           </div>
           <!-- email -->
           <div class="inputText">
-            <input type="email" placeholder="Email"/>
+            <input type="email" placeholder="Email" id = "Email"/>
           </div>
           <!-- passsword -->
           <div class="inputText">
-            <input type="password" placeholder="Password"/>
+            <input type="password" placeholder="Password" id="Password"/>
           </div>
           <!-- signUp button -->
-          <input type="button" value="Sign Up" class="inputButton"/>
+          <input type="button" value="Sign Up" class="inputButton" onclick="signup()"/>
         </form>
 
       </div>

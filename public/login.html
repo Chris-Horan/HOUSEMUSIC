@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="stylesheets/login.css"/>
     <title>Login</title>
+    <script src="signupscript.js"></script>
   </head>
   <body>
     <div id="loginBox">
@@ -13,14 +14,14 @@
         <form action="" method="post">
           <!-- username -->
           <div class="inputText">
-            <input type="text" placeholder="Username"/>
+            <input type="text" placeholder="Username" id="Username"/>
           </div>
           <!-- passsword -->
           <div class="inputText">
-            <input type="password" placeholder="Password"/>
+            <input type="password" placeholder="Password" id="Password"/>
           </div>
           <!-- login button -->
-          <input type="button" value="LOGIN" class="inputButton"/>
+          <input type="button" value="LOGIN" class="inputButton" onclick = "logins()"/>
         </form>
 
       </div>
