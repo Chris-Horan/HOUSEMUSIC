@@ -11,12 +11,19 @@ async function signup() {
      return false;
 	}    
 
-    if(checkPassReqs(password) == false){
-     return false;
-	}
     if(checkUserReqs(userName, email) == false){
      return false;
 	}
+    
+    
+    if(uniqueemail(actualdata, email) == false){
+     return false;
+	}
+
+    if(checkPassReqs(password) == false){
+     return false;
+	}
+
 
 
 
@@ -64,6 +71,16 @@ function unique(data, username){
      for(i of data){
          if(i.userName.toLowerCase() == username.toLowerCase() ){ //Lowercase and uppercases are ignored
              alert("This Username Already Exists!");
+             return false;
+ 		}
+     }
+     return true;
+}
+
+function uniqueemail(data, email){
+     for(i of data){
+         if(i.email.toLowerCase() == email.toLowerCase() ){ //Lowercase and uppercases are ignored
+             alert("This Email Has Already Been Used!");
              return false;
  		}
      }
