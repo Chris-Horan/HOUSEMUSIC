@@ -1,14 +1,25 @@
-function signup() {
+async function signup() {
     var userName = document.getElementById("Username").value;
     var email = document.getElementById("Email").value;
     var password = document.getElementById("Password").value;
     var data = {userName, email, password};
+    
+    var res =  await fetch('/all');
+    var actualdata =  await res.json();
+
+    if(unique(actualdata, userName) == false){
+     return false;
+	}    
+
     if(checkPassReqs(password) == false){
      return false;
 	}
     if(checkUserReqs(userName, email) == false){
      return false;
 	}
+
+
+
     var options = {
         method: 'POST',
         body: JSON.stringify(data),
@@ -31,41 +42,50 @@ async function logins(){
             'Content-Type': 'application/json'
         }
     };
-    var res =  await fetch('/authenticateUser', options);
+    var res =  await fetch('/all');
     var data =  await res.json();
 
     // If no data was returned
-    if(Object.keys(data).length != 1) {
-        alert("fail");
-    }
-    else {
-        success();
-    }
-    // if(auth(data, userName, password) == true){
-    //     success();
-	// }
-    // else{
-    //  return false;
-	// }
+     if(auth(data, userName, password) == true){
+        if(Object.keys(data).length < 1) {  
+            alert("fail");
+            }
+        else {
+            success();
+         }
+	 }
+     else{
+      return false;
+	 }
 
 }
 
-// function auth(data, Username, password){
-//     /*Alright, gonna be honest, no clue if this is efficient or not */
-//     for(i of data){
-//         if(i.userName == Username){
-//             if(i.password == password){
-//                 return true;
-// 			}
-//             else{
-//                 alert("Your Password is Incorrect!");
-//                 return false;
-// 			}
-// 		}
-//     }
-//     alert("This Username is Incorrect!")
-//     return false;
-// }
+function unique(data, username){
+     for(i of data){
+         if(i.userName.toLowerCase() == username.toLowerCase() ){ //Lowercase and uppercases are ignored
+             alert("This Username Already Exists!");
+             return false;
+ 		}
+     }
+     return true;
+}
+
+ function auth(data, Username, password){
+     /*Alright, gonna be honest, no clue if this is efficient or not */
+     for(i of data){
+         if(i.userName == Username){
+             if(i.password == password){
+                 return true;
+ 			}
+             else{
+                 alert("Your Password is Incorrect!");
+                 return false;
+ 			}
+ 		}
+     }
+     alert("This Username is Incorrect!")
+     return false;
+}
 
 function success(){
      window.location.replace("dashboard.html");
