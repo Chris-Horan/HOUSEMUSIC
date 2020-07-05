@@ -9,16 +9,18 @@
   <body>
     <div id="loginBox">
       <h1>Welcome Back</h1>
+      <p1 id = "PassErrorIncorrect" style = "display:none">Password is Incorrect!</br></p1>
+      <p1 id = "UserErrorExist" style = "display:none">Username Does Not Exist</p1>
       <div class="inputBox">
 
         <form action="" method="post">
           <!-- username -->
           <div class="inputText">
-            <input type="text" placeholder="Username" id="Username"/>
+            <input type="text" placeholder="Username" id="Username" onclick="loginreset()"/>
           </div>
           <!-- passsword -->
           <div class="inputText">
-            <input type="password" placeholder="Password" id="Password"/>
+            <input type="password" placeholder="Password" id="Password" onclick="loginreset()"/>
           </div>
           <!-- login button -->
           <input type="button" value="LOGIN" class="inputButton" onclick = "logins()"/>
