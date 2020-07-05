@@ -103,6 +103,7 @@ async function findUsers() {
 }
 
 function checkPassReqs(password) {
+    var statusBar = document.getElementById("status");
     var verifyPassword = /^[0-9a-zA-Z!@#$%^&*()]+$/;
     if(password.length < 6 || password.length > 25) {
         statusBar.innerHtml = "Password must be between 6 and 25 characters.";
@@ -116,6 +117,7 @@ function checkPassReqs(password) {
 }
 
 function checkUserReqs(userName, Email) {
+    var statusBar = document.getElementById("status");
     var alphanumeric = /^[0-9a-zA-Z]+$/;
     var verifyEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if(userName.length < 4 || userName.length > 16) {
