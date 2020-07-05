@@ -1,72 +1,41 @@
-body{
-  margin: 0;
-  padding: 0;
-  background-image: url(background.jpg);
-  background-repeat: no-repeat;
-}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="stylesheets/signup.css"/>
+    <title>SignUp</title>
+    <script src="signupscript.js"></script>
+  </head>
+  <body>
+    <div id="signUpBox">
+      <h1>Create Account</h1>
+      <p1 id = "UserError" style = "display:none">Username Has Been Taken!</br></p1>
+      <p1 id = "EmailError" style = "display:none">Email Has Been Used!</br></p1>
+      <p1 id = "PassError" style = "display:none">Password must contain between 6 and 25 characters!</p1>
+      <p1 id = "PassError2" style = "display:none">Password must contain only numbers, letters, and common symbols (!@#$%^&*)!</p1>
+      <p1 id = "UserError2" style = "display:none">Username must be 4 to 16 characters long!</p1>
+      <p1 id = "UserError3" style = "display:none">Username must contain only letters and numbers!</p1>
+      <p1 id = "EmailError2" style = "display:none">Invalid email address!</p1>
+      <div class="inputBox">
 
-#signUpBox{
-  margin: 0 auto;
-  margin-top: 200px;
-  padding: 20px 50px;
-  background-color: #00000090;
-  width: 400px;
-  height: 350px;
-  border-radius: 10px;
-  text-align: center;
-}
+        <form action="" method="post">
+          <!-- username -->
+          <div class="inputText">
+            <input type="text" placeholder="Username" id="Username" onclick="signupreset()"/>
+          </div>
+          <!-- email -->
+          <div class="inputText">
+            <input type="email" placeholder="Email" id = "Email" onclick="signupreset()"/>
+          </div>
+          <!-- passsword -->
+          <div class="inputText">
+            <input type="password" placeholder="Password" id="Password" onclick="signupreset()"/>
+          </div>
+          <!-- signUp button -->
+          <input type="button" value="Sign Up" class="inputButton" onclick="signup()"/>
+        </form>
 
-#signUpBox h1{
-  color: white;
-  font-size: 35px;
-  text-shadow: 2px 2px 4px white;
-}
+      </div>
 
-p1{
-    color:white;
-}
-
-#signUpBox .inputBox{
-  margin-top: 45px;
-}
-
-#signUpBox .inputBox .inputText{
-  margin-top: 25px;
-}
-
-#signUpBox .inputBox .inputText input{
-  border: 0;
-  padding: 10px 10px;
-  border-bottom: 1px solid white;
-  background-color: #00000000;
-  color:white;
-}
-
-#signUpBox .inputBox .inputButton{
-  border:0;
-  width: 150px;
-  height: 35px;
-  color: white;
-  margin-top: 30px;
-  border-radius: 20px;
-  /* background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%); */
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
-  /* background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
-  background-size:400% */
-}
-
-#signUpBox .inputButton{
-  cursor: pointer;
-  text-shadow: 2px 2px 4px white;
-  font-size: 16px;
-}
-
-/* #signUpBox .inputButton:hover{
-  animation: aurora 8s;
-}
-
-@keyframes aurora{
-  100%{
-    background-position: -400% 0;
-  }
-} */
+  </body>
+</html>
