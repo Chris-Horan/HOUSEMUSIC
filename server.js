@@ -2,8 +2,6 @@ const express = require('express');
 const path = require('path')
 const app = express();
 const DataStore = require('nedb');
-const { response } = require('express');
-const { nextTick } = require('process');
 const PORT = process.env.PORT || 5000;
 
 // Set app to listen on localport 5000
@@ -35,7 +33,7 @@ userData.ensureIndex({fieldName: 'userName', unique: true}, function(err){});
 userData.ensureIndex({fieldName: 'email', unique: true}, function(err){});
 
 // Handles the /addUser post request
-app.post('/addUser', (req, res, next) => {
+app.post('/addUser', (req, res) => {
     console.log('Add user request.');
     userData.insert({userName: req.body.userName, password: req.body.password, email: req.body.email, userType: 'user'}, function(err) {
         if(err) {
