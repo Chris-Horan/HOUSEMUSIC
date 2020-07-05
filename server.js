@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const DataStore = require('nedb');
+const { response } = require('express');
 const PORT = process.env.PORT || 5000;
 
 // Set app to listen on localport 5000
@@ -37,11 +38,26 @@ app.post('/addUser', (req, res) => {
             console.log("Error: ", err.errorType);
             // Report error
             if(err.errorType === 'uniqueViolated') {
-                console.log("This username or email address already has an account associated with it.");
+                userData.count({userName: req.body.userName}, function(err, count) {
+                    if(count!=0) {
+                        console.log("Username taken.");
+                        res.status(201);
+                        res.send("Username taken.");
+                    }
+                });
+                userData.count({email: req.body.email}, function(err, count) {
+                    if(count!=0) {
+                        console.log("Email taken.");
+                        res.status(202);
+                        res.send("Email taken.");
+                    }
+                });
             }
         }
         else {
             console.log("Add user successful: ", req.body.userName);
+            res.status(200);
+            res.send("User added successfully");
         }
     });
 });

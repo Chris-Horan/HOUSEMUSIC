@@ -16,8 +16,20 @@ function signup() {
             'Content-Type': 'application/json'
         }
     };
-    fetch('/addUser', options);
-    success();
+    fetch('/addUser', options).then(function(res) {
+        var stat = res.status;
+        if(stat==201) {
+            // Change HTML to reflect that username is taken
+            alert(stat);
+        }
+        else if(stat==202) {
+            // Change HTML to reflect that email is taken
+            alert(stat);
+        }
+        else {
+            success();
+        }
+    });
 }
 
 async function logins(){
