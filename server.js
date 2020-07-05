@@ -130,6 +130,47 @@ app.post('/removeUser', (req, res) => {
     userData.persistence.compactDatafile();
 });
 
+app.post('/addAdmin', (req, res) => {
+    console.log('Add admin request.');
+    userData.insert({userName: req.body.userName, password: req.body.password, email: req.body.email, userType: 'admin'}, function(err) {
+        if(err) {
+            console.log("Add admin failed.");
+            console.log("Error: ", err.errorType);
+            if(err.errorType === 'uniqueViolated') {
+                var userNameCount = 0;
+                userData.count({userName: req.body.userName}, function(err, count) {
+                    userNameCount = count;
+                    if(count!=0) {
+                        console.log("Username taken.");
+                        res.status(201);
+                        res.send("Username taken.");
+                    }
+                });
+                userData.count({email: req.body.email}, function(err, count) {
+                    if(count!=0 && userNameCount==0) {
+                        console.log("Email taken.");
+                        res.status(202);
+                        res.send("Email taken.");
+                    }
+                });
+            }
+        }
+        else {
+            console.log("Add user successful: ", req.body.userName);
+            res.status(200);
+            res.send("User added successfully");
+        }
+    });
+});
+
+app.post('/findUsers', (req, res) => {
+    console.log("Searching for user: ", req.body.userName);
+    let regexp = new RegExp(req.body.userName);
+    userData.find({userName: regexp}, (err, data) => {
+        res.json(data);
+    })
+});
+
 // Sends all userData in a response
 app.get('/all', (req, res) => {
     userData.find({}, (err, data) => {

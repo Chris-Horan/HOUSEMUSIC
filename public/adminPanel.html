@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>Test</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Admin panel for HOUSEMUSIC">
+        <script src="adminscript.js"></script>
+    </head>
+    <body>
+        <h2 id="status"></h2>
+        <div id="insert">
+            <h2>Add Admin</h2>
+            <label for="userName">Username:</label>
+            <input type="text" id="userName"/>
+
+            <label for="sizeIns">Email Address:</label>
+            <input type="text" id="email"/>
+
+            <label for="password">Password:</label>
+            <input type="text" id="password"/>
+
+            <button onclick="addAdmin()">Add User</button>
+        </div>
+        <br><br><br>
+        <div id="changepw">
+            <h2>Change Password</h2>
+            <label for="userNamepw">Username:</label>
+            <input type="text" id="userNamepw"/>
+
+            <label for="passwordpw">New Password:</label>
+            <input type="text" id="passwordpw"/>
+
+            <button onclick="changePw()">Change Password</button>
+        </div>
+        <br><br><br>
+        <div id="removeuser">
+            <h2>Remove User</h2>
+            <label for="userNamerem">Username:</label>
+            <input type="text" id="userNamerem"/>
+
+            <button onclick="removeUser()">Remove User</button>
+        </div>
+        <br><br><br>
+        <h2>Search User</h2>
+        <label for="userNameSearch">Username:</label>
+        <input type="text" id="userNameSearch"/>
+
+        <button onclick="findUsers()">Search</button>
+        <div id="table"></div>
+    </body>
+</html>
