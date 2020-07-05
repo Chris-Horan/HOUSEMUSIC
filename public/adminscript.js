@@ -106,11 +106,11 @@ function checkPassReqs(password) {
     var statusBar = document.getElementById("status");
     var verifyPassword = /^[0-9a-zA-Z!@#$%^&*()]+$/;
     if(password.length < 6 || password.length > 25) {
-        statusBar.innerHtml = "Password must be between 6 and 25 characters.";
+        statusBar.innerHTML = "Password must be between 6 and 25 characters.";
         return false;
     }
     if(!verifyPassword.test(password)) {
-        statusBar.innerHtml = "Password must contain only letters, numbers, and common symbols (!@#$%^&*).";
+        statusBar.innerHTML = "Password must contain only letters, numbers, and common symbols (!@#$%^&*).";
         return false;
     }
     return true;
@@ -121,15 +121,15 @@ function checkUserReqs(userName, Email) {
     var alphanumeric = /^[0-9a-zA-Z]+$/;
     var verifyEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if(userName.length < 4 || userName.length > 16) {
-        statusBar.innerHtml = "Username must be between 4 and 16 characters.";
+        statusBar.innerHTML = "Username must be between 4 and 16 characters.";
         return false;
     }
     if(!alphanumeric.test(userName)) {
-        statusBar.innerHtml = "Username must contain only letters and numbers.";
+        statusBar.innerHTML = "Username must contain only letters and numbers.";
         return false;
     }
     if(!verifyEmail.test(Email)) {
-        statusBar.innerHtml = "Invalid email address.";
+        statusBar.innerHTML = "Invalid email address.";
         return false;
     }
     return true;

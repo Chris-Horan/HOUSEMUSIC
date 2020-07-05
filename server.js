@@ -170,13 +170,14 @@ app.post('/addAdmin', (req, res) => {
 });
 
 // Handles the /findUsers post request
-// Responds with user entries matching query 
+// Responds with user entries matching query
+// TODO: Block queries with symbols
 app.post('/findUsers', (req, res) => {
     console.log("Searching for user: ", req.body.userName);
     let regexp = new RegExp(req.body.userName);
     userData.find({userName: regexp}).sort({userName: 1}).exec(function(err, docs) {
         res.json(docs);
-        console.log("Returning seach results.");
+        console.log("Returning search results.");
     });
 });
 
