@@ -33,6 +33,7 @@ userData.ensureIndex({fieldName: 'userName', unique: true}, function(err){});
 userData.ensureIndex({fieldName: 'email', unique: true}, function(err){});
 
 // Handles the /addUser post request
+// Adds a user to the user database
 app.post('/addUser', (req, res) => {
     console.log('Add user request.');
     userData.insert({userName: req.body.userName, password: req.body.password, email: req.body.email, userType: 'user'}, function(err) {
@@ -66,7 +67,8 @@ app.post('/addUser', (req, res) => {
     });
 });
 
-// Handles user authentication
+// Handles the /authenticateUser post request
+// Compares request password and user data against matching data in the database and responds with the corresponding user data
 app.post('/authenticateUser', (req, res) => {
     console.log('User authentication request.');
     userData.count({userName: req.body.userName}, function(err, count) {
@@ -77,7 +79,6 @@ app.post('/authenticateUser', (req, res) => {
                     res.status(200);
                     res.json(data);
                 }
-                // Report error
                 else {
                     console.log('Authentication failed');
                     res.status(201);
@@ -85,7 +86,6 @@ app.post('/authenticateUser', (req, res) => {
                 }
             });
         }
-        // Report error
         else {
             console.log("User does not exist");
             res.status(202);
@@ -96,6 +96,8 @@ app.post('/authenticateUser', (req, res) => {
 });
 
 // Handles the /changePassword post request
+// Changes the password of a specified user
+// TODO: Error handling
 app.post('/changePassword', (req, res) => {
     console.log('Change password request.');
     userData.update(
@@ -113,7 +115,9 @@ app.post('/changePassword', (req, res) => {
     userData.persistence.compactDatafile();
 });
 
-//Handles the /removeUser post request
+// Handles the /removeUser post request
+// Removes a user from the database
+// TODO: Error handling
 app.post('/removeUser', (req, res) => {
     console.log('Remove user request.');
     userData.remove(
@@ -130,6 +134,8 @@ app.post('/removeUser', (req, res) => {
     userData.persistence.compactDatafile();
 });
 
+// Handles the /addAdmin post request
+// Adds a user as an administrator
 app.post('/addAdmin', (req, res) => {
     console.log('Add admin request.');
     userData.insert({userName: req.body.userName, password: req.body.password, email: req.body.email, userType: 'admin'}, function(err) {
@@ -163,16 +169,20 @@ app.post('/addAdmin', (req, res) => {
     });
 });
 
+// Handles the /findUsers post request
+// Responds with user entries matching query 
 app.post('/findUsers', (req, res) => {
     console.log("Searching for user: ", req.body.userName);
     let regexp = new RegExp(req.body.userName);
-    userData.find({userName: regexp}, (err, data) => {
-        res.json(data);
-    })
+    userData.find({userName: regexp}).sort({userName: 1}).exec(function(err, docs) {
+        res.json(docs);
+        console.log("Returning seach results.");
+    });
 });
 
+// Handles the /all post request
 // Sends all userData in a response
-app.get('/all', (req, res) => {
+app.post('/all', (req, res) => {
     userData.find({}, (err, data) => {
         res.json(data);
     });
