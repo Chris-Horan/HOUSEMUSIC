@@ -1,7 +1,9 @@
 const express = require('express');
+const path = require('path')
 const app = express();
 const DataStore = require('nedb');
 const { response } = require('express');
+const { nextTick } = require('process');
 const PORT = process.env.PORT || 5000;
 
 // Set app to listen on localport 5000
@@ -17,6 +19,9 @@ userData.loadDatabase();
 // Direct node to frontend resources folder (html, css, js)
 app.use(express.static(__dirname + '/public'));
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
 // Set max json request size
 app.use(express.json({limit: '10kb'}));
 
@@ -30,15 +35,16 @@ userData.ensureIndex({fieldName: 'userName', unique: true}, function(err){});
 userData.ensureIndex({fieldName: 'email', unique: true}, function(err){});
 
 // Handles the /addUser post request
-app.post('/addUser', (req, res) => {
+app.post('/addUser', (req, res, next) => {
     console.log('Add user request.');
     userData.insert({userName: req.body.userName, password: req.body.password, email: req.body.email, userType: 'user'}, function(err) {
         if(err) {
             console.log("Add user failed.");
             console.log("Error: ", err.errorType);
-            // Report error
             if(err.errorType === 'uniqueViolated') {
+                var userNameCount = 0;
                 userData.count({userName: req.body.userName}, function(err, count) {
+                    userNameCount = count;
                     if(count!=0) {
                         console.log("Username taken.");
                         res.status(201);
@@ -46,7 +52,7 @@ app.post('/addUser', (req, res) => {
                     }
                 });
                 userData.count({email: req.body.email}, function(err, count) {
-                    if(count!=0) {
+                    if(count!=0 && userNameCount==0) {
                         console.log("Email taken.");
                         res.status(202);
                         res.send("Email taken.");
@@ -69,18 +75,23 @@ app.post('/authenticateUser', (req, res) => {
         if(count==1) {
             userData.find({userName: req.body.userName}, function(err, data) {
                 if(data[0].password == req.body.password) {
-                    res.json(data);
                     console.log('Responded with user data.')
+                    res.status(200);
+                    res.json(data);
                 }
                 // Report error
                 else {
                     console.log('Authentication failed');
+                    res.status(201);
+                    res.send("Incorrect password.")
                 }
             });
         }
         // Report error
         else {
             console.log("User does not exist");
+            res.status(202);
+            res.send("User does not exist.");
         }
     });
     
@@ -120,44 +131,6 @@ app.post('/removeUser', (req, res) => {
     );
     userData.persistence.compactDatafile();
 });
-
-// // Checks username requirements
-// function checkUserReqs(req) {
-//     var userName = req.body.userName;
-//     var password = req.body.password;
-//     var email = req.body.email;
-//     var alphanumeric = /^[0-9a-zA-Z]+$/;
-//     var verifyPassword = /^[0-9a-zA-Z!@#$%^&*()]+$/;
-//     var verifyEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-//     if(userName.length < 4 || userName.length > 16) {
-//         throw "Username must be 4 to 16 characters long.";
-//     }
-//     if(!alphanumeric.test(userName)) {
-//         throw "Username must contain only letters and numbers.";
-//     }
-//     if(password.length < 6 || password.length > 25) {
-//         throw "Password must contain between 6 and 25 characters.";
-//     }
-//     if(!verifyPassword.test(password)) {
-//         throw "Password must contain only numbers, letters, and common symbols (!@#$%^&*).";
-//     }
-//     if(!verifyEmail.test(email)) {
-//         throw "Invalid email address.";
-//     }
-//     return true;
-// }
-
-// // Checks password requirements
-// function checkPassReqs(password) {
-//     var verifyPassword = /^[0-9a-zA-Z!@#$%^&*()]+$/;
-//     if(password.length < 6 || password.length > 25) {
-//         throw "Password must contain between 6 and 25 characters.";
-//     }
-//     if(!verifyPassword.test(password)) {
-//         throw "Password must contain only numbers, letters, and common symbols (!@#$%^&*).";
-//     }
-//     return true;
-// }
 
 // Sends all userData in a response
 app.get('/all', (req, res) => {

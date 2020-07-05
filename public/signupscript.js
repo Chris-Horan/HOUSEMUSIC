@@ -1,13 +1,15 @@
-function signup() {
+async function signup() {
     var userName = document.getElementById("Username").value;
     var email = document.getElementById("Email").value;
     var password = document.getElementById("Password").value;
     var data = {userName, email, password};
-    if(checkPassReqs(password) == false){
-     return false;
+    if(!checkPassReqs(password)) {
+        return;
+        // Change HTML to reflect that password does not meet reqs
 	}
-    if(checkUserReqs(userName, email) == false){
-     return false;
+    if(!checkUserReqs(userName, email)) {
+        return;
+        // Change HTML to reflect that username does not meet reqs
 	}
     var options = {
         method: 'POST',
@@ -16,15 +18,15 @@ function signup() {
             'Content-Type': 'application/json'
         }
     };
-    fetch('/addUser', options).then(function(res) {
+    await fetch('/addUser', options).then(function(res) {
         var stat = res.status;
         if(stat==201) {
             // Change HTML to reflect that username is taken
-            alert(stat);
+            alert("Username taken.");
         }
         else if(stat==202) {
             // Change HTML to reflect that email is taken
-            alert(stat);
+            alert("Email taken.");
         }
         else {
             success();
@@ -43,41 +45,21 @@ async function logins(){
             'Content-Type': 'application/json'
         }
     };
-    var res =  await fetch('/authenticateUser', options);
-    var data =  await res.json();
-
-    // If no data was returned
-    if(Object.keys(data).length != 1) {
-        alert("fail");
-    }
-    else {
-        success();
-    }
-    // if(auth(data, userName, password) == true){
-    //     success();
-	// }
-    // else{
-    //  return false;
-	// }
-
+    await fetch('/authenticateUser', options).then(function(res) {
+        var stat = res.status;
+        if(res.status==201) {
+            // Change HTML to reflect that password is incorrect
+            alert("Incorrect password.");
+        }
+        else if(res.status==202) {
+            // Change HTML to reflect that username does not exist
+            alert("Username does not exist.");
+        }
+        else {
+            success();
+        }
+    });
 }
-
-// function auth(data, Username, password){
-//     /*Alright, gonna be honest, no clue if this is efficient or not */
-//     for(i of data){
-//         if(i.userName == Username){
-//             if(i.password == password){
-//                 return true;
-// 			}
-//             else{
-//                 alert("Your Password is Incorrect!");
-//                 return false;
-// 			}
-// 		}
-//     }
-//     alert("This Username is Incorrect!")
-//     return false;
-// }
 
 function success(){
      window.location.replace("dashboard.html");
