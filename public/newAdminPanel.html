@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="stylesheets/newAdminPanel.css"/>
+    <title>Manage System</title>
+  </head>
+  <body>
+      <div id="topBar">
+        <p id="adminName">Welcome back, Admin</p>
+      </div>
+      <!-- <div id="leftBar">
+      </div> -->
+      <div id="mainView">
+          <div id="leftGrid">
+              <div id="admins">
+                    <div class="inputBox">
+                      <p>Manage Admin</p>
+                      <input type="text" placeholder="Username" class="inputText" />
+                      <input type="submit" value="Add" class="inputButton" onclick="addAdmin()" />
+                      <input type="submit" value="Delete" class="inputButton" onclick="deleteAdmin()" />
+                    </div>
+                    <div id="adminTable">
+                          <!-- ################################# sample table #################################### -->
+                          <!-- <table>
+                              <th>Username</th><th>Email</th><th>Password</th><br>
+                              <tr>
+                                <td>user1</td><td>123user1@ggt.com</td><td>123456</td>
+                              </tr>
+                          </table> -->
+                    </div>
+              </div>
+              <div id="resetPw">
+                <p>Reset Password</p>
+                  <input type="text" placeholder="Username" class="inputText"/>
+                  <input type="text" placeholder="New Password" class="inputText"/>
+                  <input type="submit" value="Reset" class="inputButton" onclick="" />
+              </div>
+              <div id="searchUser">
+                  <p>Search User</p>
+                  <input type="text" placeholder="Username" class="inputText"/>
+                  <input type="submit" value="Search" class="inputButton" onclick="" />
+                  <div id="searchResult">
+                    <!-- <table>
+                        <th>Username</th><th>Email</th><th>Password</th><br>
+                        <tr>
+                          <td>user1</td><td>123user1@ggt.com</td><td>123456</td>
+                        </tr>
+                    </table> -->
+                  </div>
+              </div>
+          </div>
+          <div id="rightGrid">
+              <div id="users">
+                    <div class="inputBox">
+                          <p>Manage Users</p>
+                          <input type="text" placeholder="Username" class="inputText">
+                          <input type="submit" value="Delete" class="inputButton" onclick="deleteUser()">
+                    </div>
+                    <div id="userTable">
+
+                          <!-- ###########################sample table############################# -->
+                          <!-- <table>
+                              <th>Username</th><th>Email</th><th>Password</th><br>
+                              <tr>
+                                <td>user1</td><td>123user1@ggt.com</td><td>123456</td>
+                              </tr>
+                              <tr>
+                                <td>user2</td><td>456user2@ggt.com</td><td>654321</td>
+                              </tr>
+                              <tr>
+                                <td>user2</td><td>456user2@ggt.com</td><td>654321</td>
+                              </tr>
+                              <tr>
+                                <td>user2</td><td>456user2@ggt.com</td><td>654321</td>
+                              </tr>
+                              <tr>
+                                <td>user2</td><td>456user2@ggt.com</td><td>654321</td>
+                              </tr>
+                              <tr>
+                                <td>user2</td><td>456user2@ggt.com</td><td>654321</td>
+                              </tr>
+                              <tr>
+                                <td>user2</td><td>456user2@ggt.com</td><td>654321</td>
+                              </tr>
+                              <tr>
+                                <td>user2</td><td>456user2@ggt.com</td><td>654321</td>
+                              </tr>
+
+                          </table> -->
+                    </div>
+              </div>
+          </div>
+      </div>
+  </body>
+</html>

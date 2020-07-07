@@ -1,0 +1,224 @@
+body{
+  background-color: #222831;
+}
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++ layout settings +++++++++++++++++++++++++++++++++++++++++ */
+#topBar{
+  margin: 0 auto;
+  background-color: #00ADB5;
+  width: auto;
+  height: 50px;
+  border-radius: 5px;
+}
+
+#leftBar{
+  float:left;
+  width: 200px;
+  height: 800px;
+  background-color: #eeeeee;
+  border-radius: 5px;
+}
+
+#mainView {
+  text-align: center;
+  /* display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+  width: 50%; */
+}
+
+#leftGrid{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+  width: 45%;
+  float:left;
+  margin-left: 30px;
+}
+
+#rightGrid{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+  width: 45%;
+  float:right;
+  margin-right: 30px;
+}
+
+
+#users {
+  /* float:left; */
+  border-radius: 10px;
+  text-align: center;
+  /* background: blue; */
+  border: 1px solid #00ADB5;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+#admins{
+  /* float:left; */
+  border-radius: 10px;
+  text-align: center;
+  /* background: red; */
+  border: 1px solid #00ADB5;
+  margin-top: 30px;
+  /* margin-left: 20px; */
+  padding: 10px;
+}
+
+#resetPw{
+  /* float:left; */
+  border-radius: 10px;
+  text-align: center;
+  /* background: red; */
+  border: 1px solid #00ADB5;
+  margin-top: 30px;
+  /* margin-left: 20px; */
+  padding: 10px;
+}
+
+
+#searchUser{
+  /* float:left; */
+  border-radius: 10px;
+  text-align: center;
+  /* background: red; */
+  border: 1px solid #00ADB5;
+  margin-top: 30px;
+  /* margin-left: 20px; */
+  padding: 10px;
+}
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++ hover settings +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+#admins:hover{
+  background-color: #00ADB5;
+}
+
+#admins:hover .inputBox .inputButton {
+  background-color: #EEEEEE;
+  color: #222831;
+}
+
+#admins:hover .inputBox .inputText{
+  background-color: #EEEEEE;
+  color:#222831;
+}
+
+#admins:hover td{
+  border: 1px solid white;
+}
+
+#users:hover{
+  background-color: #00ADB5;
+}
+
+#users:hover .inputBox .inputButton {
+  background-color: #EEEEEE;
+  color: #222831;
+}
+
+#users:hover .inputBox .inputText{
+  background-color: #EEEEEE;
+  color:#222831;
+}
+
+#users:hover td{
+  border: 1px solid white;
+}
+
+#resetPw:hover{
+  background-color: #00ADB5;
+}
+
+#resetPw:hover .inputButton {
+  background-color: #EEEEEE;
+  color: #222831;
+}
+
+#resetPw:hover .inputText{
+  background-color: #EEEEEE;
+  color:#222831;
+}
+
+#searchUser:hover{
+  background-color: #00ADB5;
+}
+
+#searchUser:hover .inputButton {
+  background-color: #EEEEEE;
+  color: #222831;
+}
+
+#searchUser:hover .inputText{
+  background-color: #EEEEEE;
+  color:#222831;
+}
+
+#searchUser:hover td{
+  border: 1px solid white;
+}
+
+/* ++++++++++++++++++++++++++++++++++++++++ other settings ++++++++++++++++++++++++++++++++++++++ */
+
+.inputText {
+  border: 0;
+  padding: 10px 10px;
+  /* border-bottom: 1px solid white; */
+  border: 1px solid white;
+  background-color: #00000000;
+  color:white;
+}
+
+.inputButton{
+  border:0;
+  width: 60px;
+  height: 25px;
+  color: white;
+  /* margin-top: 10px; */
+  border-radius: 20px;
+  /* background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%); */
+  /* background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); */
+  background-color: #00ADB5;
+  cursor: pointer;
+  text-shadow: 2px 2px 4px white;
+}
+
+
+#userTable{
+  /* background: red; */
+}
+
+#adminTable{
+  /* background: white; */
+}
+
+table{
+  color: #EEEEEE;
+  text-align: center;
+  margin: 0 auto;
+}
+
+td{
+  width: 200px;
+  word-break: break-all;
+}
+
+
+#mainView p{
+  color:#EEEEEE;
+  text-align: center;
+  /* text-shadow: 2px 2px 4px white; */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#topBar p{
+  padding-top: 14px;
+  padding-right: 12px;
+  text-align: right;
+  color:#EEEEEE;
+  font-size: 20px;
+  font-style: italic;
+}
