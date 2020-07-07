@@ -2,7 +2,7 @@ body{
   margin: 0;
   padding: 0;
   background-image: url(background.jpg);
-  background-repeat: no-repeat;
+  background-repeat: repeat;
 }
 
 #signUpBox{
@@ -15,9 +15,15 @@ body{
   height: 350px;
   border-radius: 10px;
   text-align: center;
-  position:relative;
+  /* position:relative;
   top: 270px;
-  left: 37%;
+  left: 37%; */
+  position: fixed;
+  top:0;
+  bottom:0;
+  left: 0;
+  right: 0;
+  margin:auto;
 }
 
 #signUpBox h1{
@@ -36,7 +42,7 @@ body{
 p1{
     color:white;
     font-style: italic;
-    font-size: 12px;
+    font-size: 13px;
     text-align:center;
 }
 
