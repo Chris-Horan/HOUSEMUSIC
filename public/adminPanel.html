@@ -1,50 +1,85 @@
-<html>
-    <head>
-        <title>Admin Panel</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Admin panel for HOUSEMUSIC">
-        <script src="adminscript.js"></script>
-    </head>
-    <body>
-        <h2 id="status"></h2>
-        <div id="insert">
-            <h2>Add Admin</h2>
-            <label for="userName">Username:</label>
-            <input type="text" id="userName"/>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="stylesheets/newAdminPanel.css"/>
+    <script src="adminscript.js"></script>
+    <title>Manage System</title>
+  </head>
+  <body>
+      <div id="topBar">
+        <p id="adminName">Welcome back, Admin</p>
+      </div>
+      <!-- <div id="leftBar">
+      </div> -->
+      <div id="mainView">
+          <div id="leftGrid">
+              <div id="admins">
+                    <div class="inputBox">
+                      <p>Manage Admin</p>
+                      <input type="text" id="userName" placeholder="Username" class="inputText" />
+                      <input type="submit" value="Add" class="inputButton" onclick="addAdmin()" />
+                    </div>
+              </div>
+              <div id="resetPw">
+                <p>Change Password</p>
+                  <input id="userNamepw" type="text" placeholder="Username" class="inputText"/>
+                  <input id="passwordpw" type="text" placeholder="New Password" class="inputText"/>
+                  <input type="submit" value="Reset" class="inputButton" onclick="changePw()" />
+              </div>
+              <div id="searchUser">
+                  <p>User Search</p>
+                  <input id="userNameSearch" type="text" placeholder="Username" class="inputText"/>
+                  <input type="submit" value="Search" class="inputButton" onclick="findUsers()" />
+                  <div id="table">
+                    <!-- <table>
+                        <th>Username</th><th>Email</th><th>Password</th><br>
+                        <tr>
+                          <td>user1</td><td>123user1@ggt.com</td><td>123456</td>
+                        </tr>
+                    </table> -->
+                  </div>
+              </div>
+          </div>
+          <div id="rightGrid">
+              <div id="users">
+                    <div class="inputBox">
+                          <p>Remove User</p>
+                          <input id="userNamerem" type="text" placeholder="Username" class="inputText">
+                          <input type="submit" value="Remove" class="inputButton" onclick="removeUser()">
+                    </div>
+                          <!-- ###########################sample table############################# -->
+                          <!-- <table>
+                              <th>Username</th><th>Email</th><th>Password</th><br>
+                              <tr>
+                                <td>user1</td><td>123user1@ggt.com</td><td>123456</td>
+                              </tr>
+                              <tr>
+                                <td>user2</td><td>456user2@ggt.com</td><td>654321</td>
+                              </tr>
+                              <tr>
+                                <td>user2</td><td>456user2@ggt.com</td><td>654321</td>
+                              </tr>
+                              <tr>
+                                <td>user2</td><td>456user2@ggt.com</td><td>654321</td>
+                              </tr>
+                              <tr>
+                                <td>user2</td><td>456user2@ggt.com</td><td>654321</td>
+                              </tr>
+                              <tr>
+                                <td>user2</td><td>456user2@ggt.com</td><td>654321</td>
+                              </tr>
+                              <tr>
+                                <td>user2</td><td>456user2@ggt.com</td><td>654321</td>
+                              </tr>
+                              <tr>
+                                <td>user2</td><td>456user2@ggt.com</td><td>654321</td>
+                              </tr>
 
-            <label for="sizeIns">Email Address:</label>
-            <input type="text" id="email"/>
-
-            <label for="password">Password:</label>
-            <input type="text" id="password"/>
-
-            <button onclick="addAdmin()">Add User</button>
-        </div>
-        <br><br><br>
-        <div id="changepw">
-            <h2>Change Password</h2>
-            <label for="userNamepw">Username:</label>
-            <input type="text" id="userNamepw"/>
-
-            <label for="passwordpw">New Password:</label>
-            <input type="text" id="passwordpw"/>
-
-            <button onclick="changePw()">Change Password</button>
-        </div>
-        <br><br><br>
-        <div id="removeuser">
-            <h2>Remove User</h2>
-            <label for="userNamerem">Username:</label>
-            <input type="text" id="userNamerem"/>
-
-            <button onclick="removeUser()">Remove User</button>
-        </div>
-        <br><br><br>
-        <h2>Search User</h2>
-        <label for="userNameSearch">Username:</label>
-        <input type="text" id="userNameSearch"/>
-
-        <button onclick="findUsers()">Search</button>
-        <div id="table"></div>
-    </body>
+                          </table> -->
+                    </div>
+              </div>
+          </div>
+      </div>
+  </body>
 </html>

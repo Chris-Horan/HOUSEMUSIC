@@ -42,7 +42,6 @@ async function logins(){
         }
     };
     await fetch('/authenticateUser', options).then(function(res) {
-        var stat = res.status;
         if(res.status==201) {
             document.getElementById("PassErrorIncorrect").style.display="block"
         }
@@ -50,7 +49,9 @@ async function logins(){
             document.getElementById("UserErrorExist").style.display="block"
         }
         else {
-            if(res.body.userType==='user') {
+            var userInfo = res.json();
+            alert(userInfo.userType);
+            if(userInfo.userType==='user') {
                 userLogin();
             }
             else {
