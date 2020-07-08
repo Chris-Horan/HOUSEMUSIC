@@ -50,7 +50,7 @@ async function logins(){
         }
         else {
             var userInfo = res.json();
-            alert(userInfo.userType);
+            alert(userInfo.body.userType);
             if(userInfo.userType==='user') {
                 userLogin();
             }
