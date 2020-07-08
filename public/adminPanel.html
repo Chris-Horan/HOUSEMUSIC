@@ -24,13 +24,20 @@
               <div id="resetPw">
                 <p>Change Password</p>
                   <input id="userNamepw" type="text" placeholder="Username" class="inputText"/>
-                  <input id="passwordpw" type="text" placeholder="New Password" class="inputText"/>
+                  <input id="passwordpw" type="password" placeholder="New Password" class="inputText"/>
                   <input type="submit" value="Reset" class="inputButton" onclick="changePw()" />
+                  <div id="popError">
+                    <p id="UpdateError" style = "display:none"> User does not exist. </br> </p>
+                    <p id="UpdateSuccess" style = "display:none"> Success: User password updated. </br> </p>
+                  </div>
               </div>
               <div id="searchUser">
                   <p>User Search</p>
                   <input id="userNameSearch" type="text" placeholder="Username" class="inputText"/>
                   <input type="submit" value="Search" class="inputButton" onclick="findUsers()" />
+                  <div id="popError">
+                    <p id="SearchError" style = "display:none"> User does not exist. </br> </p>
+                  </div>
                   <div id="table"></div>
               </div>
           </div>

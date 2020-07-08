@@ -37,6 +37,11 @@ async function changePw() {
     var userName = document.getElementById("userNamepw").value;
     var password = document.getElementById("passwordpw").value;
     var data = {userName, password};
+
+    if(!checkPassReqs(password)) {
+        return;
+    }
+    
     var options = {
         method: 'POST',
         body: JSON.stringify(data),
@@ -44,7 +49,21 @@ async function changePw() {
             'Content-Type': 'application/json'
         }
     };
-    await fetch('/changePassword', options);
+
+    await fetch('/changePassword', options).then(function(res) {
+        if (res.status == 201) {
+            document.getElementById("UpdateError").style.display="block"
+            document.getElementById("UpdateSuccess").style.display="none"
+        }
+        else if (res.status == 202) {
+            document.getElementById("UpdateError").style.display="block"
+            document.getElementById("UpdateSuccess").style.display="none"
+        }
+        else {
+            document.getElementById("UpdateError").style.display="none"
+            document.getElementById("UpdateSuccess").style.display="block"
+        }
+    });
 }
 
 async function removeUser() {
@@ -79,37 +98,45 @@ async function findUsers() {
             'Content-Type': 'application/json'
         }
     };
-    var res = await fetch('/findUsers', options);
-    var data = await res.json();
-    var tableFrame = document.getElementById("table");
-    tableFrame.innerHTML = '';
-    var table = document.createElement('table');
-    tableFrame.append(table);
-    var head = document.createElement('thead');
-    table.append(head);
-    var nameCol = document.createElement('th');
-    nameCol.innerHTML = 'Username';
-    var pwCol = document.createElement('th');
-    pwCol.innerHTML = 'Password';
-    var emailCol = document.createElement('th');
-    emailCol.innerHTML = 'Email';
-    var typeCol = document.createElement('th');
-    typeCol.innerHTML = 'Type';
-    head.append(nameCol, pwCol, emailCol, typeCol);
-    for(p of data) {
-        var row = document.createElement('tr');
-        table.append(row);
-        var nameCell = document.createElement('td');
-        nameCell.innerHTML = p.userName;
-        var pwCell = document.createElement('td');
-        pwCell.innerHTML = p.password;
-        var emailCell = document.createElement('td');
-        emailCell.innerHTML = p.email;
-        var typeCell = document.createElement('td');
-        typeCell.innerHTML = p.userType;
-        row.append(nameCell, pwCell, emailCell, typeCell);
+    var res = await fetch('/findUsers', options);  //.then(function(res){        
+        // if (res.status == 201) {
+        //     document.getElementById("SearchError").style.display="block"
+        // }
+        var data = await res.json();
+
+        // if (data.fetch() == null) {
+        //     document.getElementById("SearchError").style.display="block"
+        // }
+        var tableFrame = document.getElementById("table");
+        tableFrame.innerHTML = '';
+        var table = document.createElement('table');
+        tableFrame.append(table);
+        var head = document.createElement('thead');
+        table.append(head);
+        var nameCol = document.createElement('th');
+        nameCol.innerHTML = 'Username';
+        var pwCol = document.createElement('th');
+        pwCol.innerHTML = 'Password';
+        var emailCol = document.createElement('th');
+        emailCol.innerHTML = 'Email';
+        var typeCol = document.createElement('th');
+        typeCol.innerHTML = 'Type';
+        head.append(nameCol, pwCol, emailCol, typeCol);
+        for(p of data) {
+            var row = document.createElement('tr');
+            table.append(row);
+            var nameCell = document.createElement('td');
+            nameCell.innerHTML = p.userName;
+            var pwCell = document.createElement('td');
+            pwCell.innerHTML = p.password;
+            var emailCell = document.createElement('td');
+            emailCell.innerHTML = p.email;
+            var typeCell = document.createElement('td');
+            typeCell.innerHTML = p.userType;
+            row.append(nameCell, pwCell, emailCell, typeCell);
+        }
+        
     }
-}
 
 function checkPassReqs(password) {
     var statusBar = document.getElementById("status");
