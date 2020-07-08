@@ -120,19 +120,46 @@ app.post('/changePassword', (req, res) => {
 // TODO: Error handling
 app.post('/removeUser', (req, res) => {
     console.log('Remove user request.');
-    userData.remove(
-        {userName: req.body.userName}, function(err) {
-            // Report error
-            if(err) {
-                console.log("Remove user failed.");
-            }
-            else {
-                console.log("Remove user successful");
-            }
+
+    userData.count({userName: req.body.userName}, function(err, count) {
+        if(count == 0) {
+            console.log("Remove user failed.");
+            res.status(201);
+            res.send("Remove User Failed: Doesnot exist.");
         }
-    );
+        else {
+            userData.remove(
+                {userName: req.body.userName}, function(err) {
+                    console.log("Remove user successful");
+                    res.status(200);
+                    res.send("Remove successfully");
+                });
+        }
+    });
     userData.persistence.compactDatafile();
 });
+
+
+//     userData.remove(
+//         {userName: req.body.userName}, function(err) {
+//             // Report error
+//             // var userNameCount = 0;
+//             userData.count({userName: req.body.userName}, function(err, count) {
+//                 // userNameCount = count;
+//                 if(count==0) {
+//                     console.log("Remove user failed.");
+//                     res.status(201);
+//                     res.send("Remove User Failed: Doesnot exist.");
+//                 }
+//                 else {
+//                     console.log("Remove user successful");
+//                     res.status(200);
+//                     res.send("Remove successfully");
+//                 }
+//             })
+//         });
+    
+// });
 
 // Handles the /addAdmin post request
 // Adds a user as an administrator

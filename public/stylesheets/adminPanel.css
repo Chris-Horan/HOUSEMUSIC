@@ -238,3 +238,10 @@ td{
   font-style: italic;
   /* text-shadow: 2px 2px 4px white; */
 }
+
+#popError{
+  text-align: center;
+  position: relative;
+  font-style: italic;
+  font-size: 16px;
+}

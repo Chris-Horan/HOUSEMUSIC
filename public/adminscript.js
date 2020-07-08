@@ -57,7 +57,16 @@ async function removeUser() {
             'Content-Type': 'application/json'
         }
     };
-    await fetch('/removeUser', options);
+    await fetch('/removeUser', options).then(function(res) {
+        if (res.status == 201) {
+            document.getElementById("RemoveError").style.display="block"
+            document.getElementById("RemoveSuccess").style.display="none"
+        }
+        else {
+            document.getElementById("RemoveError").style.display="none"
+            document.getElementById("RemoveSuccess").style.display="block"
+        }
+    });
 }
 
 async function findUsers() {
