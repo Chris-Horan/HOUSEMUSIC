@@ -34,6 +34,7 @@ body{
   width: 45%;
   float:left;
   margin-left: 30px;
+  margin-bottom: 30px;
 }
 
 #rightGrid{
@@ -43,6 +44,7 @@ body{
   width: 45%;
   float:right;
   margin-right: 30px;
+  margin-bottom: 30px;
 }
 
 
@@ -107,7 +109,7 @@ body{
 }
 
 #admins:hover td{
-  border: 1px solid white;
+  border-bottom: 1px solid white;
 }
 
 #users:hover{
@@ -125,7 +127,7 @@ body{
 }
 
 #users:hover td{
-  border: 1px solid white;
+  border-bottom: 1px solid white;
 }
 
 #resetPw:hover{
@@ -157,7 +159,7 @@ body{
 }
 
 #searchUser:hover td{
-  border: 1px solid white;
+  border-bottom: 1px solid white;
 }
 
 /* ++++++++++++++++++++++++++++++++++++++++ other settings ++++++++++++++++++++++++++++++++++++++ */
@@ -185,6 +187,10 @@ body{
   text-shadow: 2px 2px 4px white;
 }
 
+#admins .inputBox .inputButton{
+  margin-top: 10px;
+}
+
 
 #userTable{
   /* background: red; */
@@ -206,7 +212,7 @@ td{
 }
 
 
-#mainView p{
+#mainView .inputBox p{
   color:#EEEEEE;
   text-align: center;
   /* text-shadow: 2px 2px 4px white; */
@@ -221,4 +227,14 @@ td{
   color:#EEEEEE;
   font-size: 20px;
   font-style: italic;
+}
+
+.errorMessage p{
+  font-size: 16px;
+  color:#f0f5f9;
+  margin-top: 20px;
+  /* border: 1px solid white; */
+  padding-top: 10px;
+  font-style: italic;
+  /* text-shadow: 2px 2px 4px white; */
 }
