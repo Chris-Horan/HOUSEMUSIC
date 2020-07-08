@@ -50,12 +50,14 @@ async function logins(){
         }
         else {
             var userInfo = res.json();
-            alert(userInfo.body.userType);
-            if(userInfo.userType==='user') {
-                userLogin();
-            }
-            else {
-                window.location.replace("adminPanel.html");
+            for(p of userInfo) {
+                alert(userInfo.userType);
+                if(userInfo.userType==='user') {
+                    userLogin();
+                }
+                else {
+                    window.location.replace("adminPanel.html");
+                }
             }
         }
     });
