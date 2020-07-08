@@ -56,7 +56,7 @@ async function logins(){
                     userLogin();
                 }
                 else {
-                    window.location.replace("adminPanel.html");
+                    adminLogin();
                 }
             }
         }
@@ -80,6 +80,10 @@ function loginreset(){
 
 function userLogin(){
      window.location.replace("dashboard.html");
+}
+
+function adminLogin(){
+    window.location.replace("adminPanel.html");
 }
 
 function checkPassReqs(password) {
