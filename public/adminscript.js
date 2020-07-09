@@ -1,16 +1,14 @@
 async function addAdmin() {
-    var statusBar = document.getElementById("status");
+    var statusBar = document.getElementById("adminMsg");
     var userName = document.getElementById("userName").value;
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
     var data = {userName, email, password};
     if(!checkPassReqs(password)) {
         return;
-        // Change HTML to reflect that password does not meet reqs
 	}
     if(!checkUserReqs(userName, email)) {
         return;
-        // Change HTML to reflect that username does not meet reqs
 	}
     var options = {
         method: 'POST',
@@ -22,7 +20,7 @@ async function addAdmin() {
     await fetch('/addAdmin', options).then(function(res) {
         var stat = res.status;
         if(stat==201) {
-            statusBar.innerHtml = "Username taken.";
+            statusBar.innerHTML = "Username taken.";
         }
         else if(stat==202) {
             statusBar.innerHTML = "Email taken.";
@@ -51,17 +49,14 @@ async function changePw() {
     };
 
     await fetch('/changePassword', options).then(function(res) {
-        if (res.status == 201) {
-            document.getElementById("UpdateError").style.display="block"
-            document.getElementById("UpdateSuccess").style.display="none"
+        if (res.status == 202) {
+            document.getElementById("changeMsg").innerHTML = "User does not exist.";
         }
-        else if (res.status == 202) {
-            document.getElementById("UpdateError").style.display="block"
-            document.getElementById("UpdateSuccess").style.display="none"
+        else if (res.status == 201) {
+            document.getElementById("changeMsg").innerHTML = "Password update failed.";
         }
         else {
-            document.getElementById("UpdateError").style.display="none"
-            document.getElementById("UpdateSuccess").style.display="block"
+            document.getElementById("changeMsg").innerHTML = "Password change successful.";
         }
     });
 }
@@ -78,18 +73,21 @@ async function removeUser() {
     };
     await fetch('/removeUser', options).then(function(res) {
         if (res.status == 201) {
-            document.getElementById("RemoveError").style.display="block"
-            document.getElementById("RemoveSuccess").style.display="none"
+            document.getElementById("removeMsg").innerHTML = "User does not exist.";
         }
         else {
-            document.getElementById("RemoveError").style.display="none"
-            document.getElementById("RemoveSuccess").style.display="block"
+            document.getElementById("removeMsg").innerHTML = "User removed successfully.";
         }
     });
 }
 
 async function findUsers() {
     var userName = document.getElementById("userNameSearch").value;
+    var alphanumeric = /^[0-9a-zA-Z]+$/;
+    if((!alphanumeric.test(userName)) && userName.length != 0) {
+        document.getElementById("searchMsg").innerHTML = "Invalid username query.";
+        return;
+    }
     var data = {userName};
     var options = {
         method: 'POST',
@@ -99,47 +97,43 @@ async function findUsers() {
         }
     };
     var res = await fetch('/findUsers', options);  //.then(function(res){        
-        // if (res.status == 201) {
-        //     document.getElementById("SearchError").style.display="block"
-        // }
-        var data = await res.json();
-
-        // if (data.fetch() == null) {
-        //     document.getElementById("SearchError").style.display="block"
-        // }
-        var tableFrame = document.getElementById("table");
-        tableFrame.innerHTML = '';
-        var table = document.createElement('table');
-        tableFrame.append(table);
-        var head = document.createElement('thead');
-        table.append(head);
-        var nameCol = document.createElement('th');
-        nameCol.innerHTML = 'Username';
-        var pwCol = document.createElement('th');
-        pwCol.innerHTML = 'Password';
-        var emailCol = document.createElement('th');
-        emailCol.innerHTML = 'Email';
-        var typeCol = document.createElement('th');
-        typeCol.innerHTML = 'Type';
-        head.append(nameCol, pwCol, emailCol, typeCol);
-        for(p of data) {
-            var row = document.createElement('tr');
-            table.append(row);
-            var nameCell = document.createElement('td');
-            nameCell.innerHTML = p.userName;
-            var pwCell = document.createElement('td');
-            pwCell.innerHTML = p.password;
-            var emailCell = document.createElement('td');
-            emailCell.innerHTML = p.email;
-            var typeCell = document.createElement('td');
-            typeCell.innerHTML = p.userType;
-            row.append(nameCell, pwCell, emailCell, typeCell);
-        }
-        
+    var data = await res.json();
+    var tableFrame = document.getElementById("table");
+    tableFrame.innerHTML = '';
+    if(Object.keys(data).length===0) {
+        document.getElementById("searchMsg").innerHTML = "No usernames containing this text.";
+        return;
     }
+    var table = document.createElement('table');
+    tableFrame.append(table);
+    var head = document.createElement('thead');
+    table.append(head);
+    var nameCol = document.createElement('th');
+    nameCol.innerHTML = 'Username';
+    var pwCol = document.createElement('th');
+    pwCol.innerHTML = 'Password';
+    var emailCol = document.createElement('th');
+    emailCol.innerHTML = 'Email';
+    var typeCol = document.createElement('th');
+    typeCol.innerHTML = 'Type';
+    head.append(nameCol, pwCol, emailCol, typeCol);
+    for(p of data) {
+        var row = document.createElement('tr');
+        table.append(row);
+        var nameCell = document.createElement('td');
+        nameCell.innerHTML = p.userName;
+        var pwCell = document.createElement('td');
+        pwCell.innerHTML = p.password;
+        var emailCell = document.createElement('td');
+        emailCell.innerHTML = p.email;
+        var typeCell = document.createElement('td');
+        typeCell.innerHTML = p.userType;
+        row.append(nameCell, pwCell, emailCell, typeCell);
+    }
+}
 
 function checkPassReqs(password) {
-    var statusBar = document.getElementById("status");
+    var statusBar = document.getElementById("adminMsg");
     var verifyPassword = /^[0-9a-zA-Z!@#$%^&*()]+$/;
     if(password.length < 6 || password.length > 25) {
         statusBar.innerHTML = "Password must be between 6 and 25 characters.";
@@ -153,7 +147,7 @@ function checkPassReqs(password) {
 }
 
 function checkUserReqs(userName, Email) {
-    var statusBar = document.getElementById("status");
+    var statusBar = document.getElementById("adminMsg");
     var alphanumeric = /^[0-9a-zA-Z]+$/;
     var verifyEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if(userName.length < 4 || userName.length > 16) {
@@ -169,4 +163,11 @@ function checkUserReqs(userName, Email) {
         return false;
     }
     return true;
+}
+
+function msgReset(){
+    document.getElementById("adminMsg").innerHTML = "";
+    document.getElementById("changeMsg").innerHTML = "";
+    document.getElementById("searchMsg").innerHTML = "";
+    document.getElementById("removeMsg").innerHTML = "";
 }

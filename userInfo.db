@@ -1,4 +1,5 @@
 {"userName":"sdhjaskd","password":"123123123","email":"asd@dsasd.com","userType":"user","_id":"3rOKyL26Viuo3nZJ"}
+{"userName":"test1","password":"newpass","email":"test@test.ca","userType":"admin","_id":"67fl5jiRoBZP2pOs"}
 {"userName":"chris","password":"chrischris","email":"chris@chris.com","userType":"user","_id":"BwiKXQ9YuTpYjciF"}
 {"userName":"##chris","password":"sjdksaldsad","email":"chris@chr.com","userType":"user","_id":"D6xESO1SBrjG3yOY"}
 {"userName":"admin","password":"password","email":"admin@admin.com","userType":"admin","_id":"HHZjrYAu4w0Ym0qP"}
@@ -6,3 +7,4 @@
 {"userName":"chrissda","password":"asdjasdlid","email":"chris@chrisssd.com","userType":"user","_id":"pzf59Le4PkMBvWq3"}
 {"$$indexCreated":{"fieldName":"userName","unique":true,"sparse":false}}
 {"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
+{"$$deleted":true,"_id":"67fl5jiRoBZP2pOs"}

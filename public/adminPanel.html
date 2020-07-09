@@ -15,34 +15,33 @@
               <div id="admins">
                     <div class="inputBox">
                       <p>Manage Admin</p>
-                      <input type="text" id="userName" placeholder="Username" class="inputText" />
-                      <input id="email" type="email" placeholder="Email" class="inputText" />
-                      <input id="password" type="password" placeholder="Password" class="inputText" /><br>
+                      <input type="text" id="userName" placeholder="Username" class="inputText" onclick="msgReset()" />
+                      <input id="email" type="email" placeholder="Email" class="inputText" onclick="msgReset()" />
+                      <input id="password" type="password" placeholder="Password" class="inputText" onclick="msgReset()" /><br>
                       <input type="submit" value="Add" class="inputButton" onclick="addAdmin()" />
+                      <div id="popError">
+                        <p id="adminMsg"></p><br>
+                      </div>
                     </div>
               </div>
               <div id="resetPw">
                 <div class="inputBox">
                   <p>Change Password</p>
-                  <input id="userNamepw" type="text" placeholder="Username" class="inputText"/>
-                  <input id="passwordpw" type="password" placeholder="New Password" class="inputText"/>
+                  <input id="userNamepw" type="text" placeholder="Username" class="inputText" onclick="msgReset()"/>
+                  <input id="passwordpw" type="password" placeholder="New Password" class="inputText" onclick="msgReset()"/>
                   <input type="submit" value="Reset" class="inputButton" onclick="changePw()" />
-<<<<<<< HEAD
-                </div>
-=======
                   <div id="popError">
-                    <p id="UpdateError" style = "display:none"> User does not exist. </br> </p>
-                    <p id="UpdateSuccess" style = "display:none"> Success: User password updated. </br> </p>
+                    <p id="changeMsg"></p><br>
                   </div>
->>>>>>> 1889b341846029bf31e8b7c04ecb35073319173a
+                </div>
               </div>
               <div id="searchUser">
                 <div class="inputBox">
                   <p>User Search</p>
-                  <input id="userNameSearch" type="text" placeholder="Username" class="inputText"/>
+                  <input id="userNameSearch" type="text" placeholder="Username" class="inputText" onclick="msgReset()"/>
                   <input type="submit" value="Search" class="inputButton" onclick="findUsers()" />
                   <div id="popError">
-                    <p id="SearchError" style = "display:none"> User does not exist. </br> </p>
+                    <p id="searchMsg"></p><br>
                   </div>
                   <div id="table"></div>
                 </div>
@@ -52,12 +51,11 @@
               <div id="users">
                     <div class="inputBox">
                           <p>Remove User</p>
-                          <input id="userNamerem" type="text" placeholder="Username" class="inputText">
+                          <input id="userNamerem" type="text" placeholder="Username" class="inputText" onclick="msgReset()">
                           <input type="submit" value="Remove" class="inputButton" onclick="removeUser()">
                     </div>
                     <div id="popError">
-                      <p id="RemoveError" style = "display:none"> User does not exist. </br> </p>
-                      <p id="RemoveSuccess" style = "display:none"> Success: User removed. </br> </p>
+                      <p id="removeMsg"></p><br>
                     </div>
                 </div>
           </div>
