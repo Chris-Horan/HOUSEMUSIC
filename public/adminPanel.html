@@ -25,15 +25,25 @@
                 <div class="inputBox">
                   <p>Change Password</p>
                   <input id="userNamepw" type="text" placeholder="Username" class="inputText"/>
-                  <input id="passwordpw" type="text" placeholder="New Password" class="inputText"/>
+                  <input id="passwordpw" type="password" placeholder="New Password" class="inputText"/>
                   <input type="submit" value="Reset" class="inputButton" onclick="changePw()" />
+<<<<<<< HEAD
                 </div>
+=======
+                  <div id="popError">
+                    <p id="UpdateError" style = "display:none"> User does not exist. </br> </p>
+                    <p id="UpdateSuccess" style = "display:none"> Success: User password updated. </br> </p>
+                  </div>
+>>>>>>> 1889b341846029bf31e8b7c04ecb35073319173a
               </div>
               <div id="searchUser">
                 <div class="inputBox">
                   <p>User Search</p>
                   <input id="userNameSearch" type="text" placeholder="Username" class="inputText"/>
                   <input type="submit" value="Search" class="inputButton" onclick="findUsers()" />
+                  <div id="popError">
+                    <p id="SearchError" style = "display:none"> User does not exist. </br> </p>
+                  </div>
                   <div id="table"></div>
                 </div>
               </div>
@@ -44,6 +54,10 @@
                           <p>Remove User</p>
                           <input id="userNamerem" type="text" placeholder="Username" class="inputText">
                           <input type="submit" value="Remove" class="inputButton" onclick="removeUser()">
+                    </div>
+                    <div id="popError">
+                      <p id="RemoveError" style = "display:none"> User does not exist. </br> </p>
+                      <p id="RemoveSuccess" style = "display:none"> Success: User removed. </br> </p>
                     </div>
                 </div>
           </div>

@@ -191,14 +191,14 @@ body{
   margin-top: 10px;
 }
 
-
+/* 
 #userTable{
-  /* background: red; */
+  background: red;
 }
 
 #adminTable{
-  /* background: white; */
-}
+  background: white;
+} */
 
 table{
   color: #EEEEEE;
@@ -237,4 +237,11 @@ td{
   padding-top: 10px;
   font-style: italic;
   /* text-shadow: 2px 2px 4px white; */
+}
+
+#popError{
+  text-align: center;
+  position: relative;
+  font-style: italic;
+  font-size: 16px;
 }

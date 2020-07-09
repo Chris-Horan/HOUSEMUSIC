@@ -99,18 +99,31 @@ app.post('/authenticateUser', (req, res) => {
 // TODO: Error handling
 app.post('/changePassword', (req, res) => {
     console.log('Change password request.');
-    userData.update(
-        {userName: req.body.userName},
-        { $set: {password: req.body.password}}, function(err) {
-            // Report error
-            if(err) {
-                console.log("Password update failed.");
-            }
-            else {
-                console.log("Password update successful");
-            }
+    userData.count({userName: req.body.userName}, function(err, count) {
+        if(count==1) {
+            userData.update(
+                {userName: req.body.userName},
+                { $set: {password: req.body.password}}, function(err) {
+                    // Report error
+                    if(err) {
+                        console.log("Password update failed.");
+                        res.status(201);
+                        res.send("Password update failed.")
+                    }
+                    else {
+                        console.log("Password update successful");
+                        res.status(200);
+                        res.send("Password updated successfully.")
+                    }
+                }
+            );
         }
-    );
+        else {
+            console.log("Password update failure: User doesn't exist");
+            res.status(202);
+            res.send("Password not updated: User doesnot exist")
+        }
+    });
     userData.persistence.compactDatafile();
 });
 
@@ -119,19 +132,46 @@ app.post('/changePassword', (req, res) => {
 // TODO: Error handling
 app.post('/removeUser', (req, res) => {
     console.log('Remove user request.');
-    userData.remove(
-        {userName: req.body.userName}, function(err) {
-            // Report error
-            if(err) {
-                console.log("Remove user failed.");
-            }
-            else {
-                console.log("Remove user successful");
-            }
+
+    userData.count({userName: req.body.userName}, function(err, count) {
+        if(count == 0) {
+            console.log("Remove user failed.");
+            res.status(201);
+            res.send("Remove User Failed: Doesnot exist.");
         }
-    );
+        else {
+            userData.remove(
+                {userName: req.body.userName}, function(err) {
+                    console.log("Remove user successful");
+                    res.status(200);
+                    res.send("Remove successfully");
+                });
+        }
+    });
     userData.persistence.compactDatafile();
 });
+
+
+//     userData.remove(
+//         {userName: req.body.userName}, function(err) {
+//             // Report error
+//             // var userNameCount = 0;
+//             userData.count({userName: req.body.userName}, function(err, count) {
+//                 // userNameCount = count;
+//                 if(count==0) {
+//                     console.log("Remove user failed.");
+//                     res.status(201);
+//                     res.send("Remove User Failed: Doesnot exist.");
+//                 }
+//                 else {
+//                     console.log("Remove user successful");
+//                     res.status(200);
+//                     res.send("Remove successfully");
+//                 }
+//             })
+//         });
+    
+// });
 
 // Handles the /addAdmin post request
 // Adds a user as an administrator
@@ -178,6 +218,23 @@ app.post('/findUsers', (req, res) => {
         res.json(docs);
         console.log("Returning search results.");
     });
+
+//     userData.count({userName: req.body.userName}, function(err, count) {
+//         if(count == 0) {
+//             console.log("Remove user failed.");
+//             res.status(201);
+//             res.send("Remove User Failed: Doesnot exist.");
+//         }
+//         else {
+//             userData.find({userName: regexp}).sort({userName: 1}).exec(function(err, docs) {
+//                 console.log("Returning search results.");
+//                 res.status(200);
+//                 res.json(docs);
+//                 res.send("Remove User Failed: Doesnot exist.");
+//             });
+//         }
+//     })
+// });
 });
 
 // Handles the /all post request

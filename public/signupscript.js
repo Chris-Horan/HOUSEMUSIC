@@ -78,6 +78,10 @@ function userLogin(){
      window.location.replace("dashboard.html");
 }
 
+function adminLogin(){
+    window.location.replace("adminPanel.html");
+}
+
 function checkPassReqs(password) {
     var verifyPassword = /^[0-9a-zA-Z!@#$%^&*()]+$/;
     if(password.length < 6 || password.length > 25) {

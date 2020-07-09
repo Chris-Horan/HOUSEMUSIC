@@ -2,9 +2,7 @@
 {"userName":"chris","password":"chrischris","email":"chris@chris.com","userType":"user","_id":"BwiKXQ9YuTpYjciF"}
 {"userName":"##chris","password":"sjdksaldsad","email":"chris@chr.com","userType":"user","_id":"D6xESO1SBrjG3yOY"}
 {"userName":"admin","password":"password","email":"admin@admin.com","userType":"admin","_id":"HHZjrYAu4w0Ym0qP"}
-{"userName":"ssddccf","password":"csdfgh","email":"asd@122.com","userType":"user","_id":"LryG2NkIHMurLyH3"}
-{"userName":"newusER","password":"short334","email":"tes@ttest.com","userType":"user","_id":"T8Ki5rxrImwfMEQP"}
-{"userName":"choran","password":"123456789","email":"chris@hi.com","userType":"user","_id":"j79vJFfJsV7cHs58"}
+{"userName":"newusER","password":"QWSDDFGT44","email":"tes@ttest.com","userType":"user","_id":"T8Ki5rxrImwfMEQP"}
 {"userName":"chrissda","password":"asdjasdlid","email":"chris@chrisssd.com","userType":"user","_id":"pzf59Le4PkMBvWq3"}
 {"$$indexCreated":{"fieldName":"userName","unique":true,"sparse":false}}
 {"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
