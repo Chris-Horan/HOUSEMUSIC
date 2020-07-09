@@ -41,26 +41,22 @@ async function logins(){
             'Content-Type': 'application/json'
         }
     };
-    await fetch('/authenticateUser', options).then(function(res) {
-        if(res.status==201) {
-            document.getElementById("PassErrorIncorrect").style.display="block"
-        }
-        else if(res.status==202) {
-            document.getElementById("UserErrorExist").style.display="block"
+    var res = await fetch('/authenticateUser', options);
+    if(res.status==201) {
+        document.getElementById("PassErrorIncorrect").style.display="block"
+    }
+    else if(res.status==202) {
+        document.getElementById("UserErrorExist").style.display="block"
+    }
+    else {
+        var userInfo = await res.json();
+        if(userInfo[0].userType==='user') {
+            userLogin();
         }
         else {
-            var userInfo = res.json();
-            for(p of userInfo) {
-                alert(userInfo.userType);
-                if(userInfo.userType==='user') {
-                    userLogin();
-                }
-                else {
-                    window.location.replace("adminPanel.html");
-                }
-            }
+            window.location.replace("adminPanel.html");
         }
-    });
+    }
 }
 
 function signupreset(){

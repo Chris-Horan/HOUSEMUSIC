@@ -76,7 +76,6 @@ app.post('/authenticateUser', (req, res) => {
             userData.find({userName: req.body.userName}, function(err, data) {
                 if(data[0].password == req.body.password) {
                     console.log('Responded with user data.')
-                    res.status(200);
                     res.json(data);
                 }
                 else {
