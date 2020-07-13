@@ -57,7 +57,7 @@ async function logins(){
         }
         else {
             sessionStorage.setItem("type", 'admin');
-            window.location.replace("adminPanel.html");
+            window.location.replace("login.html");
         }
     }
 }
