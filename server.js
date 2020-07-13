@@ -25,7 +25,7 @@ app.use(express.json({limit: '10kb'}));
 
 // Set site root at /public/index.html
 app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(__dirname + "/public/home.html");
 });
 
 // Ensure that userName and email are unique in the userInfo.db database
