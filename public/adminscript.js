@@ -31,6 +31,15 @@ async function addAdmin() {
     });
 }
 
+function usertype(){
+    if(sessionStorage.getItem("type") != 'admin'){
+     window.location.replace("dashboard.html");
+	}
+    else{
+     document.getElementById('hidingpanel').style.display = 'block'
+	}
+}
+
 async function changePw() {
     var userName = document.getElementById("userNamepw").value;
     var password = document.getElementById("passwordpw").value;
