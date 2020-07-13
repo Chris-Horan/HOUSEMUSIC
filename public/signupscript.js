@@ -30,6 +30,7 @@ async function signup() {
     });
 }
 
+
 async function logins(){
     var userName = document.getElementById("Username").value;
     var password = document.getElementById("Password").value;
@@ -51,9 +52,11 @@ async function logins(){
     else {
         var userInfo = await res.json();
         if(userInfo[0].userType==='user') {
+            sessionStorage.setItem("type", 'user');
             userLogin();
         }
         else {
+            sessionStorage.setItem("type", 'admin');
             window.location.replace("adminPanel.html");
         }
     }
