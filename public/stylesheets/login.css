@@ -11,7 +11,7 @@ body{
   padding: 20px 50px;
   background-color: #00000090;
   width: 400px;
-  height: 300px;
+  height: 400px;
   border-radius: 10px;
   text-align: center;
 }
@@ -66,4 +66,8 @@ a{
 #loginBox .inputButton{
   cursor: pointer;
   text-shadow: 2px 2px 4px white;
+}
+
+#intro {
+  color: white;
 }
