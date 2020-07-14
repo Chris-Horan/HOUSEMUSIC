@@ -115,3 +115,28 @@ function checkUserReqs(userName, Email) {
     }
     return true;
 }
+
+async function forgotPass() {
+    var email = document.getElementById("email").value;
+    var data = {email};
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    await fetch('/forgot', options).then(function(res) {
+        var stat = res.status;
+        console.log("ckdnckmv");
+        if(stat==201) {
+            document.getElementById("EmailNotFound").style.display="block"
+        }
+        // else if(stat==202) {
+        //     document.getElementById("EmailError").style.display="block"
+        // }
+        // else {
+        //     userLogin();
+        // }
+    });
+}
