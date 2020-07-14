@@ -57,7 +57,8 @@ async function logins(){
         }
         else {
             sessionStorage.setItem("type", 'admin');
-            window.location.replace("login.html");
+            // window.location.replace("login.html");
+            adminLogin();
         }
     }
 }
