@@ -129,4 +129,5 @@ async function forgotPass() {
     };
     // console.log("back before");
     var res = await fetch('/forgot', options);
+    
 }
