@@ -3,13 +3,15 @@ const path = require('path')
 const app = express();
 // const flash = require('express-flash');
 // const session = require('express-session');
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const async = require("async");
 const nodemailer = require("nodemailer");
+var smtpTransport = require('nodemailer-smtp-transport');
 const crypto = require("crypto");
 
 const DataStore = require('nedb');
+const ForgotPass = require('nedb');
 const PORT = process.env.PORT || 5000;
 
 // Set app to listen on localport 5000
@@ -21,6 +23,8 @@ app.listen(PORT, function() {
 // Attach database to app
 const userData = new DataStore('userInfo.db');
 userData.loadDatabase();
+const passwordDatabase = new ForgotPass('forgotPassword.db');
+passwordDatabase.loadDatabase();
 
 // Direct node to frontend resources folder (html, css, js)
 app.use(express.static(__dirname + '/public'));
@@ -30,8 +34,8 @@ app.set('view engine', 'ejs');
 // Set max json request size
 app.use(express.json({limit: '10kb'}));
 app.use(cors());
+// app.use(session({ secret: 'session secret key' }));
 // app.use(flash());
-// app.use(session({secret:'secret',resave: false, saveUninitialized:false}));
 
 
 // Set site root at /public/index.html
@@ -217,87 +221,76 @@ app.post('/all', (req, res) => {
 
 
 
-// Passwor recovery
-app.post('/forgot', function(req, res) {
-    userData.findOne({ email: req.body.email }, function(err, user) {
-        if(!user) {
-            res.status(400);
-        }
-        
-        crypto.randomBytes(20, function(err, buf) {
-            token = buf.toString('hex');
-        });
-        const mailOptions = {
-            to: user.email,
-            from: 'shresthkapila16@gmail.com',
-            subject: 'Node.js Password Reset',
-            text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-            'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-            'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-            'If you did not request this, please ignore this email and your password will remain unchanged.\n'
-        };
+// Password recovery
+app.post('/forgot', function(req, res, next) {
+    async.waterfall([
+        function(done) {
+          crypto.randomBytes(20, function(err, buf) {
+            var token = buf.toString('hex');
+            done(err, token);
+          });
+        },
+        function(token, done) {
+            userData.findOne({ email: req.body.email }, function(err, user) {
+                if (err || !user) {
+                    console.log("No email exists.");
+                    // req.flash('error', 'No account with that email address exists.');
+                    res.status(201);
+                    res.send("No email exists.");
+                    // return res.redirect('/forgot');
+                }
+                else {
+                    // console.log("assqwer.");
+                    
+                    passwordDatabase.insert({email: req.body.email, resetPasswordToken: token, resetPasswordExpires: Date.now() + 3600000}), function(error) {
+                        if (error) {
+                            res.status(202);
+                            res.send("not inserted in database.");
+                            // return res.redirect('/forgot');
+                        }
+                    }
+                // res.status(200);
+                console.log("password database updated");
+                // res.send("email send");
 
-        // return userData.updateOne()
-    });
+                console.log("first.");
+                var smtpTransport = nodemailer.createTransport({
+                    host: 'smtp.gmail.com',
+                    port: 465,  //587,
+                    secure: true, // true for 465, false for other ports
+                    service: 'gmail',
+                    auth: {
+                        user: '',
+                        pass:  ''  //process.env.GMAILPW
+                    }
+                });
+                var mailOptions = {
+                    to: 'shresthkapila16@gmail.com',//user.email,
+                    from: 'shresthkapila16@gmail.com',
+                    subject: 'Node.js Password Reset',
+                    text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+                        'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+                        'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+                        'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+                };
+                smtpTransport.sendMail(mailOptions, function(err) {
+                //   req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+                    res.status(200);
+                    console.log("email send to user.");
+                    res.send("email send to user.")
+                    done(err, 'done');
+                });
+            }
+        });
+        
+    }
+    ], function(err) {
+        if (err) return next(err);
+            res.redirect('/forgot');
+    });    
 });
 
 
-/*
 
-app.post('/forgot', function(req, res, next) {
-    async.waterfall([
-      function(done) {
-        crypto.randomBytes(20, function(err, buf) {
-          var token = buf.toString('hex');
-          done(err, token);
-        });
-      },
-      function(token, done) {
-        userData.findOne({ email: req.body.email }, function(err, user) {
-          if (!user) {
-            // req.flas(h('error', 'No account with that email address exists.');
-            console.log('error', 'No account with that email address exists');
-            res.status(201);
-            console.log('error');
-            // return res.redirect('forgot');
-          }
-  
-        //   user.resetPasswordToken = token;
-        //   user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-  
-        //   user.save(function(err) {
-        //     done(err, token, user);
-        //   });
-        });
-      },
-    //   function(token, user, done) {
-    //     var smtpTransport = nodemailer.createTransport({
-    //       service: 'Gmail', 
-    //       auth: {
-    //         user: 'shresthkapila16@gmail.com',
-    //         pass: process.env.GMAILPW
-    //       }
-    //     });
-    //     var mailOptions = {
-    //       to: user.email,
-    //       from: 'shresthkapila16@gmail.com',
-    //       subject: 'Node.js Password Reset',
-    //       text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-    //         'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-    //         'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-    //         'If you did not request this, please ignore this email and your password will remain unchanged.\n'
-    //     };
-    //     smtpTransport.sendMail(mailOptions, function(err) {
-    //       console.log('mail sent');
-    //       req.flash('success', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
-    //       done(err, 'done');
-    //     });
-    //   }
-    ], function(err) {
-      if (err) return next(err);
-      res.redirect('/forgot');
-    });
-    userData.persistence.compactDatafile();
-  });
 
-  */
+
