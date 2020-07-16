@@ -260,8 +260,8 @@ app.post('/forgot', function(req, res, next) {
                     secure: true, // true for 465, false for other ports
                     service: 'gmail',
                     auth: {
-                        user: 'shresthkapila16@gmail.com',
-                        pass:  'kapila87029'  //process.env.GMAILPW
+                        user: '',
+                        pass:  ''  //process.env.GMAILPW
                     }
                 });
                 var mailOptions = {
