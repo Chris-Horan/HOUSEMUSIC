@@ -235,21 +235,20 @@ app.post('/forgot', function(req, res, next) {
                 if (err || !user) {
                     console.log("No email exists.");
                     // req.flash('error', 'No account with that email address exists.');
-                    // res.status(201);
+                    res.status(201);
                     res.send("No email exists.");
                     // return res.redirect('/forgot');
                 }
-                // else {
+                else {
                     // console.log("assqwer.");
                     
                     passwordDatabase.insert({email: req.body.email, resetPasswordToken: token, resetPasswordExpires: Date.now() + 3600000}), function(error) {
                         if (error) {
-                            // res.status(202);
+                            res.status(202);
                             res.send("not inserted in database.");
                             // return res.redirect('/forgot');
                         }
-                    // }
-                }
+                    }
                 // res.status(200);
                 console.log("password database updated");
                 // res.send("email send");
@@ -261,8 +260,8 @@ app.post('/forgot', function(req, res, next) {
                     secure: true, // true for 465, false for other ports
                     service: 'gmail',
                     auth: {
-                        user: '',
-                        pass:  ''  //process.env.GMAILPW
+                        user: 'shresthkapila16@gmail.com',
+                        pass:  'kapila87029'  //process.env.GMAILPW
                     }
                 });
                 var mailOptions = {
@@ -276,18 +275,20 @@ app.post('/forgot', function(req, res, next) {
                 };
                 smtpTransport.sendMail(mailOptions, function(err) {
                 //   req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
-                    // res.status(200);
+                    res.status(200);
                     console.log("email send to user.");
                     res.send("email send to user.")
                     done(err, 'done');
                 });
-            });
-          }
-        ], function(err) {
-            if (err) return next(err);
-            res.redirect('/forgot');
+            }
         });
-    });
+        
+    }
+    ], function(err) {
+        if (err) return next(err);
+            res.redirect('/forgot');
+    });    
+});
 
 
 
