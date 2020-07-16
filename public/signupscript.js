@@ -127,17 +127,6 @@ async function forgotPass() {
             'Content-Type': 'application/json'
         }
     };
-    await fetch('/forgot', options).then(function(res) {
-        var stat = res.status;
-        console.log("ckdnckmv");
-        if(stat==201) {
-            document.getElementById("EmailNotFound").style.display="block"
-        }
-        // else if(stat==202) {
-        //     document.getElementById("EmailError").style.display="block"
-        // }
-        // else {
-        //     userLogin();
-        // }
-    });
+    // console.log("back before");
+    var res = await fetch('/forgot', options);
 }
