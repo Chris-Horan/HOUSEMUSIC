@@ -3,9 +3,7 @@
 {"userName":"##chris","password":"sjdksaldsad","email":"chris@chr.com","userType":"user","_id":"D6xESO1SBrjG3yOY"}
 {"userName":"admin","password":"password","email":"admin@admin.com","userType":"admin","_id":"HHZjrYAu4w0Ym0qP"}
 {"userName":"newusER","password":"QWSDDFGT44","email":"tes@ttest.com","userType":"user","_id":"T8Ki5rxrImwfMEQP"}
-{"userName":"hps1","password":"123456","email":"abc@sfu.ca","userType":"user","_id":"jptEmUk3SLFvrZzq"}
-{"userName":"kaps22","password":"password","email":"shresthkapila16@gmail.com","userType":"user","_id":"oDzll0gTSZI5WgYe"}
+{"userName":"kaps22","email":"shresthkapila16@gmail.com","userType":"user","_id":"oDzll0gTSZI5WgYe"}
 {"userName":"chrissda","password":"asdjasdlid","email":"chris@chrisssd.com","userType":"user","_id":"pzf59Le4PkMBvWq3"}
 {"$$indexCreated":{"fieldName":"userName","unique":true,"sparse":false}}
 {"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
-{"$$deleted":true,"_id":"jptEmUk3SLFvrZzq"}
