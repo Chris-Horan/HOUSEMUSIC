@@ -224,13 +224,15 @@ app.post('/forgot', function(req, res, next) {
                     secure: true, // true for 465, false for other ports
                     service: 'gmail',
                     auth: {
-                        user: 'your email',
-                        pass:  'your password'  //process.env.GMAILPW
+                        user: 'shresthkapila16@gmail.com',
+                        pass:  'kapila87029'
+                        // user: 'your email',
+                        // pass:  'your password'  //process.env.GMAILPW
                     }
                 });
                 var mailOptions = {
                     to: user.email,
-                    from: 'your email',
+                    from: 'shresthkapila16@gmail.com',   //'your email',
                     subject: 'HOUSEMUSIC Password Recovery',
                     text: 'Hi \n\n' +
                         'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
@@ -256,10 +258,15 @@ app.post('/forgot', function(req, res, next) {
 
 app.get('/reset/:token', function(req, res) {
     passwordDatabase.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
-      if (!user) {
-          console.log('Password reset token is invalid or has expired.');
+        // console.log(user);
+      if (err) {
+          console.log('Password reset token is invalid.');
+          res.send('Password reset token is invalid.');
+          res.render('pages/error');
       }
-      res.render('pages/reset', {token: req.params.token});
+      else {
+        res.render('pages/reset', {token: req.params.token});
+      }
     });
   });
 
@@ -273,7 +280,12 @@ app.post('/reset/:token', function(req, res) {
             res.status(201);
             res.send('Password reset token is invalid or has expired.(post)')
           }
-          if(req.body.password === req.body.confirm) {
+          console.log('first');
+          console.log(req.body.passw);
+          console.log(req.body.confirm);
+
+          if(req.body.passw == req.body.confirm) {
+              console.log('second');
             userData.update(
                 {email: user.email},
                 { $set: {password: req.body.password}}, function(err) {
@@ -284,13 +296,15 @@ app.post('/reset/:token', function(req, res) {
                     var smtpTransport = nodemailer.createTransport({
                         service: 'Gmail', 
                         auth: {
-                          user: 'your email',
-                          pass:  'your password'   //'process.env.GMAILPW'
+                            user: 'shresthkapila16@gmail.com',
+                            pass:  'kapila87029'
+                        //   user: 'your email',
+                        //   pass:  'your password'   //'process.env.GMAILPW'
                         }
                       });
                       var mailOptions = {
                         to: user.email,
-                        from: 'your email',
+                        from: 'shresthkapila16@gmail.com', // 'your email',
                         subject: 'Your password has been changed',
                         text: 'Hello,\n\n' +
                           'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
@@ -303,7 +317,8 @@ app.post('/reset/:token', function(req, res) {
                       });
                     
                 })
-          } else {
+          } 
+          else {
             console.log('Password donot match');
             res.status(202);
             res.send('Password donot match');
