@@ -127,6 +127,7 @@ async function forgotPass() {
             'Content-Type': 'application/json'
         }
     };
+<<<<<<< HEAD
     await fetch('/forgot', options).then(function(res) {
         var stat = res.status;
         console.log("ckdnckmv");
@@ -140,4 +141,41 @@ async function forgotPass() {
         //     userLogin();
         // }
     });
+=======
+    var res = await fetch('/forgot', options);
+    var stat = res.status;
+    if(stat==201) {
+        document.getElementById("EmailNotFound").style.display="block"
+    }
+    else if(stat==202) {
+        document.getElementById("NotFound").style.display="block"
+    }
+    else if(stat==200) {
+        document.getElementById("Insert").style.display="block"
+    }
+}
+
+
+async function resetPassword() {
+    var email = document.getElementById("email").value;
+    var data = {email};
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    var res = await fetch('/reset/:token', options);
+    var stat = res.status;
+    if(stat==201) {
+        document.getElementById("tokenNotMatch").style.display="block"
+    }
+    else if(stat==202) {
+        document.getElementById("NotMatch").style.display="block"
+    }
+    else if(stat==200) {
+        document.getElementById("SuccessChanged").style.display="block"
+    }
+>>>>>>> 1e1aa06650aa06a937064d1ec25a048f23bd3d8d
 }

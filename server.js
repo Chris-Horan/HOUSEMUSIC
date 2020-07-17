@@ -101,7 +101,6 @@ app.post('/authenticateUser', (req, res) => {
 
 // Handles the /changePassword post request
 // Changes the password of a specified user
-// TODO: Error handling
 app.post('/changePassword', (req, res) => {
     userData.count({userName: req.body.userName}, function(err, count) {
         if(count==1) {
@@ -195,7 +194,7 @@ app.post('/all', (req, res) => {
 
 
 
-// Password recovery
+// Password forgot
 app.post('/forgot', function(req, res, next) {
     async.waterfall([
         function(done) {
@@ -208,47 +207,38 @@ app.post('/forgot', function(req, res, next) {
             userData.findOne({ email: req.body.email }, function(err, user) {
                 if (err || !user) {
                     console.log("No email exists.");
-                    // req.flash('error', 'No account with that email address exists.');
                     res.status(201);
                     res.send("No email exists.");
-                    // return res.redirect('/forgot');
                 }
                 else {
-                    // console.log("assqwer.");
-                    
                     passwordDatabase.insert({email: req.body.email, resetPasswordToken: token, resetPasswordExpires: Date.now() + 3600000}), function(error) {
                         if (error) {
                             res.status(202);
                             res.send("not inserted in database.");
-                            // return res.redirect('/forgot');
                         }
                     }
-                // res.status(200);
                 console.log("password database updated");
-                // res.send("email send");
-
-                console.log("first.");
                 var smtpTransport = nodemailer.createTransport({
                     host: 'smtp.gmail.com',
                     port: 465,  //587,
                     secure: true, // true for 465, false for other ports
                     service: 'gmail',
                     auth: {
-                        user: '',
-                        pass:  ''  //process.env.GMAILPW
+                        user: 'your email',
+                        pass:  'your password'  //process.env.GMAILPW
                     }
                 });
                 var mailOptions = {
-                    to: 'shresthkapila16@gmail.com',//user.email,
-                    from: 'shresthkapila16@gmail.com',
-                    subject: 'Node.js Password Reset',
-                    text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+                    to: user.email,
+                    from: 'your email',
+                    subject: 'HOUSEMUSIC Password Recovery',
+                    text: 'Hi \n\n' +
+                        'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                         'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                         'http://' + req.headers.host + '/reset/' + token + '\n\n' +
                         'If you did not request this, please ignore this email and your password will remain unchanged.\n'
                 };
                 smtpTransport.sendMail(mailOptions, function(err) {
-                //   req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
                     res.status(200);
                     console.log("email send to user.");
                     res.send("email send to user.")
@@ -256,7 +246,6 @@ app.post('/forgot', function(req, res, next) {
                 });
             }
         });
-        
     }
     ], function(err) {
         if (err) return next(err);
@@ -265,6 +254,65 @@ app.post('/forgot', function(req, res, next) {
 });
 
 
+app.get('/reset/:token', function(req, res) {
+    passwordDatabase.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+      if (!user) {
+          console.log('Password reset token is invalid or has expired.');
+      }
+      res.render('pages/reset', {token: req.params.token});
+    });
+  });
 
+
+app.post('/reset/:token', function(req, res) {
+    async.waterfall([
+      function(done) {
+        passwordDatabase.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+          if (!user) {
+            console.log('Password reset token is invalid or has expired.(post)');
+            res.status(201);
+            res.send('Password reset token is invalid or has expired.(post)')
+          }
+          if(req.body.password === req.body.confirm) {
+            userData.update(
+                {email: user.email},
+                { $set: {password: req.body.password}}, function(err) {
+                    if (err) {
+                        console.log("error");
+                        res.send("error");
+                    }
+                    var smtpTransport = nodemailer.createTransport({
+                        service: 'Gmail', 
+                        auth: {
+                          user: 'your email',
+                          pass:  'your password'   //'process.env.GMAILPW'
+                        }
+                      });
+                      var mailOptions = {
+                        to: user.email,
+                        from: 'your email',
+                        subject: 'Your password has been changed',
+                        text: 'Hello,\n\n' +
+                          'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+                      };
+                      smtpTransport.sendMail(mailOptions, function(err) {
+                        res.status(200);
+                        console.log('Success! Your password has been changed.');
+                        res.send('Success! Your password has been changed.')
+                        done(err, 'done');
+                      });
+                    
+                })
+          } else {
+            console.log('Password donot match');
+            res.status(202);
+            res.send('Password donot match');
+          }
+        });
+      }
+    ], function(err) {
+      res.redirect('/login');
+    });
+  });
 
 
