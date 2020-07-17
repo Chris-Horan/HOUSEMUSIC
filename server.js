@@ -297,7 +297,8 @@ app.post('/reset/:token', function(req, res) {
         passwordDatabase.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
           if (!user) {
             console.log('Password reset token is invalid or has expired.(post)');
-            
+            res.status(201);
+            res.send('Password reset token is invalid or has expired.(post)')
           }
           if(req.body.password === req.body.confirm) {
             userData.update(
@@ -322,15 +323,17 @@ app.post('/reset/:token', function(req, res) {
                           'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
                       };
                       smtpTransport.sendMail(mailOptions, function(err) {
+                        res.status(200);
                         console.log('Success! Your password has been changed.');
-                        
+                        res.send('Success! Your password has been changed.')
                         done(err, 'done');
                       });
                     
                 })
           } else {
             console.log('Password donot match');
-            
+            res.status(202);
+            res.send('Password donot match');
           }
         });
       }

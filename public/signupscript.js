@@ -152,5 +152,14 @@ async function resetPassword() {
         }
     };
     var res = await fetch('/reset/:token', options);
-
+    var stat = res.status;
+    if(stat==201) {
+        document.getElementById("tokenNotMatch").style.display="block"
+    }
+    else if(stat==202) {
+        document.getElementById("NotMatch").style.display="block"
+    }
+    else if(stat==200) {
+        document.getElementById("SuccessChanged").style.display="block"
+    }
 }
