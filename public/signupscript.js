@@ -127,10 +127,8 @@ async function forgotPass() {
             'Content-Type': 'application/json'
         }
     };
-    // console.log("back before");
     var res = await fetch('/forgot', options);
     var stat = res.status;
-    // console.log("after");
     if(stat==201) {
         document.getElementById("EmailNotFound").style.display="block"
     }
@@ -139,5 +137,29 @@ async function forgotPass() {
     }
     else if(stat==200) {
         document.getElementById("Insert").style.display="block"
+    }
+}
+
+
+async function resetPassword() {
+    var email = document.getElementById("email").value;
+    var data = {email};
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    var res = await fetch('/reset/:token', options);
+    var stat = res.status;
+    if(stat==201) {
+        document.getElementById("tokenNotMatch").style.display="block"
+    }
+    else if(stat==202) {
+        document.getElementById("NotMatch").style.display="block"
+    }
+    else if(stat==200) {
+        document.getElementById("SuccessChanged").style.display="block"
     }
 }
