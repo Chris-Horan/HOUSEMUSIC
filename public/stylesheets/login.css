@@ -122,4 +122,67 @@ a{
   margin-right: 0.325em;
   padding: 0 0.125em 0 0.375em;
 }
+.topnav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 10%;
+  height: 10px;
+ 
+}
+
+.topnav li{
+  display: inline-block;
+  list-style: none;
+  
+}
+
+.topnav li a{
+transition: all 0.3s ease 0s;
+font-size: 20px;
+}
+
+li{
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  font-weight: 600; 
+  color: #2a2f4a;
+  text-decoration: none;
+}
+
+.div1{
+  transition: 4ms ease-in;
+  padding-top: 80px;
+  background-color:#2a2f4a ;  
+}
+
+button.top{
+  transition: 0.2s ease-in-out;
+  background-color: rgb(248, 248, 158);
+  border: 0;
+  border-radius: 0;
+  box-shadow: inset 0 0 0 2px #ffffff;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.8em;
+  font-weight: 600;
+  height: 3.5em;
+  letter-spacing: 0.25em;
+  line-height: 3.5em;
+  padding: 0 1.75em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  word-spacing: normal;
+
+}
+button.top:hover{
+  background-color: lightblue;
+}
+
+div {
+  display: block;
+}
+
 
