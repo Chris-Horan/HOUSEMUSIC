@@ -127,7 +127,6 @@ async function forgotPass() {
             'Content-Type': 'application/json'
         }
     };
-<<<<<<< HEAD
     await fetch('/forgot', options).then(function(res) {
         var stat = res.status;
         console.log("ckdnckmv");
@@ -141,7 +140,6 @@ async function forgotPass() {
         //     userLogin();
         // }
     });
-=======
     var res = await fetch('/forgot', options);
     var stat = res.status;
     if(stat==201) {
@@ -181,5 +179,4 @@ async function resetPassword() {
     else if(stat==200) {
         document.getElementById("SuccessChanged").style.display="block"
     }
->>>>>>> 1e1aa06650aa06a937064d1ec25a048f23bd3d8d
 }
