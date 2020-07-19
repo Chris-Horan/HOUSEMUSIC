@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
@@ -6,11 +6,12 @@
     <meta charset="utf-8" />
     <title>Dashboard</title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.js"></script>
-    <script type="text/javascript" src="soundLibrary.js">
+    <script type="text/javascript" src="soundLibrary.js"></script>
+    <script type="text/javascript" src="signupscript.js">
     </script>
 </head>
 
-<body>
+<body id = 'elementshield'  style = "display:none" onload = 'loggedin()'>
     <p1>Hello! If you see this, your login was successful! </p1><br>
     <!--Test simple sounds-->
     <button onclick="playMusic('Kick')">Kick</button><br>
@@ -22,5 +23,7 @@
     <button onclick="playMusic('Snare')">Snare</button><br>
     <button onclick="playMusic('Tom1')">Tom1</button><br>
     <button onclick="playMusic('Tom2')">Tom2</button><br>
+    <br>
+    <button onclick="logout()">Logout</button>
 </body>
 </html>
