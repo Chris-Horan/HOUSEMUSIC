@@ -28,13 +28,14 @@ async function signup() {
         }
         else {
             sessionStorage.setItem("name", userName);
+            sessionStorage.setItem("type", 'user');
             userLogin();
         }
     });
 }
 
 function logout(){
-    sessionStorage.setItem("type", "NONE");
+    sessionStorage.setItem("type", null);
     sessionStorage.setItem("name", null);
     window.location.replace("index.html");
 }
@@ -49,7 +50,7 @@ function loggedin(){
 }
 
 function allowlogin(){
-    if(sessionStorage.getItem("type") != 'NONE'){
+    if(sessionStorage.getItem("type") != null && sessionStorage.getItem("type") != 'null'){
      document.getElementById("loginshield").style.display = 'none';
      window.location.replace("dashboard.html");
 	}
@@ -59,7 +60,7 @@ function allowlogin(){
 }
 
 function allowsignup(){
-    if(sessionStorage.getItem("type") != 'NONE'){
+    if(sessionStorage.getItem("type") != null && sessionStorage.getItem("type") != 'null'){
      document.getElementById("signupshield").style.display = 'none';
      window.location.replace("dashboard.html");
 	}
