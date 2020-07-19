@@ -6,16 +6,19 @@
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="/stylesheets/homepage.css" />
 	<link rel="icon" type="image/x-icon" href="https://img.icons8.com/cotton/64/000000/piano.png"/>
+	<script src = "homepage.js"> </script>
 </head>
 
-<body>
+<body onload = 'displayUser()'>
 	<div id="wrapper">
 		<nav class="topnav">
         <a href="index.html" id="title">house music</a>
-        <a href="index.html" class="navbar">home</a>
-        <a href="login.html" class="navbar">login</a>
-        <a href="signup.html" class="navbar">sign up</a>
-        <a href="#" class="navbar">about</a>
+        <a href="index.html" class="navbar" id = 'indextag'>home</a>
+        <a href="login.html" class="navbar" id = 'logintag'>login</a>
+        <a href="signup.html" class="navbar" id = 'signuptag' >sign up</a>
+        <a href="#" class="navbar" id = 'abouttag'>about</a>
+		<a href="dashboard.html" class="navbar" id = 'dashboardtag' style = "display:none">Dashboard</a>
+		<a href="#" class="navbar" id = "usernamehere" style = "display:none" >Username Here</a>
     </nav>
 		<div class="div2">
 			<header>
