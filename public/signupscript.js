@@ -2,6 +2,8 @@ async function signup() {
     var userName = document.getElementById("Username").value;
     var email = document.getElementById("Email").value;
     var password = document.getElementById("Password").value;
+    userName = userName.trim();
+    email = email.trim();
     var data = {userName, email, password};
     if(!checkPassReqs(password)) {
         return;
@@ -30,10 +32,24 @@ async function signup() {
     });
 }
 
+function logout(){
+    sessionStorage.setItem("type", "NONE");
+    window.location.replace("index.html")
+}
+
+function loggedin(){
+    if(sessionStorage.getItem("type") != 'user'){
+     window.location.replace("login.html");
+	}
+    else{
+     document.getElementById('elementshield').style.display = 'block'
+	}
+}
 
 async function logins(){
     var userName = document.getElementById("Username").value;
     var password = document.getElementById("Password").value;
+    userName = userName.trim();
     var data = {userName, password};
     var options = {
         method: 'POST',
