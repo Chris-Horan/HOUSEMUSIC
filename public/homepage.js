@@ -9,7 +9,7 @@ function displayUser(){
 }
 
 function navbarmanager(){
-	if(sessionStorage.getItem("name") != 'null'){
+	if(sessionStorage.getItem("name") != null && sessionStorage.getItem("name") != 'null' ){
 		document.getElementById('dashboardtag').style.display = 'inline';
 		document.getElementById('usernamehere').style.display = 'inline';
 		document.getElementById('logintag').style.display = 'none';
