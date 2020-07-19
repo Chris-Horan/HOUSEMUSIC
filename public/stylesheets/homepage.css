@@ -32,6 +32,7 @@ nav .navbar:hover{
   /* background-color: #00adb5; */
   border-bottom: 4px solid #00adb5;
   color: white;
+  text-shadow: 2px 2px 4px white;
 }
 
 footer{
@@ -277,6 +278,7 @@ button.tasks:hover{
     /* background-color: rgb(229, 255, 168); */
     background-color: rgba(0, 173, 181, 0.9);
     color: white;
+    text-shadow: 2px 2px 4px white;
 }
 
 html, body, .container

@@ -92,7 +92,45 @@ p1{
   }
 } */
 
+.div1 a{
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.025em;
+  line-height: 1.65;
+}
 
+.topnav {
+  position: relative;
+  margin:auto;
+  background-color: rgba(0,0,0,0.9);
+  width: 100%;
+  /* height: auto; */
+  height: 55px;
+}
+
+
+.topnav .navbar{
+  margin-left: 35px;
+  /* border: 1px solid white; */
+}
+
+.topnav #title{
+  font-size: 30px;
+  font-family: Comic Sans MS, Comic Sans, cursive;
+  margin-left: 20px;
+}
+
+.topnav .navbar:hover{
+  border-bottom: 4px solid #00adb5;
+  color: white;
+  text-shadow: 2px 2px 4px white;
+}
+
+/*
 #header {
   display: flex;
   background-color: #2a2f4a;
@@ -138,13 +176,13 @@ p1{
   align-items: center;
   padding: 30px 10%;
   height: 10px;
- 
+
 }
 
 .topnav li{
   display: inline-block;
   list-style: none;
-  
+
 }
 
 .topnav li a{
@@ -154,7 +192,7 @@ font-size: 20px;
 
 li{
   font-family: "Source Sans Pro", Helvetica, sans-serif;
-  font-weight: 600; 
+  font-weight: 600;
   color: #2a2f4a;
   text-decoration: none;
 }
@@ -162,7 +200,7 @@ li{
 .div1{
   transition: 4ms ease-in;
   padding-top: 80px;
-  background-color:#2a2f4a ;  
+  background-color:#2a2f4a ;
 }
 
 button.top{
@@ -193,4 +231,4 @@ button.top:hover{
 
 div {
   display: block;
-}
+} */

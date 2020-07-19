@@ -16,8 +16,8 @@ body{
   text-align: center;
 }
 
-p1{
-    color:white
+#loginBox p1{
+    color:white;
 }
 
 #loginBox h1{
@@ -47,7 +47,7 @@ p1{
   margin-top: 12px;
 }
 
-a{
+#loginBox a{
   color: #D7FFFE;
   text-shadow: 2px 2px 4px white;
 }
@@ -68,16 +68,129 @@ a{
   text-shadow: 2px 2px 4px white;
 }
 
-#intro {
-  color: white;
+#intro{
+  color:white;
 }
+
+#loginBox #intro{
+  padding-top: 20px;
+}
+
 
 #EmailNotFound,#NotFound, #Insert {
   color: white;
   font-style: italic;
 }
 
-#header {
+.div1 a{
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.025em;
+  line-height: 1.65;
+}
+
+.topnav {
+  position: relative;
+  margin:auto;
+  background-color: rgba(0,0,0,0.9);
+  width: 100%;
+  /* height: auto; */
+  height: 55px;
+}
+
+
+.topnav .navbar{
+  margin-left: 35px;
+  /* border: 1px solid white; */
+}
+
+.topnav #title{
+  font-size: 30px;
+  font-family: Comic Sans MS, Comic Sans, cursive;
+  margin-left: 20px;
+}
+
+.topnav .navbar:hover{
+  border-bottom: 4px solid #00adb5;
+  color: white;
+  text-shadow: 2px 2px 4px white;
+}
+
+
+
+/*
+.div1 a{
+  text-transform: uppercase;
+  text-decoration: none;
+  color: white;
+}
+
+nav #title{
+  font-size: 30px;
+  font-family: Comic Sans MS, Comic Sans, cursive;
+  margin-left: 20px;
+}
+
+.topnav {
+  position:fixed;
+  background-color: rgba(0,0,0,1);
+  width: 100%;
+  height: 55px;
+  font-size: 18px;
+}
+
+.topnav .navbar{
+  margin-left: 35px;
+  font-size: 16px;
+}
+
+nav .navbar:hover{
+  border-bottom: 4px solid #00adb5;
+  color: white;
+}
+
+body .div1 .topnav {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+body .div1 .topnav {
+    color: #ffffff;
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-size: 17pt;
+    font-weight: 300;
+    letter-spacing: 0.025em;
+    line-height: 1.65;
+}
+
+
+.div1{
+  border: 2px solid red;
+}
+
+.topnav{
+  border: 2px solid white;
+} */
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------------ old version ---------------------------------------------- */
+/* #header {
   display: flex;
   background-color: #2a2f4a;
   box-shadow: 0 0 0.25em 0 rgba(0, 0, 0, 0.15);
@@ -121,34 +234,34 @@ a{
   align-items: center;
   padding: 30px 10%;
   height: 10px;
- 
+
 }
 
 .topnav li{
   display: inline-block;
   list-style: none;
-  
+
 }
 
 .topnav li a{
 transition: all 0.3s ease 0s;
 font-size: 20px;
-}
+} */
 
-li{
+/* li{
   font-family: "Source Sans Pro", Helvetica, sans-serif;
-  font-weight: 600; 
+  font-weight: 600;
   color: #2a2f4a;
   text-decoration: none;
-}
+} */
 
-.div1{
+/* .div1{
   transition: 4ms ease-in;
   padding-top: 80px;
-  background-color:#2a2f4a ;  
-}
+  background-color:#2a2f4a ;
+} */
 
-button.top{
+/* button.top{
   transition: 0.2s ease-in-out;
   background-color: rgb(248, 248, 158);
   border: 0;
@@ -169,13 +282,11 @@ button.top{
   white-space: nowrap;
   word-spacing: normal;
 
-}
-button.top:hover{
+} */
+/* button.top:hover{
   background-color: lightblue;
-}
+} */
 
-div {
+/* div {
   display: block;
-}
-
-
+} */
