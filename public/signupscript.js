@@ -27,6 +27,7 @@ async function signup() {
             document.getElementById("EmailError").style.display="block"
         }
         else {
+            sessionStorage.setItem("name", userName);
             userLogin();
         }
     });
@@ -34,7 +35,8 @@ async function signup() {
 
 function logout(){
     sessionStorage.setItem("type", "NONE");
-    window.location.replace("index.html")
+    sessionStorage.setItem("name", null);
+    window.location.replace("index.html");
 }
 
 function loggedin(){
@@ -42,10 +44,29 @@ function loggedin(){
      window.location.replace("login.html");
 	}
     else{
-     document.getElementById('elementshield').style.display = 'block'
+     document.getElementById('elementshield').style.display = 'block';
 	}
 }
 
+function allowlogin(){
+    if(sessionStorage.getItem("type") != 'NONE'){
+     document.getElementById("loginshield").style.display = 'none';
+     window.location.replace("dashboard.html");
+	}
+    else{
+     document.getElementById("loginshield").style.display = 'block';
+	}
+}
+
+function allowsignup(){
+    if(sessionStorage.getItem("type") != 'NONE'){
+     document.getElementById("signupshield").style.display = 'none';
+     window.location.replace("dashboard.html");
+	}
+    else{
+     document.getElementById("signupshield").style.display = 'block';
+	}
+}
 async function logins(){
     var userName = document.getElementById("Username").value;
     var password = document.getElementById("Password").value;
@@ -68,11 +89,13 @@ async function logins(){
     else {
         var userInfo = await res.json();
         if(userInfo[0].userType==='user') {
+            sessionStorage.setItem("name", userName);
             sessionStorage.setItem("type", 'user');
             userLogin();
         }
         else {
             sessionStorage.setItem("type", 'admin');
+            sessionStorage.setItem("name", userName);
             // window.location.replace("login.html");
             adminLogin();
         }
