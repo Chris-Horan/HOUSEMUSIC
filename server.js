@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 5000;
 
 // Set app to listen on localport 5000
 // View locally running app at 127.0.0.1:5000
-var server = app.listen(PORT, function() {});
+var server = app.listen(PORT, function() {console.log("Listening on port:" + PORT )});
 
 module.exports = server;
 
