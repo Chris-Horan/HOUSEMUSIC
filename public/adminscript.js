@@ -33,7 +33,7 @@ async function addAdmin() {
 
 function usertype(){
     if(sessionStorage.getItem("type") != 'admin'){
-     window.location.replace("dashboard.html");
+     window.location.replace("login.html");
 	}
     else{
      document.getElementById('hidingpanel').style.display = 'block'
