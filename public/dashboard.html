@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>Dashboard</title>
     <link rel="icon" type="image/x-icon" href="https://img.icons8.com/cotton/64/000000/piano.png"/>
     <link rel="stylesheet" href="stylesheets/dashboard.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.js"></script>
+    <script type="text/javascript" src="soundLibrary.js"></script>
+    <script type="text/javascript" src="signupscript.js"></script>
   </head>
-  <body>
-      <div class="div1">
+  <body id = 'elementshield'  style = "display:none" onload = 'loggedin()'>
+    <p1>Hello! If you see this, your login was successful! </p1><br>
+    <div class="div1">
         <nav class="topnav">
           <a href="index.html" id="title">house music</a>
           <a href="index.html" class="navbar">home</a>
@@ -222,22 +225,6 @@
       			<p class="welcome">Feature4</p>
       		</div>
        </div>
-  </body>
-=======
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-    <meta charset="utf-8" />
-    <title>Dashboard</title>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.js"></script>
-    <script type="text/javascript" src="soundLibrary.js"></script>
-    <script type="text/javascript" src="signupscript.js">
-    </script>
-</head>
-
-<body id = 'elementshield'  style = "display:none" onload = 'loggedin()'>
-    <p1>Hello! If you see this, your login was successful! </p1><br>
     <!--Test simple sounds-->
     <button onclick="playMusic('Kick')">Kick</button><br>
     <button onclick="playMusic('HiHat')">HiHat</button><br>
@@ -251,5 +238,4 @@
     <br>
     <!-- <button onclick="logout()">Logout</button> -->
 </body>
->>>>>>> 1f7e0585e59ea093165fbd98dd7cb409dc4d67af
 </html>

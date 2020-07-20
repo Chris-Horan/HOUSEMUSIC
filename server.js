@@ -11,7 +11,6 @@ var smtpTransport = require('nodemailer-smtp-transport');
 const crypto = require("crypto");
 
 const DataStore = require('nedb');
-const ForgotPass = require('nedb');
 const PORT = process.env.PORT || 5000;
 
 // Set app to listen on localport 5000
@@ -23,8 +22,10 @@ module.exports = server;
 // Attach database to app
 const userData = new DataStore('userInfo.db');
 userData.loadDatabase();
-const passwordDatabase = new ForgotPass('forgotPassword.db');
+const passwordDatabase = new DataStore('forgotPassword.db');
 passwordDatabase.loadDatabase();
+const soundData = new DataStore('soundInfo.db');
+soundData.loadDatabase();
 
 // Direct node to frontend resources folder (html, css, js)
 app.use(express.static(__dirname + '/public'));
@@ -331,3 +332,9 @@ app.post('/reset/:token', function(req, res) {
   });
 
 
+app.post('/addSound', (req, res) => {
+    soundData.insert({name: req.body.name, owner: req.body.owner}, function(err) {
+        res.status(200);
+        res.send("User added successfully");
+    });
+});
