@@ -240,7 +240,7 @@ function addColumns() {
     var table = document.getElementById("myTable");
     var row = table.getElementsByTagName('tr');
     for (i=0; i<row.length; i++) {
-        row[i].innerHTML = row[i].innerHTML + '<td class="instrument1"></td>';
+        row[i].innerHTML = row[i].innerHTML + '<td onclick="playMusic("Kick")" class="instrument1"></td>';
     }
 }
 
