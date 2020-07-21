@@ -1,3 +1,4 @@
+/*Here is a test */
 async function signup() {
     var userName = document.getElementById("Username").value;
     var email = document.getElementById("Email").value;
