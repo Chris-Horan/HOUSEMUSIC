@@ -9,6 +9,8 @@ const async = require("async");
 const nodemailer = require("nodemailer");
 var smtpTransport = require('nodemailer-smtp-transport');
 const crypto = require("crypto");
+const fs = require('fs');
+var formidable = require("formidable");
 
 const DataStore = require('nedb');
 const PORT = process.env.PORT || 5000;
@@ -333,8 +335,33 @@ app.post('/reset/:token', function(req, res) {
 
 
 app.post('/addSound', (req, res) => {
-    soundData.insert({name: req.body.name, owner: req.body.owner}, function(err) {
+    soundData.insert({name: req.body.name, owner: req.body.owner}, function(err, data) {
         res.status(200);
-        res.send("User added successfully");
+        console.log(data);
+        res.send(data);
+    });
+});
+
+app.post('/writeSound', (req, res) => {
+    console.log("hi");
+    fs.writeFile("newSound.mp3", req.body, function(err) {
+        if(err)
+            console.log(err);
+        else
+            console.log("Success");
+    });
+});
+
+app.post('/uploadSound', (req, res) => {
+    var form = new formidable.IncomingForm();
+    form.parse(req, function(err, fields, files) {
+        soundData.insert({name: req.body.name, owner: req.body.owner}, function(err, data) {
+            var oldpath = files.addSound.path;
+            var newpath = "/public/sounds/".concat(data._id).concat(".mp3");
+            fs.rename(oldpath, newpath, function(err) {
+                if(err) console.log(err);
+                console.log("File uploaded.");
+            });
+        });
     });
 });
