@@ -41,7 +41,10 @@ function logout(){
 }
 
 function loggedin(){
-    if(sessionStorage.getItem("type") != 'user'){
+    if(sessionStorage.getItem("type") == 'admin'){
+        document.getElementById('elementshield').style.display = 'block';
+	}
+    else if(sessionStorage.getItem("type") != 'user'){
      window.location.replace("login.html");
 	}
     else{
