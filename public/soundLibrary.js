@@ -11,7 +11,6 @@ function togglePlay() {
     var bpm = 120;
     var bps = bpm / 60;
     var freq = 1 / bps;
-    window.playPos = 0;
     window.musicInt = setInterval(play, freq*500);
 }
 
@@ -25,17 +24,45 @@ function play() {
             playMusic(window.instrs[i]);
         }
     }
-    playPos++;
+    updatePlayCol();
+    window.playPos++;
+}
+
+function updatePlayCol() {
+    var table = document.getElementById("soundGrid");
+    for(var i = 0; i < table.rows.length; i++) {
+        if(window.playPos == 0) {
+            table.rows[i].cells[window.nBeat - 1].classList.remove("playing");
+        }
+        else {
+            table.rows[i].cells[window.playPos - 1].classList.remove("playing");
+        }
+    }
+    for(var i = 0; i < table.rows.length; i++) {
+        table.rows[i].cells[window.playPos].classList.add("playing");
+    }
+}
+
+function clearPlayCol() {
+    var table = document.getElementById("soundGrid");
+    for(var i = 0; i < window.nInst; i++) {
+        for(var j = 0; j < window.nBeat; j++) {
+            table.rows[i].cells[j].classList.remove("playing");
+        }
+    }
+}
+
+function stop() {
+    clearInterval(window.musicInt);
+    window.playing = false;
+    window.playPos = 0;
+    clearPlayCol();
 }
 
 function pause() {
     clearInterval(window.musicInt);
     window.playing = false;
-    window.playPos = 0;
 }
-
-
-
 
 // async function addSound() {
 //     var soundInput = document.getElementById('addSound');
@@ -66,6 +93,7 @@ function buildTable() {
     var table = document.getElementById("soundGrid");
     window.nInst = 2;
     window.nBeat = 32;
+    window.playPos = 0;
     window.instrs = ['Kick', 'Ride'];
     cntr = 3;
     for(i = 0; i < window.nInst; i++) {

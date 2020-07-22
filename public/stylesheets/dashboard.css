@@ -302,7 +302,7 @@ html, body, .container
 }
 
 .downBeat {
-  background-color: lightcoral;
+  background-color: coral;
 }
 
 .active {
@@ -311,4 +311,8 @@ html, body, .container
 
 .downBeat.active {
   background-color: #FFAAAA;
+}
+
+.playing, .active.playing, .downbeat.active.playing, .downbeat.playing {
+  background-color: lightblue;
 }
