@@ -7,6 +7,8 @@ function displayUser(){
 	}
 	navbarmanager();
 }
+/* Test */
+
 
 function navbarmanager(){
 	if(sessionStorage.getItem("name") == 'admin'){
