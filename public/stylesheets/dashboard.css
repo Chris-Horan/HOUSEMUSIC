@@ -300,3 +300,15 @@ html, body, .container
     letter-spacing: 0.025em;
     line-height: 1.65;
 }
+
+.downBeat {
+  background-color: lightcoral;
+}
+
+.active {
+  background-color: white;
+}
+
+.downBeat.active {
+  background-color: #FFAAAA;
+}
