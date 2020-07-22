@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="stylesheets/dashboard.css"/>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.js"></script>
     <script type="text/javascript" src="soundLibrary.js"></script>
-    <script type="text/javascript" src="signupscript.js">
-    </script>
+    <script type="text/javascript" src="signupscript.js"></script>
   </head>
-  <body id = 'elementshield'  style = "display:none" onload = 'loggedin()'>
-      <div class="div1">
+  <body id = 'elementshield'  style = "display:none" onload = 'loggedin();buildTable()'>
+    <p1>Hello! If you see this, your login was successful! </p1><br>
+    <div class="div1">
         <nav class="topnav">
           <a href="index.html" id="title">house music</a>
           <a href="index.html" class="navbar">home</a>
@@ -25,8 +25,8 @@
       </div>
 
       <div class="tools">
-          <button id="play"><img src="https://img.icons8.com/ios/100/000000/circled-play.png"/></button>
-          <button id="pause"><img src="https://img.icons8.com/ios/100/000000/circled-pause.png"/></button>
+          <button id="play" onclick="togglePlay()"><img src="https://img.icons8.com/ios/100/000000/circled-play.png"/></button>
+          <button id="pause" onclick="pause()"><img src="https://img.icons8.com/ios/100/000000/circled-pause.png"/></button>
           <button id="stop"><img src="https://img.icons8.com/ios/100/000000/stop-circled--v2.png"/></button>
 
           <!-- <button id="unmute"><img src="https://img.icons8.com/ios/100/000000/high-volume.png"/></button>
@@ -34,201 +34,13 @@
       </div>
 
       <div class="musicPanel">
-        <table>
-          <tr>
-            <th class="instrumentPanel instrument1"> Kick  </th>
-            <td class="instrument1 c1"></td> <td class="instrument1"></td>
-            <td class="instrument1"></td> <td class="instrument1"></td>
-            <td class="instrument1 c5"></td> <td class="instrument1"></td>
-            <td class="instrument1"></td> <td class="instrument1"></td>
-            <td class="instrument1 c9"></td> <td class="instrument1"></td>
-            <td class="instrument1"></td> <td class="instrument1"></td>
-            <td class="instrument1 c13"></td> <td class="instrument1"></td>
-            <td class="instrument1"></td> <td class="instrument1"></td>
-            <td class="instrument1 c17"></td> <td class="instrument1"></td>
-            <td class="instrument1"></td> <td class="instrument1"></td>
-            <td class="instrument1 c21"></td> <td class="instrument1"></td>
-            <td class="instrument1"></td> <td class="instrument1"></td>
-            <td class="instrument1 c25"></td> <td class="instrument1"></td>
-            <td class="instrument1"></td> <td class="instrument1"></td>
-            <td class="instrument1 c29"></td> <td class="instrument1"></td>
-            <td class="instrument1"></td> <td class="instrument1"></td>
-          </tr>
-          <tr>
-            <th class="instrumentPanel instrument2"> HiHat </th>
-            <td class="instrument2 c1"></td> <td class="instrument2"></td>
-            <td class="instrument2"></td> <td class="instrument2"></td>
-            <td class="instrument2 c5"></td> <td class="instrument2"></td>
-            <td class="instrument2"></td> <td class="instrument2"></td>
-            <td class="instrument2 c9"></td> <td class="instrument2"></td>
-            <td class="instrument2"></td> <td class="instrument2"></td>
-            <td class="instrument2 c13"></td> <td class="instrument2"></td>
-            <td class="instrument2"></td> <td class="instrument2"></td>
-            <td class="instrument2 c17"></td> <td class="instrument2"></td>
-            <td class="instrument2"></td> <td class="instrument2"></td>
-            <td class="instrument2 c21"></td> <td class="instrument2"></td>
-            <td class="instrument2"></td> <td class="instrument2"></td>
-            <td class="instrument2 c25"></td> <td class="instrument2"></td>
-            <td class="instrument2"></td> <td class="instrument2"></td>
-            <td class="instrument2 c29"></td> <td class="instrument2"></td>
-            <td class="instrument2"></td> <td class="instrument2"></td>
-          </tr>
-          <tr>
-            <th class="instrumentPanel instrument3"> Crash </th>
-            <td class="instrument3 c1"></td> <td class="instrument3"></td>
-            <td class="instrument3"></td> <td class="instrument3"></td>
-            <td class="instrument3 c5"></td> <td class="instrument3"></td>
-            <td class="instrument3"></td> <td class="instrument3"></td>
-            <td class="instrument3 c9"></td> <td class="instrument3"></td>
-            <td class="instrument3"></td> <td class="instrument3"></td>
-            <td class="instrument3 c13"></td> <td class="instrument3"></td>
-            <td class="instrument3"></td> <td class="instrument3"></td>
-            <td class="instrument3 c17"></td> <td class="instrument3"></td>
-            <td class="instrument3"></td> <td class="instrument3"></td>
-            <td class="instrument3 c21"></td> <td class="instrument3"></td>
-            <td class="instrument3"></td> <td class="instrument3"></td>
-            <td class="instrument3 c25"></td> <td class="instrument3"></td>
-            <td class="instrument3"></td> <td class="instrument3"></td>
-            <td class="instrument3 c29"></td> <td class="instrument3"></td>
-            <td class="instrument3"></td> <td class="instrument3"></td>
-          </tr>
-          <tr>
-            <th class="instrumentPanel instrument4"> OpenHat </th>
-            <td class="instrument4 c1"></td> <td class="instrument4"></td>
-            <td class="instrument4"></td> <td class="instrument4"></td>
-            <td class="instrument4 c5"></td> <td class="instrument4"></td>
-            <td class="instrument4"></td> <td class="instrument4"></td>
-            <td class="instrument4 c9"></td> <td class="instrument4"></td>
-            <td class="instrument4"></td> <td class="instrument4"></td>
-            <td class="instrument4 c13"></td> <td class="instrument4"></td>
-            <td class="instrument4"></td> <td class="instrument4"></td>
-            <td class="instrument4 c17"></td> <td class="instrument4"></td>
-            <td class="instrument4"></td> <td class="instrument4"></td>
-            <td class="instrument4 c21"></td> <td class="instrument4"></td>
-            <td class="instrument4"></td> <td class="instrument4"></td>
-            <td class="instrument4 c25"></td> <td class="instrument4"></td>
-            <td class="instrument4"></td> <td class="instrument4"></td>
-            <td class="instrument4 c29"></td> <td class="instrument4"></td>
-            <td class="instrument4"></td> <td class="instrument4"></td>
-          </tr>
-          <tr>
-            <th class="instrumentPanel instrument5"> Ride </th>
-            <td class="instrument5 c1"></td> <td class="instrument5"></td>
-            <td class="instrument5"></td> <td class="instrument5"></td>
-            <td class="instrument5 c5"></td> <td class="instrument5"></td>
-            <td class="instrument5"></td> <td class="instrument5"></td>
-            <td class="instrument5 c9"></td> <td class="instrument5"></td>
-            <td class="instrument5"></td> <td class="instrument5"></td>
-            <td class="instrument5 c13"></td> <td class="instrument5"></td>
-            <td class="instrument5"></td> <td class="instrument5"></td>
-            <td class="instrument5 c17"></td> <td class="instrument5"></td>
-            <td class="instrument5"></td> <td class="instrument5"></td>
-            <td class="instrument5 c21"></td> <td class="instrument5"></td>
-            <td class="instrument5"></td> <td class="instrument5"></td>
-            <td class="instrument5 c25"></td> <td class="instrument5"></td>
-            <td class="instrument5"></td> <td class="instrument5"></td>
-            <td class="instrument5 c29"></td> <td class="instrument5"></td>
-            <td class="instrument5"></td> <td class="instrument5"></td>
-          </tr>
-          <tr>
-            <th class="instrumentPanel instrument6"> Sdst </th>
-            <td class="instrument6 c1"></td> <td class="instrument6"></td>
-            <td class="instrument6"></td> <td class="instrument6"></td>
-            <td class="instrument6 c5"></td> <td class="instrument6"></td>
-            <td class="instrument6"></td> <td class="instrument6"></td>
-            <td class="instrument6 c9"></td> <td class="instrument6"></td>
-            <td class="instrument6"></td> <td class="instrument6"></td>
-            <td class="instrument6 c13"></td> <td class="instrument6"></td>
-            <td class="instrument6"></td> <td class="instrument6"></td>
-            <td class="instrument6 c17"></td> <td class="instrument6"></td>
-            <td class="instrument6"></td> <td class="instrument6"></td>
-            <td class="instrument6 c21"></td> <td class="instrument6"></td>
-            <td class="instrument6"></td> <td class="instrument6"></td>
-            <td class="instrument6 c25"></td> <td class="instrument6"></td>
-            <td class="instrument6"></td> <td class="instrument6"></td>
-            <td class="instrument6 c29"></td> <td class="instrument6"></td>
-            <td class="instrument6"></td> <td class="instrument6"></td>
-          </tr>
-          <tr>
-            <th class="instrumentPanel instrument7"> Snare </th>
-            <td class="instrument7 c1"></td> <td class="instrument7"></td>
-            <td class="instrument7"></td> <td class="instrument7"></td>
-            <td class="instrument7 c5"></td> <td class="instrument7"></td>
-            <td class="instrument7"></td> <td class="instrument7"></td>
-            <td class="instrument7 c9"></td> <td class="instrument7"></td>
-            <td class="instrument7"></td> <td class="instrument7"></td>
-            <td class="instrument7 c13"></td> <td class="instrument7"></td>
-            <td class="instrument7"></td> <td class="instrument7"></td>
-            <td class="instrument7 c17"></td> <td class="instrument7"></td>
-            <td class="instrument7"></td> <td class="instrument7"></td>
-            <td class="instrument7 c21"></td> <td class="instrument7"></td>
-            <td class="instrument7"></td> <td class="instrument7"></td>
-            <td class="instrument7 c25"></td> <td class="instrument7"></td>
-            <td class="instrument7"></td> <td class="instrument7"></td>
-            <td class="instrument7 c29"></td> <td class="instrument7"></td>
-            <td class="instrument7"></td> <td class="instrument7"></td>
-          </tr>
-          <tr>
-            <th class="instrumentPanel instrument8"> Tom1 </th>
-            <td class="instrument8 c1"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-            <td class="instrument8 c5"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-            <td class="instrument8 c9"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-            <td class="instrument8 c13"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-            <td class="instrument8 c17"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-            <td class="instrument8 c21"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-            <td class="instrument8 c25"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-            <td class="instrument8 c29"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-          </tr>
-          <tr>
-            <th class="instrumentPanel instrument9"> Tom2 </th>
-            <td class="instrument8 c1"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-            <td class="instrument8 c5"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-            <td class="instrument8 c9"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-            <td class="instrument8 c13"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-            <td class="instrument8 c17"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-            <td class="instrument8 c21"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-            <td class="instrument8 c25"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-            <td class="instrument8 c29"></td> <td class="instrument8"></td>
-            <td class="instrument8"></td> <td class="instrument8"></td>
-          </tr>
 
-          <!-- <div class="numberBar">
-            <tr>
-              <th class="bottomBar"> </th>
-              <td class="bottomBar">1</td> <td class="bottomBar">2</td>
-              <td class="bottomBar">3</td> <td class="bottomBar">4</td>
-              <td class="bottomBar">5</td> <td class="bottomBar">6</td>
-              <td class="bottomBar">7</td> <td class="bottomBar"></td>
-              <td class="bottomBar"></td> <td class="bottomBar"></td>
-              <td class="bottomBar"></td> <td class="bottomBar"></td>
-              <td class="bottomBar"></td> <td class="bottomBar"></td>
-              <td class="bottomBar"></td> <td class="bottomBar"></td>
-              <td class="bottomBar"></td> <td class="bottomBar"></td>
-              <td class="bottomBar"></td> <td class="bottomBar"></td>
-              <td class="bottomBar"></td> <td class="bottomBar"></td>
-              <td class="bottomBar"></td> <td class="bottomBar"></td>
-              <td class="bottomBar"></td> <td class="bottomBar"></td>
-              <td class="bottomBar"></td> <td class="bottomBar"></td>
-              <td class="bottomBar"></td> <td class="bottomBar"></td>
-              <td class="bottomBar"></td> <td class="bottomBar"></td>
-            </tr>
-          </div> -->
-        </table>
+        <table id="soundGrid"></table>
+
+        <button onclick="createInstrument()">Add Instrument</button>
+        <button onclick="addColumns()">Add Column</button>
+        <button onclick="deleterow()">Remove Instrument</button>
+        <button onclick="deleteColumn()">Delete Column</button>
       </div>
 
       <div class="container">
@@ -245,16 +57,14 @@
       			<p class="welcome">Feature4</p>
       		</div>
        </div>
-       <!--Test simple sounds-->
-       <!-- <button onclick="playMusic('Kick')">Kick</button><br>
-       <button onclick="playMusic('HiHat')">HiHat</button><br>
-       <button onclick="playMusic('Crash')">Crash</button><br>
-       <button onclick="playMusic('OpenHat')">OpenHat</button><br>
-       <button onclick="playMusic('Ride')">Ride</button><br>
-       <button onclick="playMusic('Sdst')">Sdst</button><br>
-       <button onclick="playMusic('Snare')">Snare</button><br>
-       <button onclick="playMusic('Tom1')">Tom1</button><br>
-       <button onclick="playMusic('Tom2')">Tom2</button><br> -->
-  </body>
 
+    <form action="uploadSound" method="post" enctype="multipart/form-data">
+      <input name="addSound" id="addSound" type="file" accept=".wav, .mp3"/>
+      <input type="text" name="owner" id="owner"/>
+      <input type="text" name="soundName" id="soundName"/>
+      <input type="submit" value="upload"/>
+      </form>
+    <br>
+    <!-- <button onclick="logout()">Logout</button> -->
+</body>
 </html>

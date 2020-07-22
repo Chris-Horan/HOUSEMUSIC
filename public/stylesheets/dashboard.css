@@ -149,6 +149,7 @@ table td {
 
 .c1, .c5, .c9, .c13, .c17, .c21, .c25, .c29 {
   background-color: rgba(255,255,255,0.95);
+  /* background-color: #00adb5; */
 }
 
 
@@ -298,4 +299,16 @@ html, body, .container
     font-weight: 300;
     letter-spacing: 0.025em;
     line-height: 1.65;
+}
+
+.downBeat {
+  background-color: lightcoral;
+}
+
+.active {
+  background-color: white;
+}
+
+.downBeat.active {
+  background-color: #FFAAAA;
 }

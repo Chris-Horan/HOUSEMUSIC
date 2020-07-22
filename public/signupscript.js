@@ -41,7 +41,10 @@ function logout(){
 }
 
 function loggedin(){
-    if(sessionStorage.getItem("type") != 'user'){
+    if(sessionStorage.getItem("type") == 'admin'){
+        document.getElementById('elementshield').style.display = 'block';
+	}
+    else if(sessionStorage.getItem("type") != 'user'){
      window.location.replace("login.html");
 	}
     else{
@@ -167,19 +170,19 @@ async function forgotPass() {
             'Content-Type': 'application/json'
         }
     };
-    await fetch('/forgot', options).then(function(res) {
-        var stat = res.status;
-        console.log("ckdnckmv");
-        if(stat==201) {
-            document.getElementById("EmailNotFound").style.display="block"
-        }
-        // else if(stat==202) {
-        //     document.getElementById("EmailError").style.display="block"
-        // }
-        // else {
-        //     userLogin();
-        // }
-    });
+    // await fetch('/forgot', options).then(function(res) {
+    //     var stat = res.status;
+    //     console.log("ckdnckmv");
+    //     if(stat==201) {
+    //         document.getElementById("EmailNotFound").style.display="block"
+    //     }
+    //     // else if(stat==202) {
+    //     //     document.getElementById("EmailError").style.display="block"
+    //     // }
+    //     // else {
+    //     //     userLogin();
+    //     // }
+    // });
     var res = await fetch('/forgot', options);
     var stat = res.status;
     if(stat==201) {
