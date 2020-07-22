@@ -53,3 +53,40 @@ function pause() {
 //     };
 //     var res = await fetch('/writeSound', options);
 // }
+
+function createInstrument() {
+    var table = document.getElementById("myTable");
+    var row = table.getElementsByTagName('tr');
+    var row = row[row.length-1].outerHTML;
+    table.innerHTML = table.innerHTML + row;
+    var row = table.getElementsByTagName('tr');
+    var row = row[row.length-1].getElementsByTagName('td');
+    for(i=0; i<row.length; i++) {
+        row[i].innerHTML = '<td class="instrument2"></td>';
+    }
+}
+
+function addColumns() {
+    var table = document.getElementById("myTable");
+    var row = table.getElementsByTagName('tr');
+    for (i=0; i<row.length; i++) {
+        row[i].innerHTML = row[i].innerHTML + '<td onclick="playMusic("Kick")" class="instrument1"></td>';
+    }
+}
+
+function deleterow() {
+    var table = document.getElementById("myTable");
+      var row = table.getElementsByTagName('tr');
+      if (row.length != '1') {
+          row[row.length - 1].outerHTML = '';
+      }
+}
+
+function deleteColumn() {
+    var allRows = document.getElementById("myTable").rows;
+    for (var i=0; i<allRows.length; i++) {
+        if (allRows[i].cells.length > 1) {
+            allRows[i].deleteCell(-1);
+        }
+    }
+}
