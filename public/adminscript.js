@@ -40,6 +40,10 @@ function usertype(){
 	}
 }
 
+function dashboard(){
+    window.location.replace("dashboard.html");
+}
+
 async function changePw() {
     var userName = document.getElementById("userNamepw").value;
     var password = document.getElementById("passwordpw").value;
