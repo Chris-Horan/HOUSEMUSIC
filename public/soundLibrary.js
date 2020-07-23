@@ -8,10 +8,9 @@ function playMusic(soundName) {
 function togglePlay() {
     if(window.playing) return;
     window.playing = true;
-    var bpm = 120;
-    var bps = bpm / 60;
+    var bps = window.BPM / 60;
     var freq = 1 / bps;
-    window.musicInt = setInterval(play, freq*500);
+    window.musicInt = setInterval(play, freq*250);
 }
 
 function play() {
@@ -64,6 +63,28 @@ function pause() {
     window.playing = false;
 }
 
+function bpmDown() {
+    if(window.BPM <= 40) return;
+    var bpmTag = document.getElementById("bpm");
+    window.BPM -= 5;
+    bpmTag.innerHTML = window.BPM;
+    if(window.playing) {
+        pause();
+        togglePlay();
+    }
+}
+
+function bpmUp() {
+    if(window.BPM >= 220) return;
+    var bpmTag = document.getElementById("bpm");
+    window.BPM += 5;
+    bpmTag.innerHTML = window.BPM;
+    if(window.playing) {
+        pause();
+        togglePlay();
+    }
+}
+
 // async function addSound() {
 //     var soundInput = document.getElementById('addSound');
 //     var file = soundInput.files[0];
@@ -92,7 +113,8 @@ function pause() {
 function buildTable() {
     var table = document.getElementById("soundGrid");
     window.nInst = 2;
-    window.nBeat = 32;
+    window.nBeat = 16;
+    window.BPM = 120;
     window.playPos = 0;
     window.instrs = ['Kick', 'Ride'];
     cntr = 3;

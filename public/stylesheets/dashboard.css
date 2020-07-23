@@ -78,7 +78,7 @@ body{
   width: 100%;
 }
 
-#play, #pause, #stop, #unmute, #mute{
+#play, #pause, #stop, #unmute, #mute, #bpmDown, #bpmUp{
   /* background-color: #eeeeee; */
   outline: none;
   width: 45px;
@@ -315,4 +315,8 @@ html, body, .container
 
 .playing, .active.playing, .downbeat.active.playing, .downbeat.playing {
   background-color: lightblue;
+}
+
+#bpm {
+  display: inline-block;
 }
