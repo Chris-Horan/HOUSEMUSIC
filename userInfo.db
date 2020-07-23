@@ -8,5 +8,6 @@
 {"userName":"newusER","password":"QWSDDFGT44","email":"tes@ttest.com","userType":"user","_id":"T8Ki5rxrImwfMEQP"}
 {"userName":"kaps22","password":"password","email":"shresthkapila16@gmail.com","userType":"user","_id":"oDzll0gTSZI5WgYe"}
 {"userName":"chrissda","password":"asdjasdlid","email":"chris@chrisssd.com","userType":"user","_id":"pzf59Le4PkMBvWq3"}
+{"userName":"test","password":"123456","email":"test@gmail.com","userType":"user","_id":"uQa1IQdMkwTc31Xb"}
 {"$$indexCreated":{"fieldName":"userName","unique":true,"sparse":false}}
 {"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
