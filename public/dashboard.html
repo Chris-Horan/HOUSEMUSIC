@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -38,13 +38,24 @@
       </div>
 
       <div class="musicPanel">
-
         <table id="soundGrid"></table>
-
-        <button onclick="createInstrument()">Add Instrument</button>
-        <button onclick="addColumns()">Add Column</button>
-        <button onclick="deleterow()">Remove Instrument</button>
-        <button onclick="deleteColumn()">Delete Column</button>
+        <div class="dropdown">
+          <button class = "dropbtn" >Add Instrument</button>
+          <div class="dropdown-content">
+          <a href="#" onclick="createInstrument('Crash')">Crash</a>
+          <a href="#" onclick="createInstrument('HiHat')">HiHat</a>
+          <a href="#" onclick="createInstrument('Kick')">Kick</a>
+          <a href="#" onclick="createInstrument('OpenHat')">OpenHat</a>
+          <a href="#" onclick="createInstrument('Ride')">Ride</a>
+          <a href="#" onclick="createInstrument('Sdst')">Sdst</a>
+          <a href="#" onclick="createInstrument('Snare')">Snare</a>
+          <a href="#" onclick="createInstrument('Tom1')">Tom1</a>
+          <a href="#" onclick="createInstrument('Tom2')">Tom2</a>
+          </div>
+        </div>
+        <button class = "dropbtn" onclick="addColumns()">Add Column</button>
+        <button class = "dropbtn" onclick="deleterow()">Remove Instrument</button>
+        <button class = "dropbtn" onclick="deleteColumn()">Delete Column</button>
       </div>
 
       <!-- <div class="container">

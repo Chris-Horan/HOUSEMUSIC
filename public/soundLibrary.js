@@ -136,11 +136,11 @@ function buildTable() {
     }
 }
 
-function createInstrument() {
+function createInstrument(soundName) {
     var table = document.getElementById("soundGrid");
     //TODO: Add instrument selection panel.
     window.nInst++;
-    window.instrs.push('Snare');
+    window.instrs.push(`${soundName}`);
     table.insertRow(-1);
     var cntr = 3;
     var i = window.nInst - 1;
