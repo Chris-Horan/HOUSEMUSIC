@@ -28,6 +28,8 @@ const passwordDatabase = new DataStore('forgotPassword.db');
 passwordDatabase.loadDatabase();
 const soundData = new DataStore('soundInfo.db');
 soundData.loadDatabase();
+const instrumentData = new DataStore('instrumentInfo.db')
+instrumentData.loadDatabase();
 
 // Direct node to frontend resources folder (html, css, js)
 app.use(express.static(__dirname + '/public'));
@@ -365,3 +367,13 @@ app.post('/uploadSound', (req, res) => {
         });
     });
 });
+
+//save and load feature
+app.post('/load', (req,res) => {
+    // TO DO: load the sound (form of table)
+    instrumentData.insert({name: req.body.name}, function(err, data) {
+        res.status(200);
+        console.log(data);
+        res.send(data);
+    })
+})

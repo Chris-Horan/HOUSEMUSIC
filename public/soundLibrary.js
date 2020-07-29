@@ -85,6 +85,23 @@ function bpmUp() {
     }
 }
 
+async function loadSound() {
+    name = "shresth"
+     // TO DO: sound and user name to load
+    var data = {name}
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    var res = await fetch('/load', options);
+    if (res.status == 200) {
+        console.log("success")
+    }
+} 
+
 // async function addSound() {
 //     var soundInput = document.getElementById('addSound');
 //     var file = soundInput.files[0];

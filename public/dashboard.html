@@ -58,6 +58,11 @@
         <button class = "dropbtn" onclick="deleteColumn()">Delete Column</button>
       </div>
 
+      <br>
+      <div id="loadSound" action="/load" method="post"> 
+        <button onclick="loadSound()"> Load </button>
+      </div>
+
       <!-- <div class="container">
       		<div class="feature1">
       			<p class="welcome">Feature1</p>
@@ -71,9 +76,9 @@
       		<div class="feature4">
       			<p class="welcome">Feature4</p>
       		</div>
-       </div>
+       </div> -->
 
-    <form action="uploadSound" method="post" enctype="multipart/form-data">
+    <!-- <form action="uploadSound" method="post" enctype="multipart/form-data">
       <input name="addSound" id="addSound" type="file" accept=".wav, .mp3"/>
       <input type="text" name="owner" id="owner"/>
       <input type="text" name="soundName" id="soundName"/>
