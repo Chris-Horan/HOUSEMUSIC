@@ -86,9 +86,30 @@ function bpmUp() {
 }
 
 async function loadSound() {
-    name = "shresth"
-     // TO DO: sound and user name to load
-    var data = {name}
+    var name = sessionStorage.getItem("name");
+    // DONE: sound and user name to load
+    // TO DO: error handling and display sound
+
+    // var table = document.getElementById("soundGrid")
+    var soundArray = new Array(window.nInst);
+    
+    for(k = 0; k < window.nInst; k++) {
+        soundArray[k] = new Array(window.nBeat);
+    }
+    console.log(soundArray);
+    for(i = 0; i < window.nInst; i++) {
+        for(j = 0; j < window.nBeat; j++) {
+            if(document.getElementById("soundGrid").rows[i].cells[j].classList.toggle('active')) {
+                soundArray[i][j] = 0;
+            }
+            else {
+                soundArray[i][j] = 1;
+            }
+        }
+    }
+    console.log(soundArray);
+
+    var data = {name, soundArray}
     var options = {
         method: 'POST',
         body: JSON.stringify(data),

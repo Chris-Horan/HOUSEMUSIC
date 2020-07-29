@@ -370,10 +370,16 @@ app.post('/uploadSound', (req, res) => {
 
 //save and load feature
 app.post('/load', (req,res) => {
-    // TO DO: load the sound (form of table)
-    instrumentData.insert({name: req.body.name}, function(err, data) {
-        res.status(200);
-        console.log(data);
-        res.send(data);
+    // done: load the sound (form of table)
+    // TO DO: Error handling
+    instrumentData.insert({name: req.body.name, soundArray: req.body.soundArray}, function(err, data) {
+        if (!data) {
+            console.log("error");
+        }
+        else {
+            res.status(200);
+            console.log(data);
+            res.send(data);
+        }
     })
 })
