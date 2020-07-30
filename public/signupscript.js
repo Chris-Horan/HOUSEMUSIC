@@ -124,6 +124,8 @@ function loginreset(){
 function resetReset() {
     document.getElementById("PassError").style.display="none";
     document.getElementById("PassError2").style.display="none";
+    document.getElementById("tokenNotMatch").style.display="none";
+    document.getElementById("NotMatch").style.display="none";
 }
 
 function userLogin(){
@@ -175,19 +177,6 @@ async function forgotPass() {
             'Content-Type': 'application/json'
         }
     };
-    // await fetch('/forgot', options).then(function(res) {
-    //     var stat = res.status;
-    //     console.log("ckdnckmv");
-    //     if(stat==201) {
-    //         document.getElementById("EmailNotFound").style.display="block"
-    //     }
-    //     // else if(stat==202) {
-    //     //     document.getElementById("EmailError").style.display="block"
-    //     // }
-    //     // else {
-    //     //     userLogin();
-    //     // }
-    // });
     var res = await fetch('/forgot', options);
     var stat = res.status;
     if(stat==201) {
@@ -228,6 +217,8 @@ async function resetPassword() {
         document.getElementById("NotMatch").style.display="block"
     }
     else if(stat==200) {
-        document.getElementById("SuccessChanged").style.display="block"
+        document.getElementById("SuccessChanged").style.display="block";
+        resetReset();
+
     }
 }
