@@ -121,6 +121,11 @@ function loginreset(){
     document.getElementById("UserErrorExist").style.display="none";
 }
 
+function resetReset() {
+    document.getElementById("PassError").style.display="none";
+    document.getElementById("PassError2").style.display="none";
+}
+
 function userLogin(){
      window.location.replace("dashboard.html");
 }
@@ -203,6 +208,9 @@ async function resetPassword() {
     var tok = url.match(getToken)[0];
     var password = document.getElementById("passw").value;
     var confirm = document.getElementById("confirm").value;
+    if(!(checkPassReqs(password) && checkPassReqs("confirm"))) {
+        return;
+    }
     var data = {password,confirm, tok};
     var options = {
         method: 'POST',

@@ -249,8 +249,8 @@ app.post('/forgot', function(req, res, next) {
                 };
                 smtpTransport.sendMail(mailOptions, function(err) {
                     res.status(200);
-                    console.log("email send to user.");
-                    res.send("email send to user.")
+                    console.log("Email sent to user.");
+                    res.send("Email sent to user.")
                     done(err, 'done');
                 });
             }
@@ -287,7 +287,6 @@ app.post('/reset/:token', function(req, res) {
      async.waterfall([
        function(done) {
          passwordDatabase.findOne({ resetPasswordToken: req.body.tok}, function(err, user) {
-             console.log(user);
            if (user == null) {
              console.log('Password reset token is invalid or has expired.');
              res.status(201);

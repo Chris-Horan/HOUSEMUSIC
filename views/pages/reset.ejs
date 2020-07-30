@@ -13,6 +13,8 @@
       <div class="inputBox">
 
         <div>
+          <p1 id = "PassError" style = "display:none">Password must contain between 6 and 25 characters!</p1>
+          <p1 id = "PassError2" style = "display:none">Password must contain only numbers, letters, and common symbols (!@#$%^&*)!</p1>
             <p1 id="tokenNotMatch" style = "display:none"> Password reset token is invalid or has expired. </br></p1>
             <p1 id = "NotMatch" style = "display:none">Password do not Match</p1>
             <p1 id = "SuccessChanged" style = "display:none">Password changed.</p1>
@@ -20,10 +22,10 @@
 
         <!-- <form action="" method="post"> -->
 		  <div class="inputText">
-		    <input type="password" id="passw" placeholder="New password">
+		    <input type="password" id="passw" placeholder="New password" onclick="resetReset()">
 		  </div>
 		  <div class="inputText">
-		    <input type="password" id="confirm" placeholder="Confirm password">
+		    <input type="password" id="confirm" placeholder="Confirm password" onclick="resetReset()">
 		  </div>
 		  <div>
 		    <button type="submit" class="inputButton" onclick="resetPassword()">Update Password</button>

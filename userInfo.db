@@ -12,4 +12,4 @@
 {"userName":"test","password":"123456","email":"test@gmail.com","userType":"user","_id":"uQa1IQdMkwTc31Xb"}
 {"$$indexCreated":{"fieldName":"userName","unique":true,"sparse":false}}
 {"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
-{"userName":"chrisch","password":"testtest","email":"chris.horan27@gmail.com","userType":"user","_id":"9ieTAYD13mmJOvn2"}
+{"userName":"chrisch","password":"123123123","email":"chris.horan27@gmail.com","userType":"user","_id":"9ieTAYD13mmJOvn2"}
