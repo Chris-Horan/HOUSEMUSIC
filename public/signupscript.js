@@ -198,12 +198,12 @@ async function forgotPass() {
 
 
 async function resetPassword() {
-    // var email = document.getElementById("email").value;
-    var password = document.getElementById("passw");
+    var url = window.location.href;
+    var getToken = /([^\/]*)$/gm;
+    var tok = url.match(getToken)[0];
+    var password = document.getElementById("passw").value;
     var confirm = document.getElementById("confirm").value;
-    console.log(password);
-    console.log(confirm);
-    var data = {password,confirm};
+    var data = {password,confirm, tok};
     var options = {
         method: 'POST',
         body: JSON.stringify(data),
