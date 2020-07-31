@@ -377,7 +377,7 @@ app.post('/uploadSound', (req, res) => {
 app.post('/load', (req,res) => {
     // done: load the sound (form of table)
     // TO DO: Error handling
-    instrumentData.insert({name: req.body.name, soundArray: req.body.soundArray}, function(err, data) {
+    instrumentData.insert({name: req.body.name, soundArray: req.body.soundArray, instruments: req.body.instruments, noInstr: req.body.noInstr, beats: req.body.beats, bpmRate: req.body.bpmRate}, function(err, data) {
         if (!data) {
             console.log("error");
         }

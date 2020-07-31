@@ -1,7 +1,7 @@
 {"userName":"hps1","password":"123abc","email":"hps1@sfu.ca","userType":"user","_id":"1ta2rH7wv0KQVx6e"}
 {"userName":"sdhjaskd","password":"123123123","email":"asd@dsasd.com","userType":"user","_id":"3rOKyL26Viuo3nZJ"}
 {"userName":"hihihi","password":"testtest","email":"test@test.com","userType":"user","_id":"7S6nRes80ZyROCLM"}
-{"userName":"chrisch","password":"123123123","email":"chris.horan27@gmail.com","userType":"user","_id":"9ieTAYD13mmJOvn2"}
+{"userName":"chrisch","password":"234234234","email":"chris.horan27@gmail.com","userType":"user","_id":"9ieTAYD13mmJOvn2"}
 {"userName":"chris","password":"chrischris","email":"chris@chris.com","userType":"user","_id":"BwiKXQ9YuTpYjciF"}
 {"userName":"##chris","password":"sjdksaldsad","email":"chris@chr.com","userType":"user","_id":"D6xESO1SBrjG3yOY"}
 {"userName":"admin","password":"password","email":"admin@admin.com","userType":"admin","_id":"HHZjrYAu4w0Ym0qP"}
@@ -12,4 +12,3 @@
 {"userName":"test","password":"123456","email":"test@gmail.com","userType":"user","_id":"uQa1IQdMkwTc31Xb"}
 {"$$indexCreated":{"fieldName":"userName","unique":true,"sparse":false}}
 {"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
-{"userName":"chrisch","password":"234234234","email":"chris.horan27@gmail.com","userType":"user","_id":"9ieTAYD13mmJOvn2"}

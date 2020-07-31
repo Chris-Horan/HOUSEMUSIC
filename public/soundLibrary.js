@@ -91,6 +91,10 @@ async function loadSound() {
     // TO DO: error handling and display sound
 
     // var table = document.getElementById("soundGrid")
+    var instruments = window.instrs;
+    var noInstr = window.nInst;
+    var beats = window.nBeat;
+    var bpmRate = window.BPM;
     var soundArray = new Array(window.nInst);
     
     for(k = 0; k < window.nInst; k++) {
@@ -109,7 +113,7 @@ async function loadSound() {
     }
     console.log(soundArray);
 
-    var data = {name, soundArray}
+    var data = {name, soundArray, instruments, noInstr, beats, bpmRate}
     var options = {
         method: 'POST',
         body: JSON.stringify(data),
