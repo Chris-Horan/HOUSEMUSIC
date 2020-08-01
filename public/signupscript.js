@@ -1,3 +1,8 @@
+module.exports.test = {
+    passReqsHandler: passReqsHandler,
+    userReqsHandler: userReqsHandler
+}
+
 async function signup() {
     var userName = document.getElementById("Username").value;
     var email = document.getElementById("Email").value;
@@ -137,34 +142,59 @@ function adminLogin(){
 }
 
 function checkPassReqs(password) {
-    var verifyPassword = /^[0-9a-zA-Z!@#$%^&*()]+$/;
-    if(password.length < 6 || password.length > 25) {
+    var retVal = passReqsHandler(password);
+    if(retVal == 1) {
         document.getElementById("PassError").style.display="block"
         return false;
     }
-    if(!verifyPassword.test(password)) {
+    if(retVal == 2) {
         document.getElementById("PassError2").style.display="block"
         return false;
     }
     return true;
 }
 
+function passReqsHandler(password) {
+    var verifyPassword = /^[0-9a-zA-Z!@#$%^&*()]+$/;
+    if(password.length < 6 || password.length > 25) {
+        return 1;
+    }
+    if(!verifyPassword.test(password)) {
+        return 2;
+    }
+    return 0;
+}
+
 function checkUserReqs(userName, Email) {
-    var alphanumeric = /^[0-9a-zA-Z]+$/;
-    var verifyEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if(userName.length < 4 || userName.length > 16) {
+    var retVal = userReqsHandler(userName, email);
+    if(retVal==1) {
         document.getElementById("UserError2").style.display="block"
         return false;
     }
-    if(!alphanumeric.test(userName)) {
+    if(retVal==2) {
         document.getElementById("UserError3").style.display="block"
         return false;
     }
-    if(!verifyEmail.test(Email)) {
+    if(retVal==3) {
         document.getElementById("EmailError2").style.display="block"
         return false;
     }
     return true;
+}
+
+function userReqsHandler(userName, email) {
+    var alphanumeric = /^[0-9a-zA-Z]+$/;
+    var verifyEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(userName.length < 4 || userName.length > 16) {
+        return 1;
+    }
+    if(!alphanumeric.test(userName)) {
+        return 2;
+    }
+    if(!verifyEmail.test(email)) {
+        return 3;
+    }
+    return 0;
 }
 
 async function forgotPass() {

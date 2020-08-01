@@ -1,9 +1,13 @@
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var request = require('supertest');
+var assert = require('assert');
+var signup = require('../public/signupscript.js');
+const { expect } = require('chai');
 process.env.NODE_ENV = 'test';
 chai.use(chaiHttp);
-describe('Login functionality: ', function() {
+
+describe('Login functionality (backend): ', function() {
     beforeEach(function() {
         server = require('../server');
     });
@@ -64,6 +68,48 @@ describe('Admin panel functionality: ', function() {
                 .post('/changePassword')
                 .send({'userName': '??', 'password': 'password'})
                 .expect(202, done);
+        });
+    });
+});
+
+
+
+// signupscript.js tests
+
+describe('Sign Up Functionality (Front end)', function() {
+    describe('Reject password based on length:', function() {
+        it('Should reject short passwords', function() {
+            assert.equal(1, signup.test.passReqsHandler("bad"));
+        });
+    });
+    describe('Reject passwords with disallowed characters:', function() {
+        it('Should reject passwords with bad characters', function() {
+            assert.equal(2, signup.test.passReqsHandler("<><><><><"));
+        });
+    });
+    describe('Accept valid password:', function() {
+        it('Should accept valid passwords', function() {
+            assert.equal(0, signup.test.passReqsHandler("password"));
+        });
+    });
+    describe('Reject username based on length:', function() {
+        it('Should reject short usernames', function() {
+            assert.equal(1, signup.test.userReqsHandler("bad", "test@test.com"));
+        });
+    });
+    describe('Reject usernames with disallowed characters:', function() {
+        it('Should reject usernames with bad characters', function() {
+            assert.equal(2, signup.test.userReqsHandler("<><><><><", "test@test.com"));
+        });
+    });
+    describe('Reject invalid email addresses:', function() {
+        it('Should reject invalid email addresses', function() {
+            assert.equal(3, signup.test.userReqsHandler("username", "bad"));
+        });
+    });
+    describe('Accept valid usernames and emails:', function() {
+        it('Should accept valid passwords', function() {
+            assert.equal(0, signup.test.passReqsHandler("username", "test@test.com"));
         });
     });
 });
