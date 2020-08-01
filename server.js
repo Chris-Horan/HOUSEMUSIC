@@ -213,7 +213,6 @@ app.post('/forgot', function(req, res, next) {
         function(token, done) {
             userData.findOne({ email: req.body.email }, function(err, user) {
                 if (err || !user) {
-                    console.log("No email exists.");
                     res.status(201);
                     res.send("No email exists.");
                 }

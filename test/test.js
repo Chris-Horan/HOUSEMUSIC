@@ -30,6 +30,14 @@ describe('Login functionality (backend): ', function() {
                 .expect(200, done);
         });
     });
+    describe('Forgot Password: ', function() {
+        it('Should attempt to update a password.', function(done) {
+            request(server)
+                .post('/forgot')
+                .send({'email': 'dne'})
+                .expect(201, done);
+        });
+    });
 });
 describe('Admin panel functionality: ', function() {
     beforeEach(function() {
