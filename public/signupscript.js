@@ -1,7 +1,7 @@
-module.exports.test = {
-    passReqsHandler: passReqsHandler,
-    userReqsHandler: userReqsHandler
-}
+// module.exports.test = {
+//     passReqsHandler: passReqsHandler,
+//     userReqsHandler: userReqsHandler
+// }
 
 async function signup() {
     var userName = document.getElementById("Username").value;
@@ -165,7 +165,7 @@ function passReqsHandler(password) {
     return 0;
 }
 
-function checkUserReqs(userName, Email) {
+function checkUserReqs(userName, email) {
     var retVal = userReqsHandler(userName, email);
     if(retVal==1) {
         document.getElementById("UserError2").style.display="block"
