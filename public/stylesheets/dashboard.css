@@ -366,3 +366,16 @@ html, body, .container
 .musicPanel{
   align-content: center;
 }
+
+#label {
+  color: white;
+}
+
+ul{
+  color: white;
+}
+
+#recordingAdded, #recordingNotAdded {
+  color: white;
+  font-style: italic;
+}

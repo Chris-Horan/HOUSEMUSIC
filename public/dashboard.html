@@ -39,6 +39,22 @@
 
       <div class="musicPanel">
         <table id="soundGrid"></table>
+
+        <br>
+          <div>
+            <p1 id = "recordingAdded" style = "display:none">Recording added to the playlist!</br></p1>
+            <p1 id = "recordingNotAdded" style = "display:none">Error: Try again.....</p1>
+          </div>
+    
+          <br>
+          <div id="loadSound" action="/load" method="post"> 
+            <ul id="dynamic-list"></ul>
+            <label id="label"> Give name to your recording</label>
+            <input type="text" id="candidate"/>
+            <button onclick="loadSound()"> Load </button>
+          </div>
+          <br>
+
         <div class="dropdown">
           <button class = "dropbtn" >Add Instrument</button>
           <div class="dropdown-content">
@@ -57,12 +73,10 @@
         <button class = "dropbtn" onclick="deleterow()">Remove Instrument</button>
         <button class = "dropbtn" onclick="deleteColumn()">Delete Column</button>
       </div>
-
-      <br>
-      <div id="loadSound" action="/load" method="post"> 
-        <button onclick="loadSound()"> Load </button>
-      </div>
-
+      
+      
+      <!-- <button id="playlist" onclick="playlist()"> Playlist </button> -->
+      
       <!-- <div class="container">
       		<div class="feature1">
       			<p class="welcome">Feature1</p>

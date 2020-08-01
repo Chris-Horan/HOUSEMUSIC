@@ -86,11 +86,8 @@ function bpmUp() {
 }
 
 async function loadSound() {
+    // TO DO: play added sound
     var name = sessionStorage.getItem("name");
-    // DONE: sound and user name to load
-    // TO DO: error handling and display sound
-
-    // var table = document.getElementById("soundGrid")
     var instruments = window.instrs;
     var noInstr = window.nInst;
     var beats = window.nBeat;
@@ -100,7 +97,7 @@ async function loadSound() {
     for(k = 0; k < window.nInst; k++) {
         soundArray[k] = new Array(window.nBeat);
     }
-    console.log(soundArray);
+
     for(i = 0; i < window.nInst; i++) {
         for(j = 0; j < window.nBeat; j++) {
             if(document.getElementById("soundGrid").rows[i].cells[j].classList.toggle('active')) {
@@ -111,7 +108,6 @@ async function loadSound() {
             }
         }
     }
-    console.log(soundArray);
 
     var data = {name, soundArray, instruments, noInstr, beats, bpmRate}
     var options = {
@@ -122,10 +118,54 @@ async function loadSound() {
         }
     }
     var res = await fetch('/load', options);
-    if (res.status == 200) {
-        console.log("success")
+    if (res.status == 201) {
+        document.getElementById("recordingNotAdded").style.display = 'block';
     }
+    else if (res.status == 200) {
+        document.getElementById("recordingAdded").style.display = 'block';
+    }
+
+    // playlist()
+    addItem()
 } 
+
+function addItem(){
+    var ul = document.getElementById("dynamic-list");
+    var candidate = document.getElementById("candidate");
+    var li = document.createElement("li");
+    var link = document.createElement("a");
+    link.setAttribute('href', '');
+    link.setAttribute('id',candidate.value);
+    link.appendChild(document.createTextNode(candidate.value));
+    li.appendChild(link);
+    ul.appendChild(li);
+}
+
+// async function playlist() {
+//     var name = sessionStorage.getItem("name");
+//     var data = {name}
+//     var options = {
+//         method: 'POST',
+//         body: JSON.stringify(data),
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     }
+//     var res = await fetch('/displayPlaylist', options);
+//     var data = await res.json();
+//     if (res.status == 200) {
+//         console.log(data);
+//     }
+    
+// /*
+//     for(i = 0; i < window.nInst; i++) {
+//         for(j = 0; j < window.nBeat; j++) {
+//             document.getElementById("soundGrid").rows[i].cells[j].classList.toggle;
+//         }
+//     }
+//     */
+// }
+
 
 // async function addSound() {
 //     var soundInput = document.getElementById('addSound');

@@ -374,16 +374,31 @@ app.post('/uploadSound', (req, res) => {
 
 //save and load feature
 app.post('/load', (req,res) => {
-    // done: load the sound (form of table)
-    // TO DO: Error handling
     instrumentData.insert({name: req.body.name, soundArray: req.body.soundArray, instruments: req.body.instruments, noInstr: req.body.noInstr, beats: req.body.beats, bpmRate: req.body.bpmRate}, function(err, data) {
         if (!data) {
-            console.log("error");
+            res.status(201);
+            console.log("Error");
+            res.send("Error");
         }
         else {
             res.status(200);
             console.log(data);
             res.send(data);
         }
-    })
-})
+    });
+});
+
+app.post('/displayPlaylist', (req, res) => {
+    instrumentData.find({name: req.body.name}, function(err, data) {
+        if (err) {
+            res.status(201);
+            console.log("Error");
+            res.send("Error")
+        }
+        else {
+            res.status(200);
+            console.log(data);
+            res.send(data);
+        }
+    });
+});
