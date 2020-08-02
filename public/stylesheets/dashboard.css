@@ -371,11 +371,16 @@ html, body, .container
   color: white;
 }
 
+#dynamic-list {
+  float: right;
+}
+
+
 ul{
   color: white;
 }
 
-#recordingAdded, #recordingNotAdded {
+#recordingAdded, #recordingNotAdded, #recNameError, #playlistError {
   color: white;
   font-style: italic;
 }

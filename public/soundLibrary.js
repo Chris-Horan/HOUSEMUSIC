@@ -88,6 +88,7 @@ function bpmUp() {
 async function loadSound() {
     // TO DO: play added sound
     var name = sessionStorage.getItem("name");
+    var recName = document.getElementById('candidate').value;
     var instruments = window.instrs;
     var noInstr = window.nInst;
     var beats = window.nBeat;
@@ -108,8 +109,49 @@ async function loadSound() {
             }
         }
     }
+    // console.log(recName);
+    if (recName == '') {
+        document.getElementById("recordingNotAdded").style.display = 'none';
+        document.getElementById("recordingAdded").style.display = 'none';
+        document.getElementById("recNameError").style.display = 'display';
+    }
+    else {
+        var data = {name, recName, soundArray, instruments, noInstr, beats, bpmRate}
+        var options = {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        var res = await fetch('/load', options);
+        if (res.status == 201) {
+            document.getElementById("recordingNotAdded").style.display = 'block';
+            document.getElementById("recordingAdded").style.display = 'none';
+        }
+        else if (res.status == 200) {
+            document.getElementById("recordingNotAdded").style.display = 'none';
+            document.getElementById("recordingAdded").style.display = 'block';
+        }
+    }
+    playlist()
+} 
 
-    var data = {name, soundArray, instruments, noInstr, beats, bpmRate}
+function addItem(value){
+    var ul = document.getElementById("dynamic-list");
+    // var candidate = document.getElementById("candidate");
+    var li = document.createElement("li");
+    var link = document.createElement("a");
+    link.setAttribute('href', '');
+    link.setAttribute('id',value);
+    link.appendChild(document.createTextNode(value));
+    li.appendChild(link);
+    ul.appendChild(li);
+}
+
+async function playlist() {
+    var name = sessionStorage.getItem("name");
+    var data = {name}
     var options = {
         method: 'POST',
         body: JSON.stringify(data),
@@ -117,54 +159,23 @@ async function loadSound() {
             'Content-Type': 'application/json'
         }
     }
-    var res = await fetch('/load', options);
-    if (res.status == 201) {
-        document.getElementById("recordingNotAdded").style.display = 'block';
+    var res = await fetch('/displayPlaylist', options);
+    if (res.status == 200) {
+        var result = await res.json();
+        // console.log(result);
+        for (i=0 ; i < Object.keys(result).length ; i++) {
+            // console.log(result[i].recName);
+            addItem(result[i].recName);
+        }
     }
-    else if (res.status == 200) {
-        document.getElementById("recordingAdded").style.display = 'block';
+    else if (res.status == 201) {
+        console.log("Error : No playlist found.");
+        document.getElementById("playlistError").style.display = 'block';
     }
-
-    // playlist()
-    addItem()
-} 
-
-function addItem(){
-    var ul = document.getElementById("dynamic-list");
-    var candidate = document.getElementById("candidate");
-    var li = document.createElement("li");
-    var link = document.createElement("a");
-    link.setAttribute('href', '');
-    link.setAttribute('id',candidate.value);
-    link.appendChild(document.createTextNode(candidate.value));
-    li.appendChild(link);
-    ul.appendChild(li);
+    else {
+        console.log("Error");
+    }
 }
-
-// async function playlist() {
-//     var name = sessionStorage.getItem("name");
-//     var data = {name}
-//     var options = {
-//         method: 'POST',
-//         body: JSON.stringify(data),
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     }
-//     var res = await fetch('/displayPlaylist', options);
-//     var data = await res.json();
-//     if (res.status == 200) {
-//         console.log(data);
-//     }
-    
-// /*
-//     for(i = 0; i < window.nInst; i++) {
-//         for(j = 0; j < window.nBeat; j++) {
-//             document.getElementById("soundGrid").rows[i].cells[j].classList.toggle;
-//         }
-//     }
-//     */
-// }
 
 
 // async function addSound() {
