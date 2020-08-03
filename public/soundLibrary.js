@@ -87,6 +87,7 @@ function bpmUp() {
 
 async function loadSound() {
     // TO DO: play added sound
+    
     var name = sessionStorage.getItem("name");
     var recName = document.getElementById('candidate').value;
     var instruments = window.instrs;
@@ -134,7 +135,8 @@ async function loadSound() {
             document.getElementById("recordingAdded").style.display = 'block';
         }
     }
-    playlist()
+    addItem(recName);
+    // playlist()
 } 
 
 function addItem(value){
@@ -162,9 +164,7 @@ async function playlist() {
     var res = await fetch('/displayPlaylist', options);
     if (res.status == 200) {
         var result = await res.json();
-        // console.log(result);
         for (i=0 ; i < Object.keys(result).length ; i++) {
-            // console.log(result[i].recName);
             addItem(result[i].recName);
         }
     }
@@ -175,6 +175,7 @@ async function playlist() {
     else {
         console.log("Error");
     }
+    document.getElementById("playlist").disabled = true;
 }
 
 
