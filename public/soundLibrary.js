@@ -86,17 +86,20 @@ function bpmUp() {
 }
 
 async function loadSound() {
-    var name = sessionStorage.getItem("name");
-    // DONE: sound and user name to load
-    // TO DO: error handling and display sound
+    // TO DO: play added sound
 
-    // var table = document.getElementById("soundGrid")
+    var name = sessionStorage.getItem("name");
+    var recName = document.getElementById('candidate').value;
+    var instruments = window.instrs;
+    var noInstr = window.nInst;
+    var beats = window.nBeat;
+    var bpmRate = window.BPM;
     var soundArray = new Array(window.nInst);
 
     for(k = 0; k < window.nInst; k++) {
         soundArray[k] = new Array(window.nBeat);
     }
-    console.log(soundArray);
+
     for(i = 0; i < window.nInst; i++) {
         for(j = 0; j < window.nBeat; j++) {
             if(document.getElementById("soundGrid").rows[i].cells[j].classList.toggle('active')) {
@@ -107,9 +110,50 @@ async function loadSound() {
             }
         }
     }
-    console.log(soundArray);
+    // console.log(recName);
+    if (recName == '') {
+        document.getElementById("recordingNotAdded").style.display = 'none';
+        document.getElementById("recordingAdded").style.display = 'none';
+        document.getElementById("recNameError").style.display = 'display';
+    }
+    else {
+        var data = {name, recName, soundArray, instruments, noInstr, beats, bpmRate}
+        var options = {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        var res = await fetch('/load', options);
+        if (res.status == 201) {
+            document.getElementById("recordingNotAdded").style.display = 'block';
+            document.getElementById("recordingAdded").style.display = 'none';
+        }
+        else if (res.status == 200) {
+            document.getElementById("recordingNotAdded").style.display = 'none';
+            document.getElementById("recordingAdded").style.display = 'block';
+        }
+    }
+    addItem(recName);
+    // playlist()
+}
 
-    var data = {name, soundArray}
+function addItem(value){
+    var ul = document.getElementById("dynamic-list");
+    // var candidate = document.getElementById("candidate");
+    var li = document.createElement("li");
+    var link = document.createElement("a");
+    link.setAttribute('href', '');
+    link.setAttribute('id',value);
+    link.appendChild(document.createTextNode(value));
+    li.appendChild(link);
+    ul.appendChild(li);
+}
+
+async function playlist() {
+    var name = sessionStorage.getItem("name");
+    var data = {name}
     var options = {
         method: 'POST',
         body: JSON.stringify(data),
@@ -117,11 +161,23 @@ async function loadSound() {
             'Content-Type': 'application/json'
         }
     }
-    var res = await fetch('/load', options);
+    var res = await fetch('/displayPlaylist', options);
     if (res.status == 200) {
-        console.log("success")
+        var result = await res.json();
+        for (i=0 ; i < Object.keys(result).length ; i++) {
+            addItem(result[i].recName);
+        }
     }
+    else if (res.status == 201) {
+        console.log("Error : No playlist found.");
+        document.getElementById("playlistError").style.display = 'block';
+    }
+    else {
+        console.log("Error");
+    }
+    document.getElementById("playlist").disabled = true;
 }
+
 
 // async function addSound() {
 //     var soundInput = document.getElementById('addSound');

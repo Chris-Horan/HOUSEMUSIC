@@ -213,7 +213,6 @@ app.post('/forgot', function(req, res, next) {
         function(token, done) {
             userData.findOne({ email: req.body.email }, function(err, user) {
                 if (err || !user) {
-                    console.log("No email exists.");
                     res.status(201);
                     res.send("No email exists.");
                 }
@@ -375,16 +374,40 @@ app.post('/uploadSound', (req, res) => {
 
 //save and load feature
 app.post('/load', (req,res) => {
-    // done: load the sound (form of table)
-    // TO DO: Error handling
-    instrumentData.insert({name: req.body.name, soundArray: req.body.soundArray}, function(err, data) {
+    instrumentData.insert({name: req.body.name, recName: req.body.recName, soundArray: req.body.soundArray, instruments: req.body.instruments, noInstr: req.body.noInstr, beats: req.body.beats, bpmRate: req.body.bpmRate}, function(err, data) {
         if (!data) {
-            console.log("error");
+            res.status(201);
+            console.log("Error");
+            res.send("Error");
         }
         else {
             res.status(200);
             console.log(data);
             res.send(data);
         }
-    })
-})
+    });
+});
+
+app.post('/displayPlaylist', (req, res) => {
+    instrumentData.count({name: req.body.name}, function(err, total) {
+        if (total == 0) {
+            res.status(201);
+            console.log("Error: No playlist found.");
+            res.send("Error: No playlist found.");
+        }
+        else {
+            instrumentData.find({name: req.body.name}, function(err, data) {
+                if (err) {
+                    res.status(202);
+                    console.log("Error");
+                    res.send("Error")
+                }
+                else {
+                    res.status(200);
+                    console.log(data);
+                    res.send(data);
+                }
+            });
+        }
+    });
+});

@@ -366,3 +366,26 @@ html, body, .container
 .musicPanel{
   align-content: center;
 }
+
+#label {
+  color: white;
+}
+
+#dynamic-list {
+  color: white;
+  float: right;
+}
+
+#playlist {
+  color: red;
+  float: right;
+}
+
+ul{
+  color: white;
+}
+
+#recordingAdded, #recordingNotAdded, #recNameError, #playlistError {
+  color: white;
+  font-style: italic;
+}

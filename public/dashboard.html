@@ -39,6 +39,26 @@
 
       <div class="musicPanel">
         <table id="soundGrid"></table>
+
+        <br>
+          <div>
+            <p1 id = "recordingAdded" style = "display:none">Recording added to the playlist!</br></p1>
+            <p1 id = "recordingNotAdded" style = "display:none">Error: Try again.....</p1>
+            <p1 id = "recNameError" style = "display:none">Error: Enter any name to your recording. </p1>
+            <p1 id = "playlistError" style = "display:none">Error: No playlist found. </p1>
+          </div>
+    
+          <br>
+          <div id="loadSound" action="/load" method="post"> 
+            <button type="submit" id="playlist" onclick="playlist()"> My Playlist </button>
+            <p id="dynamic-list">PLAYLIST</p>
+            <ul id="dynamic-list"></ul>
+            <label id="label"> Give name to your recording</label>
+            <input type="text" id="candidate"/>
+            <button onclick="loadSound()"> Load </button>
+          </div>
+          <br>
+
         <div class="dropdown">
           <button class = "dropbtn" >Add Instrument</button>
           <div class="dropdown-content">
@@ -57,12 +77,10 @@
         <button class = "dropbtn" onclick="deleterow()">Remove Instrument</button>
         <button class = "dropbtn" onclick="deleteColumn()">Delete Column</button>
       </div>
-
-      <br>
-      <div id="loadSound" action="/load" method="post"> 
-        <button onclick="loadSound()"> Load </button>
-      </div>
-
+      
+      
+      
+      
       <!-- <div class="container">
       		<div class="feature1">
       			<p class="welcome">Feature1</p>
