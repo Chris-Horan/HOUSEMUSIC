@@ -3,6 +3,7 @@
 <head>
     <title>Socket.IO chat</title>
     <style>
+        /*
         * {
             margin: 0;
             padding: 0;
@@ -51,17 +52,48 @@
 
         #messages {
             margin-bottom: 40px
+        }  */
+        /* 
+                    #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
         }
+
+            #messages li {
+                padding: 5px 10px;
+            }
+        */
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+            #messages li {
+                padding: 5px 10px;
+            }
     </style>
 </head>
 <body>
     <ul id="messages"></ul>
-    <form action="">
-        <input id="m" autocomplete="off" /><button>Send</button>
+    <form action="" style="display:none">
+        <input id="m" autocomplete="off" /><button id="sender">Send</button>
     </form>
+    <button onclick="sendmessage()">Send out Scunt</button>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
+
+        function sendmessage() {
+            document.getElementById("m").value = "User Guy wants to share his creation:";
+            document.getElementById("sender").click();
+            document.getElementById("m").value = "Here is the code or link or whatever";
+            document.getElementById("sender").click();
+            document.getElementById("m").value = "";
+            document.getElementById("sender").click();
+
+        }
         $(function () {
             var socket = io();
             $('form').submit(function () {

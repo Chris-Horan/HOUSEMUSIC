@@ -87,7 +87,7 @@ function bpmUp() {
 
 async function loadSound() {
     // TO DO: play added sound
-    
+
     var name = sessionStorage.getItem("name");
     var recName = document.getElementById('candidate').value;
     var instruments = window.instrs;
@@ -95,7 +95,7 @@ async function loadSound() {
     var beats = window.nBeat;
     var bpmRate = window.BPM;
     var soundArray = new Array(window.nInst);
-    
+
     for(k = 0; k < window.nInst; k++) {
         soundArray[k] = new Array(window.nBeat);
     }
@@ -137,7 +137,7 @@ async function loadSound() {
     }
     addItem(recName);
     // playlist()
-} 
+}
 
 function addItem(value){
     var ul = document.getElementById("dynamic-list");
@@ -205,6 +205,7 @@ async function playlist() {
 // }
 
 function buildTable() {
+  //find where is the table
     var table = document.getElementById("soundGrid");
     window.nInst = 2;
     window.nBeat = 16;
@@ -226,6 +227,14 @@ function buildTable() {
             table.rows[i].cells[j].addEventListener("click", function() {
                 this.classList.toggle('active');
             });
+        }
+        var instName = table.rows[i].insertCell(0);
+        instName.style.backgroundColor = "GhostWhite";
+        if(window.instrs[i] == 'Kick'){
+          instName.innerHTML = "<img src=\"stylesheets/instIcon/kick.png\" width=\"35px\" height=\"35px\">";
+        }
+        else{
+          instName.innerHTML = "<img src=\"stylesheets/instIcon/ride2.png\" width=\"35px\" height=\"35px\">";
         }
     }
 }
@@ -251,6 +260,36 @@ function createInstrument(soundName) {
             this.classList.toggle('active');
         });
     }
+    var instName = table.rows[i].insertCell(0);
+    instName.style.backgroundColor = "GhostWhite";
+    if(soundName == 'Kick'){
+      instName.innerHTML = "<img src=\"stylesheets/instIcon/kick.png\" width=\"35px\" height=\"35px\">";
+    }
+    else if (soundName == 'Ride'){
+      instName.innerHTML = "<img src=\"stylesheets/instIcon/ride2.png\" width=\"35px\" height=\"35px\">";
+    }
+    else if(soundName == 'Crash'){
+      instName.innerHTML = "<img src=\"stylesheets/instIcon/crash.png\" width=\"35px\" height=\"35px\">";
+    }
+    else if(soundName == 'HiHat'){
+      instName.innerHTML = "<img src=\"stylesheets/instIcon/ride.png\" width=\"35px\" height=\"35px\">";
+    }
+    else if(soundName == 'OpenHat'){
+      instName.innerHTML = "<img src=\"stylesheets/instIcon/openHat.png\" width=\"35px\" height=\"35px\">";
+    }
+    else if(soundName == 'Sdst'){
+      instName.innerHTML = "<img src=\"stylesheets/instIcon/sdst.png\" width=\"35px\" height=\"35px\">";
+    }
+    else if(soundName == 'Snare'){
+      instName.innerHTML = "<img src=\"stylesheets/instIcon/snare.png\" width=\"35px\" height=\"35px\">";
+    }
+    else if(soundName == 'Tom1'){
+      instName.innerHTML = "<img src=\"stylesheets/instIcon/tom1.png\" width=\"35px\" height=\"35px\">";
+    }
+    else if(soundName == 'Tom2'){
+      instName.innerHTML = "<img src=\"stylesheets/instIcon/tom2.png\" width=\"35px\" height=\"35px\">";
+    }
+
 }
 
 function addColumns() {
@@ -260,13 +299,13 @@ function addColumns() {
         for(var j = 0; j < 4; j++) {
             table.rows[i].insertCell(-1);
             if(cntr == 3) {
-                table.rows[i].cells[window.nBeat + j].classList.add('downBeat');
+                table.rows[i].cells[window.nBeat + j + 1].classList.add('downBeat');
                 cntr = 0;
             }
             else {
                 cntr++;
             }
-            table.rows[i].cells[window.nBeat + j].addEventListener("click", function() {
+            table.rows[i].cells[window.nBeat + j + 1].addEventListener("click", function() {
                 this.classList.toggle('active');
             });
         }

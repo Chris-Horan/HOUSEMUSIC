@@ -1,15 +1,53 @@
 ﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Dashboard</title>
-    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/cotton/64/000000/piano.png"/>
-    <link rel="stylesheet" href="stylesheets/dashboard.css"/>
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/cotton/64/000000/piano.png" />
+    <link rel="stylesheet" href="stylesheets/dashboard.css" />
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.js"></script>
     <script type="text/javascript" src="soundLibrary.js"></script>
     <script type="text/javascript" src="signupscript.js"></script>
     <script type="text/javascript" src="homepage.js"></script>
-  </head>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+
+        function sendmessage() {
+            var username = sessionStorage.getItem("name")
+            document.getElementById("m").value = username + " wants to share his creation:";
+            document.getElementById("sender").click();
+            document.getElementById("m").value = "Here is the code or link or whatever";
+            document.getElementById("sender").click();
+            document.getElementById("m").value = "";
+            document.getElementById("sender").click();
+
+        }
+        $(function () {
+            var socket = io();
+            $('form').submit(function () {
+                socket.emit('chat message', $('#m').val());
+                $('#m').val('');
+                return false;
+            });
+            socket.on('chat message', function (msg) {
+                $('#messages').append($('<li>').text(msg));
+                //window.scrollTo(0, document.body.scrollHeight);
+            });
+        });
+    </script>
+    <style>
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+            #messages li {
+                padding: 5px 10px;
+            }
+        </style>
+</head>
   <body id = 'elementshield'  style = "display:none" onload = 'loggedin();buildTable();dashboarddisplayUser()'>
     <p1>Hello! If you see this, your login was successful! </p1><br>
     <div class="div1">
@@ -38,44 +76,45 @@
       </div>
 
       <div class="musicPanel">
-        <table id="soundGrid"></table>
+          <table id="soundGrid"></table>
 
-        <br>
+          <br>
           <div>
-            <p1 id = "recordingAdded" style = "display:none">Recording added to the playlist!</br></p1>
-            <p1 id = "recordingNotAdded" style = "display:none">Error: Try again.....</p1>
-            <p1 id = "recNameError" style = "display:none">Error: Enter any name to your recording. </p1>
-            <p1 id = "playlistError" style = "display:none">Error: No playlist found. </p1>
+              <p1 id="recordingAdded" style="display:none">Recording added to the playlist!</br></p1>
+              <p1 id="recordingNotAdded" style="display:none">Error: Try again.....</p1>
+              <p1 id="recNameError" style="display:none">Error: Enter any name to your recording. </p1>
+              <p1 id="playlistError" style="display:none">Error: No playlist found. </p1>
           </div>
-    
+
           <br>
-          <div id="loadSound" action="/load" method="post"> 
-            <button type="submit" id="playlist" onclick="playlist()"> My Playlist </button>
-            <p id="dynamic-list">PLAYLIST</p>
-            <ul id="dynamic-list"></ul>
-            <label id="label"> Give name to your recording</label>
-            <input type="text" id="candidate"/>
-            <button onclick="loadSound()"> Load </button>
+          <div id="loadSound" action="/load" method="post">
+              <button type="submit" id="playlist" onclick="playlist()"> My Playlist </button>
+              <p id="dynamic-list">PLAYLIST</p>
+              <ul id="dynamic-list"></ul>
+              <label id="label"> Give name to your recording</label>
+              <input type="text" id="candidate" />
+              <button onclick="loadSound()"> Load </button>
           </div>
           <br>
 
-        <div class="dropdown">
-          <button class = "dropbtn" >Add Instrument</button>
-          <div class="dropdown-content">
-          <a href="#" onclick="createInstrument('Crash')">Crash</a>
-          <a href="#" onclick="createInstrument('HiHat')">HiHat</a>
-          <a href="#" onclick="createInstrument('Kick')">Kick</a>
-          <a href="#" onclick="createInstrument('OpenHat')">OpenHat</a>
-          <a href="#" onclick="createInstrument('Ride')">Ride</a>
-          <a href="#" onclick="createInstrument('Sdst')">Sdst</a>
-          <a href="#" onclick="createInstrument('Snare')">Snare</a>
-          <a href="#" onclick="createInstrument('Tom1')">Tom1</a>
-          <a href="#" onclick="createInstrument('Tom2')">Tom2</a>
+          <div class="dropdown">
+              <button class="dropbtn">Add Instrument</button>
+              <div class="dropdown-content">
+                  <a href="#" onclick="createInstrument('Crash')">Crash</a>
+                  <a href="#" onclick="createInstrument('HiHat')">HiHat</a>
+                  <a href="#" onclick="createInstrument('Kick')">Kick</a>
+                  <a href="#" onclick="createInstrument('OpenHat')">OpenHat</a>
+                  <a href="#" onclick="createInstrument('Ride')">Ride</a>
+                  <a href="#" onclick="createInstrument('Sdst')">Sdst</a>
+                  <a href="#" onclick="createInstrument('Snare')">Snare</a>
+                  <a href="#" onclick="createInstrument('Tom1')">Tom1</a>
+                  <a href="#" onclick="createInstrument('Tom2')">Tom2</a>
+              </div>
           </div>
-        </div>
-        <button class = "dropbtn" onclick="addColumns()">Add Column</button>
-        <button class = "dropbtn" onclick="deleterow()">Remove Instrument</button>
-        <button class = "dropbtn" onclick="deleteColumn()">Delete Column</button>
+          <button class="dropbtn" onclick="addColumns()">Add Column</button>
+          <button class="dropbtn" onclick="deleterow()">Remove Instrument</button>
+          <button class="dropbtn" onclick="deleteColumn()">Delete Column</button>
+          <button class="dropbtn" onclick="sendmessage()">Share Project</button>
       </div>
       
       
@@ -103,6 +142,12 @@
       <input type="submit" value="upload"/>
       </form> -->
     <br>
+    <div>
+        <ul id="messages"></ul>
+        <form action="" style="display:none">
+            <input id="m" autocomplete="off" /><button id="sender">Send</button>
+        </form>
+    </div>
     <!-- <button onclick="logout()">Logout</button> -->
 </body>
 </html>
