@@ -4,11 +4,14 @@
 {"userName":"chrisch","password":"234234234","email":"chris.horan27@gmail.com","userType":"user","_id":"9ieTAYD13mmJOvn2"}
 {"userName":"chris","password":"chrischris","email":"chris@chris.com","userType":"user","_id":"BwiKXQ9YuTpYjciF"}
 {"userName":"##chris","password":"sjdksaldsad","email":"chris@chr.com","userType":"user","_id":"D6xESO1SBrjG3yOY"}
+{"userName":"apples","password":"123456","email":"apples@gmail.com","userType":"user","_id":"H8gPVGvnE3p3djub"}
 {"userName":"admin","password":"password","email":"admin@admin.com","userType":"admin","_id":"HHZjrYAu4w0Ym0qP"}
 {"userName":"test54345","password":"password","email":"test543445@test.com","userType":"user","_id":"JQJmgOd3gcvUboMN"}
 {"userName":"newusER","password":"QWSDDFGT44","email":"tes@ttest.com","userType":"user","_id":"T8Ki5rxrImwfMEQP"}
+{"userName":"killme","password":"123456","email":"penis@gmail.com","userType":"user","_id":"kba21mY1fpmAtePF"}
 {"userName":"kaps22","password":"password","email":"shresthkapila16@gmail.com","userType":"user","_id":"oDzll0gTSZI5WgYe"}
 {"userName":"chrissda","password":"asdjasdlid","email":"chris@chrisssd.com","userType":"user","_id":"pzf59Le4PkMBvWq3"}
 {"userName":"test","password":"123456","email":"test@gmail.com","userType":"user","_id":"uQa1IQdMkwTc31Xb"}
 {"$$indexCreated":{"fieldName":"userName","unique":true,"sparse":false}}
 {"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
+{"userName":"poopoo","password":"123456","email":"dopee@gmail.com","userType":"user","_id":"bidbJ4sFl8SkIf0q"}

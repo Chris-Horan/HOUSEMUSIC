@@ -15,9 +15,24 @@ var formidable = require("formidable");
 const DataStore = require('nedb');
 const PORT = process.env.PORT || 5000;
 
+var http = require('http').createServer(app);
+var io = require('socket.io')(http, { wsEngine: 'ws' });
+
 // Set app to listen on localport 5000
 // View locally running app at 127.0.0.1:5000
-var server = app.listen(PORT, function() {console.log("Listening on port:" + PORT )});
+var server = http.listen(PORT, function() {console.log("Listening on port:" + PORT )});
+
+io.on('connection', function (socket) {
+    console.log('a user connected');
+    socket.on('chat message', function (msg) {
+        io.emit('chat message', msg);
+    });
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+});
+
+
 
 module.exports = server;
 
@@ -411,3 +426,4 @@ app.post('/displayPlaylist', (req, res) => {
         }
     });
 });
+
