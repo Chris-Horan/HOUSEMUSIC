@@ -1,8 +1,3 @@
-// module.exports.test = {
-//     passReqsHandler: passReqsHandler,
-//     userReqsHandler: userReqsHandler
-// }
-
 async function signup() {
     var userName = document.getElementById("Username").value;
     var email = document.getElementById("Email").value;

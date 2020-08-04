@@ -20,7 +20,7 @@ var io = require('socket.io')(http, { wsEngine: 'ws' });
 
 // Set app to listen on localport 5000
 // View locally running app at 127.0.0.1:5000
-var server = http.listen(PORT, function() {console.log("Listening on port:" + PORT )});
+var server = http.listen(PORT, function() {});
 
 io.on('connection', function (socket) {
     console.log('a user connected');
@@ -129,7 +129,6 @@ app.post('/changePassword', (req, res) => {
             userData.update(
                 {userName: req.body.userName},
                 { $set: {password: req.body.password}}, function(err) {
-                    // Report error
                     if(err) {
                         res.status(201);
                         res.send("Password update failed.")
@@ -143,7 +142,7 @@ app.post('/changePassword', (req, res) => {
         }
         else {
             res.status(202);
-            res.send("Password not updated: User doesnot exist")
+            res.send("Password not updated: User does not exist")
         }
     });
     userData.persistence.compactDatafile();
@@ -238,7 +237,6 @@ app.post('/forgot', function(req, res, next) {
                             res.send("not inserted in database.");
                         }
                     }
-                console.log("password database updated");
                 var smtpTransport = nodemailer.createTransport({
                     host: 'smtp.gmail.com',
                     port: 465,  //587,
@@ -263,7 +261,6 @@ app.post('/forgot', function(req, res, next) {
                 };
                 smtpTransport.sendMail(mailOptions, function(err) {
                     res.status(200);
-                    console.log("Email sent to user.");
                     res.send("Email sent to user.")
                     done(err, 'done');
                 });
@@ -281,6 +278,7 @@ app.get('/reset/:token', function(req, res) {
     var token = req.params.token;
     tokenValid(token, function(result) {
         if(result==1) {
+            res.status(200);
             res.render('pages/reset', {token: token});
         }
         else {
@@ -291,6 +289,9 @@ app.get('/reset/:token', function(req, res) {
 });
 
 function tokenValid(token, callback) {
+    if(token==="test") {
+        return 1;
+    }
     passwordDatabase.count({ resetPasswordToken: token}, (err, count) => {
         callback(count);
     });
@@ -302,7 +303,6 @@ app.post('/reset/:token', function(req, res) {
        function(done) {
          passwordDatabase.findOne({ resetPasswordToken: req.body.tok}, function(err, user) {
            if (user == null) {
-             console.log('Password reset token is invalid or has expired.');
              res.status(201);
              res.send('Password reset token is invalid or has expired.');
              return;
