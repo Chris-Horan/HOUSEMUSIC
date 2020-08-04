@@ -23,19 +23,26 @@
 {"name":"kaps22","recName":"check","soundArray":[[0,0,0,0,1,0,0,0,0,1,0,0,1,0,0,0],[0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0]],"instruments":["Kick","Ride"],"noInstr":2,"beats":16,"bpmRate":120,"_id":"dolh9Pp80kA1FAqL"}
 {"name":"test","recName":"awef","soundArray":[[1,1,1,0,0,1,1,1,0,1,1,1,1,1,1,1],[1,1,1,0,0,1,1,1,0,1,1,1,1,1,1,1]],"instruments":["Kick","Ride"],"noInstr":2,"beats":16,"bpmRate":120,"_id":"eKqEw717ZIymCQLU"}
 {"name":"test","recName":"test_rec1","soundArray":[[1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,1,1]],"instruments":["Kick","Ride","Crash","OpenHat","Tom2"],"noInstr":5,"beats":24,"bpmRate":120,"_id":"efEY21HdjVVmt9mL"}
+<<<<<<< HEAD
 {"name":"poopoo","recName":"Happy","soundArray":[[0,0,0,0,1,1,0,0,0,1,1,0,0,0,0,0],[0,0,0,0,1,1,0,0,0,0,1,0,0,0,0,0]],"instruments":["Kick","Ride"],"noInstr":2,"beats":16,"bpmRate":120,"_id":"hFlkvAYSQAIaXPVI"}
 {"name":"kaps22","recName":"trestsas","soundArray":[[1,1,0,1,0,0,1,0,0,1,0,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0],[0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0]],"instruments":["Kick","Ride"],"noInstr":2,"beats":28,"bpmRate":120,"_id":"hXWtvGt0aAAUMCzW"}
 {"name":"test","recName":"awef","soundArray":[[1,1,1,0,0,1,1,1,0,1,1,1,1,1,1,1],[1,1,1,0,0,1,1,1,0,1,1,1,1,1,1,1]],"instruments":["Kick","Ride"],"noInstr":2,"beats":16,"bpmRate":120,"_id":"inAxRtLoJbLVBq3E"}
 {"name":"poopoo","recName":"testproject","soundArray":[[1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0],[0,1,0,0,0,0,1,0,0,0,1,0,0,0,1,0]],"instruments":["Kick","Ride"],"noInstr":2,"beats":16,"bpmRate":120,"_id":"l0ELqd5CcNfSFjLO"}
 {"name":"poopoo","recName":"testsound2","soundArray":[[0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0],[0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0]],"instruments":["Kick","Ride"],"noInstr":2,"beats":16,"bpmRate":120,"_id":"pfBW81qKCRRU9XrZ"}
 {"name":"test","recName":"test","soundArray":[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],"instruments":["Kick","Ride"],"noInstr":2,"beats":16,"bpmRate":120,"_id":"rUmktxzrODMEFsuw"}
+=======
+{"name":"kaps22","recName":"trestsas","soundArray":[[1,1,0,1,0,0,1,0,0,1,0,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0],[0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0]],"instruments":["Kick","Ride"],"noInstr":2,"beats":28,"bpmRate":120,"_id":"hXWtvGt0aAAUMCzW"}
+>>>>>>> 68485e15d5d48e7243d80c0a391a7ed35db9abfb
 {"name":"kaps22","recName":"aweress","soundArray":[[0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0]],"instruments":["Kick","Ride","OpenHat"],"noInstr":3,"beats":28,"bpmRate":120,"_id":"s8ncIm1wsugp5okJ"}
 {"name":"test","recName":"poop","soundArray":[[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0]],"instruments":["Kick","Ride"],"noInstr":2,"beats":16,"bpmRate":120,"_id":"sa3s6ZDFx1vSXjw1"}
 {"name":"apples","recName":"Same","soundArray":[[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0]],"instruments":["Kick","Ride"],"noInstr":2,"beats":16,"bpmRate":120,"_id":"tOaquzI9mrxBGwmu"}
 {"name":"kaps22","recName":"afterrec","soundArray":[[1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0],[0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,0],[1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0]],"instruments":["Kick","Ride","Sdst","OpenHat"],"noInstr":4,"beats":20,"bpmRate":120,"_id":"tWTbHNW3xZrGG6Uv"}
+<<<<<<< HEAD
 {"name":"test","recName":"test","soundArray":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"instruments":["Kick","Ride"],"noInstr":2,"beats":16,"bpmRate":120,"_id":"vhw5fr9SkvLQ6Pvl"}
 {"name":"test","recName":"peepeepoopoo","soundArray":[[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0]],"instruments":["Kick","Ride"],"noInstr":2,"beats":16,"bpmRate":120,"_id":"xG2RFayDC08iI4n6"}
 {"name":"test","recName":"awef","soundArray":[[0,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0],[0,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0]],"instruments":["Kick","Ride"],"noInstr":2,"beats":16,"bpmRate":120,"_id":"xrUZ0ezABkaZ3tRg"}
 {"name":"poopoo","recName":"Presto","soundArray":[[0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0],[0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0],[0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0]],"instruments":["Kick","Ride","Kick"],"noInstr":3,"beats":16,"bpmRate":120,"_id":"yThMCpgheRz5Uyse"}
 {"name":"test","recName":"yahaha","soundArray":[[0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0],[0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0]],"instruments":["Kick","Ride"],"noInstr":2,"beats":16,"bpmRate":120,"_id":"5IdzXXrYAfrzJpSz"}
 {"name":"test","recName":"yahgwaegh","soundArray":[[0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0],[0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0],[0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0],[0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0]],"instruments":["Kick","Ride","Ride","Sdst"],"noInstr":4,"beats":16,"bpmRate":120,"_id":"0guDapnjFnrGagNq"}
+=======
+>>>>>>> 68485e15d5d48e7243d80c0a391a7ed35db9abfb
