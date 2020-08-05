@@ -85,7 +85,7 @@ function bpmUp() {
     }
 }
 
-async function loadSound() {
+async function saveSound() {
     // TO DO: play added sound
 
     var name = sessionStorage.getItem("name");
@@ -112,6 +112,7 @@ async function loadSound() {
     }
     // console.log(recName);
     if (recName == '') {
+        document.getElementById("playlistError").style.display = 'none';
         document.getElementById("recordingNotAdded").style.display = 'none';
         document.getElementById("recordingAdded").style.display = 'none';
         document.getElementById("recNameError").style.display = 'display';
@@ -125,31 +126,55 @@ async function loadSound() {
                 'Content-Type': 'application/json'
             }
         }
-        var res = await fetch('/load', options);
+        var res = await fetch('/save', options);
         if (res.status == 201) {
             document.getElementById("recordingNotAdded").style.display = 'block';
             document.getElementById("recordingAdded").style.display = 'none';
+            document.getElementById("playlistError").style.display = 'none';
+            document.getElementById("recNameError").style.display = 'none';
         }
         else if (res.status == 200) {
             document.getElementById("recordingNotAdded").style.display = 'none';
             document.getElementById("recordingAdded").style.display = 'block';
+            document.getElementById("playlistError").style.display = 'none';
+            document.getElementById("recNameError").style.display = 'none';
         }
     }
     addItem(recName);
     // playlist()
 }
 
-function addItem(value){
+function addItem(recName){
     var ul = document.getElementById("dynamic-list");
     // var candidate = document.getElementById("candidate");
     var li = document.createElement("li");
     var link = document.createElement("button");
     // link.setAttribute('href', '');
-    link.setAttribute('id',value);
-    link.appendChild(document.createTextNode(value));
+    // link.onclick = loadSound(recName);
+    link.addEventListener('click', loadSound(recName));
+    link.setAttribute('id',recName);
+    link.appendChild(document.createTextNode(recName));
     li.appendChild(link);
     ul.appendChild(li);
 }
+
+async function loadSound(recName) {
+    var name = sessionStorage.getItem("name");
+    var data = {name, recName};
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    console.log("first");
+    var res = await fetch('/load', options);
+    console.log("first12");
+    var result = await res.json();
+    console.log(result);
+}
+
 
 async function playlist() {
     var name = sessionStorage.getItem("name");
@@ -171,6 +196,9 @@ async function playlist() {
     else if (res.status == 201) {
         console.log("Error : No playlist found.");
         document.getElementById("playlistError").style.display = 'block';
+        document.getElementById("recordingNotAdded").style.display = 'none';
+        document.getElementById("recordingAdded").style.display = 'none';
+        document.getElementById("recNameError").style.display = 'none';
     }
     else {
         console.log("Error");
