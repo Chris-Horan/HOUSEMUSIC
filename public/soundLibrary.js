@@ -143,8 +143,8 @@ function addItem(value){
     var ul = document.getElementById("dynamic-list");
     // var candidate = document.getElementById("candidate");
     var li = document.createElement("li");
-    var link = document.createElement("a");
-    link.setAttribute('href', '');
+    var link = document.createElement("button");
+    // link.setAttribute('href', '');
     link.setAttribute('id',value);
     link.appendChild(document.createTextNode(value));
     li.appendChild(link);
