@@ -388,7 +388,7 @@ app.post('/uploadSound', (req, res) => {
 });
 
 //save and load feature
-app.post('/load', (req,res) => {
+app.post('/save', (req,res) => {
     instrumentData.insert({name: req.body.name, recName: req.body.recName, soundArray: req.body.soundArray, instruments: req.body.instruments, noInstr: req.body.noInstr, beats: req.body.beats, bpmRate: req.body.bpmRate}, function(err, data) {
         if (!data) {
             res.status(201);
@@ -427,3 +427,26 @@ app.post('/displayPlaylist', (req, res) => {
     });
 });
 
+app.post('/load', (req,res) =>{ 
+    instrumentData.count({name: req.body.name, recName: req.body.recName}, function(err, total) {
+        if (total == 0) {
+            res.status(201);
+            console.log("Error: Nothing to load.");
+            res.send("Error: Nothing to load.");
+        }
+        else {
+            instrumentData.findOne({name: req.body.name, recName: req.body.recName}, function(err, data) { 
+                if (err) {
+                    res.status(202);
+                    console.log("Error");
+                    res.send("Error")
+                }
+                else {
+                    res.status(200);
+                    console.log(data);
+                    res.send(data);
+                }
+            });
+        }
+    });
+});
