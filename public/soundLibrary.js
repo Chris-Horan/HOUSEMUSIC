@@ -15,8 +15,8 @@ function togglePlay() {
 
 function play() {
     var table = document.getElementById("soundGrid");
-    if(!(window.playPos < window.nBeat)) {
-        window.playPos = 0;
+    if(!(window.playPos <= window.nBeat)) {
+        window.playPos = 1;
     }
     for(var i = 0; i < window.nInst; i++) {
         if(table.rows[i].cells[playPos].classList.contains('active')) {
@@ -30,8 +30,8 @@ function play() {
 function updatePlayCol() {
     var table = document.getElementById("soundGrid");
     for(var i = 0; i < table.rows.length; i++) {
-        if(window.playPos == 0) {
-            table.rows[i].cells[window.nBeat - 1].classList.remove("playing");
+        if(window.playPos == 1) {
+            table.rows[i].cells[window.nBeat].classList.remove("playing");
         }
         else {
             table.rows[i].cells[window.playPos - 1].classList.remove("playing");
@@ -45,7 +45,7 @@ function updatePlayCol() {
 function clearPlayCol() {
     var table = document.getElementById("soundGrid");
     for(var i = 0; i < window.nInst; i++) {
-        for(var j = 0; j < window.nBeat; j++) {
+        for(var j = 1; j <= window.nBeat; j++) {
             table.rows[i].cells[j].classList.remove("playing");
         }
     }
@@ -54,7 +54,7 @@ function clearPlayCol() {
 function stop() {
     clearInterval(window.musicInt);
     window.playing = false;
-    window.playPos = 0;
+    window.playPos = 1;
     clearPlayCol();
 }
 
@@ -101,16 +101,15 @@ async function saveSound() {
     }
 
     for(i = 0; i < window.nInst; i++) {
-        for(j = 0; j < window.nBeat; j++) {
-            if(document.getElementById("soundGrid").rows[i].cells[j].classList.toggle('active')) {
-                soundArray[i][j] = 0;
+        for(j = 1; j <= window.nBeat; j++) {
+            if(document.getElementById("soundGrid").rows[i].cells[j].classList.contains('active')) {
+                soundArray[i][j-1] = 1;
             }
             else {
-                soundArray[i][j] = 1;
+                soundArray[i][j-1] = 0;
             }
         }
     }
-    // console.log(recName);
     if (recName == '') {
         document.getElementById("playlistError").style.display = 'none';
         document.getElementById("recordingNotAdded").style.display = 'none';
@@ -140,22 +139,50 @@ async function saveSound() {
             document.getElementById("recNameError").style.display = 'none';
         }
     }
-    addItem(recName);
-    // playlist()
+    addItem();
 }
 
-function addItem(recName){
+async function addItem(){
+    var name = sessionStorage.getItem("name");
+    var data = {name}
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    var res = await fetch('/displayPlaylist', options);
     var ul = document.getElementById("dynamic-list");
-    // var candidate = document.getElementById("candidate");
-    var li = document.createElement("li");
-    var link = document.createElement("button");
-    // link.setAttribute('href', '');
-    // link.onclick = loadSound(recName);
-    link.addEventListener('click', loadSound(recName));
-    link.setAttribute('id',recName);
-    link.appendChild(document.createTextNode(recName));
-    li.appendChild(link);
-    ul.appendChild(li);
+    ul.innerHTML = "";
+    if (res.status == 200) {
+        var result = await res.json();
+        for (i=0 ; i < Object.keys(result).length ; i++) {
+            var li = document.createElement("li");
+            var link = document.createElement("button");
+            //link.addEventListener('click', loadSound(result[i].recName));
+            link.setAttribute('id',result[i].recName);
+            link.addEventListener('click', function() {
+                var id = this.innerHTML;
+                loadSound(id);
+            });
+            link.setAttribute('id',result[i].recName);
+            link.appendChild(document.createTextNode(result[i].recName));
+            li.appendChild(link);
+            ul.appendChild(li);
+        }
+        document.getElementById("dynamic-list").style.display = "block";
+    }
+    else if (res.status == 201) {
+        console.log("Error : No playlist found.");
+        document.getElementById("playlistError").style.display = 'block';
+        document.getElementById("recordingNotAdded").style.display = 'none';
+        document.getElementById("recordingAdded").style.display = 'none';
+        document.getElementById("recNameError").style.display = 'none';
+    }
+    else {
+        console.log("Error");
+    }
 }
 
 async function loadSound(recName) {
@@ -168,42 +195,36 @@ async function loadSound(recName) {
             'Content-Type': 'application/json'
         }
     }
-    console.log("first");
+    //console.log("first");
     var res = await fetch('/load', options);
-    console.log("first12");
+    //console.log("first12");
     var result = await res.json();
-    console.log(result);
+    window.nInst = result.noInstr;
+    window.nBeat = result.beats;
+    window.bpm = result.bpmRate;
+    window.instrs = result.instruments;
+    soundArray = result.soundArray;
+    console.log(soundArray);
+    buildTable();
+    for(i = 0; i < window.nInst; i++) {
+        for(j = 0; j <= window.nBeat; j++) {
+            if(soundArray[i][j] == 1) {
+                document.getElementById("soundGrid").rows[i].cells[j+1].classList.add('active');
+            }
+        }
+    }
 }
 
 
 async function playlist() {
-    var name = sessionStorage.getItem("name");
-    var data = {name}
-    var options = {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }
-    var res = await fetch('/displayPlaylist', options);
-    if (res.status == 200) {
-        var result = await res.json();
-        for (i=0 ; i < Object.keys(result).length ; i++) {
-            addItem(result[i].recName);
-        }
-    }
-    else if (res.status == 201) {
-        console.log("Error : No playlist found.");
-        document.getElementById("playlistError").style.display = 'block';
-        document.getElementById("recordingNotAdded").style.display = 'none';
-        document.getElementById("recordingAdded").style.display = 'none';
-        document.getElementById("recNameError").style.display = 'none';
+    if(document.getElementById("dynamic-list").style.display == "block") {
+        document.getElementById("dynamic-list").style.display = "none";
+        return;
     }
     else {
-        console.log("Error");
+        addItem();
+        document.getElementById("dynamic-list").style.display = "block";
     }
-    document.getElementById("playlist").disabled = true;
 }
 
 
@@ -232,14 +253,18 @@ async function playlist() {
 //     var res = await fetch('/writeSound', options);
 // }
 
-function buildTable() {
-  //find where is the table
-    var table = document.getElementById("soundGrid");
+function init() {
     window.nInst = 2;
     window.nBeat = 16;
     window.BPM = 120;
-    window.playPos = 0;
-    window.instrs = ['Kick', 'Ride'];
+    window.playPos = 1;
+    window.instrs = ['Kick', 'HiHat'];
+}
+
+function buildTable() {
+  //find where is the table
+    var table = document.getElementById("soundGrid");
+    table.innerHTML = "";
     cntr = 3;
     for(i = 0; i < window.nInst; i++) {
         table.insertRow();
@@ -258,12 +283,7 @@ function buildTable() {
         }
         var instName = table.rows[i].insertCell(0);
         instName.style.backgroundColor = "GhostWhite";
-        if(window.instrs[i] == 'Kick'){
-          instName.innerHTML = "<img src=\"stylesheets/instIcon/kick.png\" width=\"35px\" height=\"35px\">";
-        }
-        else{
-          instName.innerHTML = "<img src=\"stylesheets/instIcon/ride2.png\" width=\"35px\" height=\"35px\">";
-        }
+        instName.innerHTML = getImg(window.instrs[i]);
     }
 }
 
@@ -290,34 +310,37 @@ function createInstrument(soundName) {
     }
     var instName = table.rows[i].insertCell(0);
     instName.style.backgroundColor = "GhostWhite";
-    if(soundName == 'Kick'){
-      instName.innerHTML = "<img src=\"stylesheets/instIcon/kick.png\" width=\"35px\" height=\"35px\">";
-    }
-    else if (soundName == 'Ride'){
-      instName.innerHTML = "<img src=\"stylesheets/instIcon/ride2.png\" width=\"35px\" height=\"35px\">";
-    }
-    else if(soundName == 'Crash'){
-      instName.innerHTML = "<img src=\"stylesheets/instIcon/crash.png\" width=\"35px\" height=\"35px\">";
-    }
-    else if(soundName == 'HiHat'){
-      instName.innerHTML = "<img src=\"stylesheets/instIcon/ride.png\" width=\"35px\" height=\"35px\">";
-    }
-    else if(soundName == 'OpenHat'){
-      instName.innerHTML = "<img src=\"stylesheets/instIcon/openHat.png\" width=\"35px\" height=\"35px\">";
-    }
-    else if(soundName == 'Sdst'){
-      instName.innerHTML = "<img src=\"stylesheets/instIcon/sdst.png\" width=\"35px\" height=\"35px\">";
-    }
-    else if(soundName == 'Snare'){
-      instName.innerHTML = "<img src=\"stylesheets/instIcon/snare.png\" width=\"35px\" height=\"35px\">";
-    }
-    else if(soundName == 'Tom1'){
-      instName.innerHTML = "<img src=\"stylesheets/instIcon/tom1.png\" width=\"35px\" height=\"35px\">";
-    }
-    else if(soundName == 'Tom2'){
-      instName.innerHTML = "<img src=\"stylesheets/instIcon/tom2.png\" width=\"35px\" height=\"35px\">";
-    }
+    instName.innerHTML = getImg(soundName);
+}
 
+function getImg(soundName) {
+    if(soundName == 'Kick'){
+        return "<img src=\"stylesheets/instIcon/kick.png\" width=\"35px\" height=\"35px\">";
+      }
+      else if (soundName == 'Ride'){
+        return "<img src=\"stylesheets/instIcon/ride2.png\" width=\"35px\" height=\"35px\">";
+      }
+      else if(soundName == 'Crash'){
+        return "<img src=\"stylesheets/instIcon/crash.png\" width=\"35px\" height=\"35px\">";
+      }
+      else if(soundName == 'HiHat'){
+        return "<img src=\"stylesheets/instIcon/ride.png\" width=\"35px\" height=\"35px\">";
+      }
+      else if(soundName == 'OpenHat'){
+        return "<img src=\"stylesheets/instIcon/openHat.png\" width=\"35px\" height=\"35px\">";
+      }
+      else if(soundName == 'Sdst'){
+        return "<img src=\"stylesheets/instIcon/sdst.png\" width=\"35px\" height=\"35px\">";
+      }
+      else if(soundName == 'Snare'){
+        return "<img src=\"stylesheets/instIcon/snare.png\" width=\"35px\" height=\"35px\">";
+      }
+      else if(soundName == 'Tom1'){
+        return "<img src=\"stylesheets/instIcon/tom1.png\" width=\"35px\" height=\"35px\">";
+      }
+      else {
+        return "<img src=\"stylesheets/instIcon/tom2.png\" width=\"35px\" height=\"35px\">";
+      }
 }
 
 function addColumns() {

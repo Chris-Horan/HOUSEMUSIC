@@ -48,7 +48,7 @@
             }
         </style>
 </head>
-  <body id = 'elementshield'  style = "display:none" onload = 'loggedin();buildTable();dashboarddisplayUser()'>
+  <body id = 'elementshield'  style = "display:none" onload = 'loggedin();init();buildTable();dashboarddisplayUser()'>
     <p1>Hello! If you see this, your login was successful! </p1><br>
     <div class="div1">
         <nav class="topnav">
@@ -87,9 +87,8 @@
           </div>
 
           <br>
-          <div id="loadSound" action="/load" method="post">
-              <button type="submit" id="playlist" onclick="playlist()"> My Playlist </button>
-              <p id="dynamic-list">PLAYLIST</p>
+          <div id="loadSound">
+              <button type="submit" id="playlist" onclick="playlist()"> My Tracks </button>
               <ul id="dynamic-list"></ul>
               <label id="label"> Give name to your recording</label>
               <input type="text" id="candidate" />

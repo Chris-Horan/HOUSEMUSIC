@@ -392,12 +392,10 @@ app.post('/save', (req,res) => {
     instrumentData.insert({name: req.body.name, recName: req.body.recName, soundArray: req.body.soundArray, instruments: req.body.instruments, noInstr: req.body.noInstr, beats: req.body.beats, bpmRate: req.body.bpmRate}, function(err, data) {
         if (!data) {
             res.status(201);
-            console.log("Error");
             res.send("Error");
         }
         else {
             res.status(200);
-            console.log(data);
             res.send(data);
         }
     });
@@ -414,12 +412,10 @@ app.post('/displayPlaylist', (req, res) => {
             instrumentData.find({name: req.body.name}, function(err, data) {
                 if (err) {
                     res.status(202);
-                    console.log("Error");
                     res.send("Error")
                 }
                 else {
                     res.status(200);
-                    console.log(data);
                     res.send(data);
                 }
             });
@@ -443,7 +439,6 @@ app.post('/load', (req,res) =>{
                 }
                 else {
                     res.status(200);
-                    console.log(data);
                     res.send(data);
                 }
             });
