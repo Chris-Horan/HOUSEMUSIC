@@ -380,3 +380,12 @@ function deleteColumn() {
     }
     window.nBeat -= 4;
 }
+
+// function displayTitle(){
+//   if(document.getElementById("displayN").style.display == "block"){
+//     document.getElementById("displayN").style.display = "none";
+//   }
+//   else {
+//     document.getElementById("displayN").style.display == "block";
+//   }
+// }

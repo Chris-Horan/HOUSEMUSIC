@@ -1,1 +1,3 @@
+{"name":"hihihi","recName":"p5","soundArray":[[0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1],[0,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0],[0,0,0,1,0,0,0,1,0,0,1,1,0,0,0,0]],"instruments":["Kick","HiHat","Kick","Sdst"],"noInstr":4,"beats":16,"bpmRate":120,"_id":"33PhZ3ZtI1C4rweQ"}
+{"name":"hihihi","recName":"23","soundArray":[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],"instruments":["Kick","HiHat","Crash"],"noInstr":3,"beats":16,"bpmRate":120,"_id":"RUbIxXyb99ygM06a"}
 {"name":"chris","recName":"new","soundArray":[[1,0,0,0,1,0,0,0,1,0,1,0,1,0,0,1],[0,0,1,0,0,0,1,0,1,0,0,0,0,0,1,0]],"instruments":["Kick","HiHat"],"noInstr":2,"beats":16,"bpmRate":120,"_id":"tEUzEg7ShuZuchLz"}

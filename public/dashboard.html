@@ -67,8 +67,10 @@
           <button id="play" onclick="togglePlay()"><img src="https://img.icons8.com/ios/100/000000/circled-play.png"/></button>
           <button id="pause" onclick="pause()"><img src="https://img.icons8.com/ios/100/000000/circled-pause.png"/></button>
           <button id="stop" onclick="stop()"><img src="https://img.icons8.com/ios/100/000000/stop-circled--v2.png"/></button>
+
           <button id="bpmDown" onclick="bpmDown()">-</button>
-          <p id="bpm">120</p>
+          <p class="bpm">BPM:</p>
+          <p class="bpm" id="bpm">120</p>
           <button id="bpmUp" onclick="bpmUp()">+</button>
 
           <!-- <button id="unmute"><img src="https://img.icons8.com/ios/100/000000/high-volume.png"/></button>
@@ -86,39 +88,88 @@
               <p1 id="playlistError" style="display:none">Error: No playlist found. </p1>
           </div>
 
+          <ul id="messages"></ul>
+          <form action="" style="display:none">
+              <input id="m" autocomplete="off" /><button id="sender">Send</button>
+          </form>
+
           <br>
-          <div id="loadSound">
-              <button type="submit" id="playlist" onclick="playlist()"> My Tracks </button>
-              <ul id="dynamic-list"></ul>
-              <label id="label"> Give name to your recording</label>
-              <input type="text" id="candidate" />
-              <button onclick="saveSound()"> SAVE </button>
-          </div>
+          <!-- <div id="loadSound">
+              <div id="saveTrack">
+                  <label id="label"> Save your recording: </label>
+                  <input type="text" id="candidate" value="Name your recording here" />
+                  <button onclick="saveSound()"> Save </button>
+                  <button type="submit" id="playlist" onclick="playlist()"> View My Tracks </button>
+              </div>
+              <div id="playlistDisplay">
+                  <ul id="dynamic-list"></ul>
+              </div>
+          </div> -->
           <br>
 
-          <div class="dropdown">
-              <button class="dropbtn">Add Instrument</button>
-              <div class="dropdown-content">
-                  <a href="#" onclick="createInstrument('Crash')">Crash</a>
-                  <a href="#" onclick="createInstrument('HiHat')">HiHat</a>
-                  <a href="#" onclick="createInstrument('Kick')">Kick</a>
-                  <a href="#" onclick="createInstrument('OpenHat')">OpenHat</a>
-                  <a href="#" onclick="createInstrument('Ride')">Ride</a>
-                  <a href="#" onclick="createInstrument('Sdst')">Sdst</a>
-                  <a href="#" onclick="createInstrument('Snare')">Snare</a>
-                  <a href="#" onclick="createInstrument('Tom1')">Tom1</a>
-                  <a href="#" onclick="createInstrument('Tom2')">Tom2</a>
+          <div id="bottomTools">
+              <div class="dropdown">
+                    <button class="dropbtn dropbtn2 ">Add Instrument</button>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="createInstrument('Crash')">Crash</a>
+                        <a href="#" onclick="createInstrument('HiHat')">HiHat</a>
+                        <a href="#" onclick="createInstrument('Kick')">Kick</a>
+                        <a href="#" onclick="createInstrument('OpenHat')">OpenHat</a>
+                        <a href="#" onclick="createInstrument('Ride')">Ride</a>
+                        <a href="#" onclick="createInstrument('Sdst')">Sdst</a>
+                        <a href="#" onclick="createInstrument('Snare')">Snare</a>
+                        <a href="#" onclick="createInstrument('Tom1')">Tom1</a>
+                        <a href="#" onclick="createInstrument('Tom2')">Tom2</a>
+                    </div>
               </div>
-          </div>
-          <button class="dropbtn" onclick="addColumns()">Add Column</button>
-          <button class="dropbtn" onclick="deleterow()">Remove Instrument</button>
-          <button class="dropbtn" onclick="deleteColumn()">Delete Column</button>
-          <button class="dropbtn" onclick="sendmessage()">Share Project</button>
+              <button class="dropbtn dropbtn2" onclick="addColumns()">Add Column</button>
+              <button class="dropbtn dropbtn2" onclick="deleterow()">Remove Instrument</button>
+              <button class="dropbtn dropbtn2" onclick="deleteColumn()">Delete Column</button>
+              <button class="dropbtn dropbtn2" onclick="sendmessage()">Share Project</button>
+              <!-- <div id="saveTrack" class="dropbtn dropbtn2">
+                  <label id="label"> Save Project: </label>
+                  <input type="text" id="candidate" value="Name your recording here" />
+                  <button onclick="saveSound()" class="saveNload"> Save </button>
+                  <button type="submit" id="playlist" onclick="playlist()" class="saveNload"> View My Tracks </button>
+                  <ul id="dynamic-list"></ul>
+              </div> -->
+              <!-- <div id="myTracks" class="dropbtn">
+                <p>My Tracks</p>
+                <ul id="dynamic-list"></ul>
+              </div> -->
+              <!-- <div id="playlistDisplay" class="dropbtn">
+                  <p id="displayN">Playlist</p>
+                  <ul id="dynamic-list"></ul>
+              </div> -->
+              <!-- <div id="saveTrack" class="dropbtn dropbtn2">
+                  <label id="label"> Save Project: </label>
+                  <input type="text" id="candidate" value="Name your recording here" />
+                  <button onclick="saveSound()" class="saveNload"> Save </button>
+                  <button type="submit" id="playlist" onclick="playlist()" class="saveNload"> View My Tracks </button>
+                  <ul id="dynamic-list"></ul>
+              </div> -->
+        </div>
+        <br>
+
+        <div id="saveTrack" class="dropbtn dropbtn2">
+            <label id="label"> Save Project: </label>
+            <input type="text" id="candidate" value="Name your recording here" />
+            <button onclick="saveSound()" class="saveNload"> Save </button>
+            <button type="submit" id="playlist" onclick="playlist()" class="saveNload"> View My Tracks </button>
+            <ul id="dynamic-list"></ul>
+        </div>
+
+        <!-- <div id="playlistDisplay">
+            <div id="myTracks">
+                <p>My Tracks</p>
+                <ul id="dynamic-list"></ul>
+            </div>
+        </div> -->
       </div>
-      
-      
-      
-      
+
+
+
+
       <!-- <div class="container">
       		<div class="feature1">
       			<p class="welcome">Feature1</p>
@@ -140,13 +191,13 @@
       <input type="text" name="soundName" id="soundName"/>
       <input type="submit" value="upload"/>
       </form> -->
-    <br>
-    <div>
+    <!-- <br>
+    <div id="socketIO">
         <ul id="messages"></ul>
         <form action="" style="display:none">
             <input id="m" autocomplete="off" /><button id="sender">Send</button>
         </form>
-    </div>
+    </div> -->
     <!-- <button onclick="logout()">Logout</button> -->
 </body>
 </html>
