@@ -147,47 +147,119 @@ describe('Admin panel functionality: ', function() {
                 .expect(202, done);
         });
     });
-
 });
 
-
-
-// signupscript.js tests
-
-// describe('Sign Up Functionality (Front end)', function() {
-//     describe('Reject password based on length:', function() {
-//         it('Should reject short passwords', function() {
-//             assert.equal(1, passReqsHandler("bad"));
-//         });
-//     });
-//     describe('Reject passwords with disallowed characters:', function() {
-//         it('Should reject passwords with bad characters', function() {
-//             assert.equal(2, signup.test.passReqsHandler("<><><><><"));
-//         });
-//     });
-//     describe('Accept valid password:', function() {
-//         it('Should accept valid passwords', function() {
-//             assert.equal(0, signup.test.passReqsHandler("password"));
-//         });
-//     });
-//     describe('Reject username based on length:', function() {
-//         it('Should reject short usernames', function() {
-//             assert.equal(1, userReqsHandler("bad", "test@test.com"));
-//         });
-//     });
-//     describe('Reject usernames with disallowed characters:', function() {
-//         it('Should reject usernames with bad characters', function() {
-//             assert.equal(2, signup.test.userReqsHandler("<><><><><", "test@test.com"));
-//         });
-//     });
-//     describe('Reject invalid email addresses:', function() {
-//         it('Should reject invalid email addresses', function() {
-//             assert.equal(3, signup.test.userReqsHandler("username", "bad"));
-//         });
-//     });
-//     describe('Accept valid usernames and emails:', function() {
-//         it('Should accept valid passwords', function() {
-//             assert.equal(0, signup.test.passReqsHandler("username", "test@test.com"));
-//         });
-//     });
-// });
+describe('Dashboard functionality: ', function() {
+    beforeEach(function() {
+        server = require('../server');
+    });
+    afterEach(function() {
+        server.close();
+    });
+    describe('Save a new track: ', function() {
+        it('Should save a track.', function(done) {
+            request(server)
+                .post('/save')
+                .send({'name': 'admin', 'recName': 'test343', 'soundArray': '', 'instruments': '', 'noInstr': '0', 'beats': '0', 'bpmRate': '120', 'code': '1'})
+                .expect(200, done);
+        });
+    });
+    describe('Load a track: ', function() {
+        it('Should load a track.', function(done) {
+            request(server)
+                .post('/load')
+                .send({'name': 'admin', 'recName': 'test343'})
+                .expect(200, done);
+        });
+        it('Should fail to load a track.', function(done) {
+            request(server)
+                .post('/load')
+                .send({'name': '', 'recName': 'test343'})
+                .expect(201, done);
+        });
+    });
+    describe('Display playlist: ', function() {
+        it('Should send playlist data for a user.', function(done) {
+            request(server)
+                .post('/displayPlaylist')
+                .send({'name': 'admin'})
+                .expect(200, done);
+        });
+        it('Should fail to send playlist data.', function(done) {
+            request(server)
+                .post('/displayPlaylist')
+                .send({'userName': ''})
+                .expect(201, done);
+        });
+    });
+    describe('Overwrite an existing track file: ', function() {
+        it('Should overwrite existing track data.', function(done) {
+            request(server)
+                .post('/overwrite')
+                .send({'name': 'admin', 'recName': 'test343', 'soundArray': '', 'instruments': '', 'noInstr': '0', 'beats': '0', 'bpmRate': '120'})
+                .expect(200, done);
+        });
+        it('Should fail to overwrite track data.', function(done) {
+            request(server)
+                .post('/overwrite')
+                .send({'name': 'admin', 'recName': 'DNE343', 'soundArray': '', 'instruments': '', 'noInstr': '0', 'beats': '0', 'bpmRate': '120'})
+                .expect(201, done);
+        });
+    });
+    describe('Retrieve a track based on ID: ', function() {
+        it('Should load a track.', function(done) {
+            request(server)
+                .post('/idload')
+                .send({'code': '1'})
+                .expect(200, done);
+        });
+        it('Should fail to load a track.', function(done) {
+            request(server)
+                .post('/idload')
+                .send({'code': '0'})
+                .expect(201, done);
+        });
+    });
+    describe('Check if a track exists: ', function() {
+        it('Should reply that this track does exist.', function(done) {
+            request(server)
+                .post('/checkname')
+                .send({'name': 'admin', 'recName': 'test343'})
+                .expect(202, done);
+        });
+        it('Should reply that this track does not exist.', function(done) {
+            request(server)
+                .post('/checkname')
+                .send({'name': 'admin', 'recName': 'DNE343'})
+                .expect(201, done);
+        });
+    });
+    describe('Check if a track exists based on a code: ', function() {
+        it('Should reply that this code exists.', function(done) {
+            request(server)
+                .post('/codecheck')
+                .send({'code': '1'})
+                .expect(202, done);
+        });
+        it('Should reply that this code does not exist.', function(done) {
+            request(server)
+                .post('/codecheck')
+                .send({'code': '0'})
+                .expect(203, done);
+        });
+    });
+    describe('Delete a track: ', function() {
+        it('Should delete a track.', function(done) {
+            request(server)
+                .post('/deleteTrack')
+                .send({'name': 'admin', 'recName': 'test343'})
+                .expect(200, done);
+        });
+        it('Should reply that this track does not exist.', function(done) {
+            request(server)
+                .post('/deleteTrack')
+                .send({'name': 'admin', 'recName': 'test343'})
+                .expect(201, done);
+        });
+    });
+});

@@ -405,7 +405,6 @@ app.post('/displayPlaylist', (req, res) => {
     instrumentData.count({name: req.body.name}, function(err, total) {
         if (total == 0) {
             res.status(201);
-            console.log("Error: No playlist found.");
             res.send("Error: No playlist found.");
         }
         else {
@@ -427,7 +426,6 @@ app.post('/load', (req,res) =>{
     instrumentData.count({name: req.body.name, recName: req.body.recName}, function(err, total) {
         if (total == 0) {
             res.status(201);
-            console.log("Error: Nothing to load.");
             res.send("Error: Nothing to load.");
         }
         else {
@@ -460,7 +458,7 @@ app.post('/overwrite', (req,res) =>{
 });
 
 app.post('/deleteTrack', (req,res) =>{ 
-    instrumentData.remove({name: req.body.name, recName: req.body.recName}, function(err, numRemoved) {
+    instrumentData.remove({name: req.body.name, recName: req.body.recName}, {multi:true}, function(err, numRemoved) {
         if(numRemoved != 1) {
             res.status(201);
             res.send("No track deleted.");
@@ -470,13 +468,13 @@ app.post('/deleteTrack', (req,res) =>{
             res.send("Track deleted.");
         }
     });
+    instrumentData.persistence.compactDatafile();
 });
 
 app.post('/idload', (req, res) => {
     instrumentData.count({ code: req.body.code}, function (err, total) {
         if (total == 0) {
             res.status(201);
-            console.log("Error: Incorrect Code.");
             res.send("Error: Code Not Valid.");
         }
         else {
@@ -507,7 +505,6 @@ app.post('/checkname', (req, res) => {
             instrumentData.find({ name: req.body.name, recName: req.body.recName }, function (err, data) {
                 if (data[0].recName == req.body.recName && data[0].name == req.body.name) {
                     res.status(202);
-                    console.log("Name Already Exists")
                     res.send("Error");
                 }
                 else {
@@ -531,13 +528,11 @@ app.post('/codecheck', (req, res) => {
     instrumentData.count({ code: req.body.code }, function (err, count) {
         if (count != 0) {
             res.status(202);
-            console.log("The same code already exists")
             res.send("Error");
         }
         else {
-            console.log("The Code is available")
-            res.send("Name Doesn't Exists");
             res.status(203);
+            res.send("Name Doesn't Exists");
         }
     }
  );
