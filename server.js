@@ -388,8 +388,8 @@ app.post('/uploadSound', (req, res) => {
 });
 
 //save and load feature
-app.post('/save', (req,res) => {
-    instrumentData.insert({name: req.body.name, recName: req.body.recName, soundArray: req.body.soundArray, instruments: req.body.instruments, noInstr: req.body.noInstr, beats: req.body.beats, bpmRate: req.body.bpmRate}, function(err, data) {
+app.post('/save', (req, res) => {
+    instrumentData.insert({ name: req.body.name, recName: req.body.recName, soundArray: req.body.soundArray, instruments: req.body.instruments, noInstr: req.body.noInstr, beats: req.body.beats, bpmRate: req.body.bpmRate, code: req.body.code }, function (err, data) {
         if (!data) {
             res.status(201);
             res.send("Error");
@@ -445,3 +445,75 @@ app.post('/load', (req,res) =>{
         }
     });
 });
+
+app.post('/idload', (req, res) => {
+    instrumentData.count({ code: req.body.code}, function (err, total) {
+        if (total == 0) {
+            res.status(201);
+            console.log("Error: Incorrect Code.");
+            res.send("Error: Code Not Valid.");
+        }
+        else {
+            instrumentData.findOne({ code: req.body.code }, function (err, data) {
+                if (err) {
+                    res.status(202);
+                    console.log("Error");
+                    res.send("Error")
+                }
+                else {
+                    res.status(200);
+                    res.send(data);
+                }
+            });
+        }
+    });
+});
+
+app.post('/checkname', (req, res) => {
+    instrumentData.count({ name: req.body.name, recName: req.body.recName }, function (err, count) {
+        if (count == 0) {
+           
+            res.status(201);
+            console.log("Error: No Names");
+            res.send("Error: Nothing in save names place.");
+        }
+        else {
+            instrumentData.find({ name: req.body.name, recName: req.body.recName }, function (err, data) {
+                if (data[0].recName == req.body.recName && data[0].name == req.body.name) {
+                    res.status(202);
+                    console.log("Name Already Exists")
+                    res.send("Error");
+                }
+                else {
+                    res.send("Name Doesn't Exists");
+                    res.status(203);
+                }
+            });
+        }
+    });
+});
+
+app.post('/update', (req, res) => {
+    instrumentData.update(
+        { code: req.body.code },
+        {
+            $set: { name: req.body.name, recName: req.body.recName, soundArray: req.body.soundArray, instruments: req.body.instruments, noInstr: req.body.noInstr, beats: req.body.beats, bpmRate: req.body.bpmRate}
+        });
+    });
+
+app.post('/codecheck', (req, res) => {
+    instrumentData.count({ code: req.body.code }, function (err, count) {
+        if (count != 0) {
+            res.status(202);
+            console.log("The same code already exists")
+            res.send("Error");
+        }
+        else {
+            console.log("The Code is available")
+            res.send("Name Doesn't Exists");
+            res.status(203);
+        }
+    }
+ );
+});
+

@@ -513,6 +513,7 @@ html, body, .container
   padding: 3px 10px;
   text-align: left;
   border-radius: 2px;
+  margin-top: 10px;
   /* margin-top: 17px; */
   /* margin-right: 60px; */
 
@@ -521,6 +522,15 @@ html, body, .container
   bottom: 20px;
   right: 20px;
   left: 20px; */
+}
+
+#share {
+  height: auto;
+  width: auto;
+  background-color: white;
+  padding: 7px 10px;
+  float:right;
+  margin-right: 204px;
 }
 
 #dynamic-list {
@@ -538,9 +548,33 @@ html, body, .container
   color: black;
 }
 
+#share input{
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 10px 10px;
+  /* margin-top: 5px; */
+  /* margin-bottom: 5px; */
+  /* border-bottom: 1px solid white; */
+  /* background-color: #00000000; */
+  background-color: white;
+  color: black;
+  width: 200px;
+}
+
 #saveTrack button {
   width: 120px;
   height: 30px;
+}
+
+#share button{
+  width: 120px;
+  height: 30px;
+}
+
+#share button:hover{
+  background-color: #19B5BC;
+  color: white;
+  border: 0;
 }
 
 #saveTrack button:hover{
@@ -552,6 +586,12 @@ html, body, .container
 #saveTrack label {
   /* color: white; */
   color: black;
+  font-size: 16px;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+}
+
+#share label{
+  color:black;
   font-size: 16px;
   font-family: "Source Sans Pro", Helvetica, sans-serif;
 }
@@ -594,13 +634,6 @@ html, body, .container
   /* background-color: white; */
   background-color: #19B5BC;
 }
-
-/* ========================================== */
-
-#label {
-  color: white;
-}
-
 
 
 ul{

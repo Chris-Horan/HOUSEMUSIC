@@ -14,10 +14,13 @@
     <script>
 
         function sendmessage() {
+            saveSound();
+            var sharecode = sessionStorage.getItem('codeid');
+
             var username = sessionStorage.getItem("name")
             document.getElementById("m").value = username + " wants to share his creation:";
             document.getElementById("sender").click();
-            document.getElementById("m").value = "Here is the code or link or whatever";
+            document.getElementById("m").value = sharecode;
             document.getElementById("sender").click();
             document.getElementById("m").value = "";
             document.getElementById("sender").click();
@@ -48,7 +51,7 @@
             }
         </style>
 </head>
-  <body id = 'elementshield'  style = "display:none" onload = 'loggedin();init();buildTable();dashboarddisplayUser()'>
+  <body id = 'elementshield'  style = "display:none" onload = 'loggedin(); init(); buildTable(); dashboarddisplayUser(); resetcodes()'>
     <p1>Hello! If you see this, your login was successful! </p1><br>
     <div class="div1">
         <nav class="topnav">
@@ -86,6 +89,7 @@
               <p1 id="recordingNotAdded" style="display:none">Error: Try again.....</p1>
               <p1 id="recNameError" style="display:none">Error: Enter any name to your recording. </p1>
               <p1 id="playlistError" style="display:none">Error: No playlist found. </p1>
+              <p1 id="updated" style="display:none; color:white">Your Project has been updated. </p1>
           </div>
 
           <ul id="messages"></ul>
@@ -126,34 +130,19 @@
               <button class="dropbtn dropbtn2" onclick="deleterow()">Remove Instrument</button>
               <button class="dropbtn dropbtn2" onclick="deleteColumn()">Delete Column</button>
               <button class="dropbtn dropbtn2" onclick="sendmessage()">Share Project</button>
-              <!-- <div id="saveTrack" class="dropbtn dropbtn2">
-                  <label id="label"> Save Project: </label>
-                  <input type="text" id="candidate" value="Name your recording here" />
-                  <button onclick="saveSound()" class="saveNload"> Save </button>
-                  <button type="submit" id="playlist" onclick="playlist()" class="saveNload"> View My Tracks </button>
-                  <ul id="dynamic-list"></ul>
-              </div> -->
-              <!-- <div id="myTracks" class="dropbtn">
-                <p>My Tracks</p>
-                <ul id="dynamic-list"></ul>
-              </div> -->
-              <!-- <div id="playlistDisplay" class="dropbtn">
-                  <p id="displayN">Playlist</p>
-                  <ul id="dynamic-list"></ul>
-              </div> -->
-              <!-- <div id="saveTrack" class="dropbtn dropbtn2">
-                  <label id="label"> Save Project: </label>
-                  <input type="text" id="candidate" value="Name your recording here" />
-                  <button onclick="saveSound()" class="saveNload"> Save </button>
-                  <button type="submit" id="playlist" onclick="playlist()" class="saveNload"> View My Tracks </button>
-                  <ul id="dynamic-list"></ul>
-              </div> -->
+
         </div>
         <br>
 
+        <div class="dropbtn dropbtn2" id="share">
+          <label id="label">Enter Friend Code:</label>
+          <input type="text" id="friendid" value="Enter the code" />
+          <button onclick="loadshareable()"> Load </button>
+       </div>
+
         <div id="saveTrack" class="dropbtn dropbtn2">
             <label id="label"> Save Project: </label>
-            <input type="text" id="candidate" value="Name your recording here" />
+            <input type="text" id="candidate" value="Name" />
             <button onclick="saveSound()" class="saveNload"> Save </button>
             <button type="submit" id="playlist" onclick="playlist()" class="saveNload"> View My Tracks </button>
             <ul id="dynamic-list"></ul>

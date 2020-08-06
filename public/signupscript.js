@@ -40,7 +40,12 @@ function logout(){
     window.location.replace("index.html");
 }
 
-function loggedin(){
+function resetcodes() {
+    sessionStorage.setItem('recName', null);
+    sessionStorage.setItem('codeid', null);
+}
+
+function loggedin() {
     if(sessionStorage.getItem("type") == 'admin'){
         document.getElementById('elementshield').style.display = 'block';
 	}
