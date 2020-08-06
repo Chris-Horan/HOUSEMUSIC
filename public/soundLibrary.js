@@ -155,12 +155,75 @@ async function shareSound() {
 }
 */
 
+async function saveCurr() {
+    var name = sessionStorage.getItem("name");
+    var recName = window.trackName;
+    if(recName === "untitled") {
+        return;
+    }
+    var instruments = window.instrs;
+    var noInstr = window.nInst;
+    var beats = window.nBeat;
+    var bpmRate = window.BPM;
+    var soundArray = new Array(window.nInst);
+    for (k = 0; k < window.nInst; k++) {
+        soundArray[k] = new Array(window.nBeat);
+    }
+
+    for (i = 0; i < window.nInst; i++) {
+        for (j = 1; j <= window.nBeat; j++) {
+            if (document.getElementById("soundGrid").rows[i].cells[j].classList.contains('active')) {
+                soundArray[i][j - 1] = 1;
+            }
+            else {
+                soundArray[i][j - 1] = 0;
+            }
+        }
+    }
+    var data = { name, recName, soundArray, instruments, noInstr, beats, bpmRate}
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    var res = await fetch('/overwrite', options);
+    if(res.status == 201) {
+        //error
+    }
+}
+
+async function deleteTrack() {
+    var name = sessionStorage.getItem("name");
+    var recName = window.trackName;
+    if(recName === "untitled") {
+        return;
+    }
+    var data = {name, recName};
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    var res = await fetch('/deleteTrack', options);
+    if(res.status == 201) {
+        //error
+    }
+    else {
+        init();
+        buildTable();
+    }
+}
+
 async function saveSound() {
     // TO DO: Added in a feature for updating
     var code = sharekey(10);
     var val = document.getElementById('candidate').value;
 
-    if (val.length > 20 || val.length < 4 || val == null || val == 'null') {
+    if (val.length > 20 || val.length < 4 || val == null || val == 'null' || val == "untitled") {
         document.getElementById('recNameError').style.display = 'block';
         return;
     }

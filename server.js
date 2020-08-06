@@ -446,6 +446,32 @@ app.post('/load', (req,res) =>{
     });
 });
 
+app.post('/overwrite', (req,res) =>{ 
+    instrumentData.update({name: req.body.name, recName: req.body.recName}, {$set: { name: req.body.name, recName: req.body.recName, soundArray: req.body.soundArray, instruments: req.body.instruments, noInstr: req.body.noInstr, beats: req.body.beats, bpmRate: req.body.bpmRate}}, function(err, numReplaced) {
+        if(numReplaced != 1) {
+            res.status(201);
+            res.send("No data written.");
+        }
+        else {
+            res.status(200);
+            res.send("File overwritten");
+        }
+    });
+});
+
+app.post('/deleteTrack', (req,res) =>{ 
+    instrumentData.remove({name: req.body.name, recName: req.body.recName}, function(err, numRemoved) {
+        if(numRemoved != 1) {
+            res.status(201);
+            res.send("No track deleted.");
+        }
+        else {
+            res.status(200);
+            res.send("Track deleted.");
+        }
+    });
+});
+
 app.post('/idload', (req, res) => {
     instrumentData.count({ code: req.body.code}, function (err, total) {
         if (total == 0) {

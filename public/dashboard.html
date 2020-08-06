@@ -76,6 +76,8 @@
           <p class="bpm" id="bpm">120</p>
           <button id="bpmUp" onclick="bpmUp()">+</button>
           <div id="trackName"></div>
+          <div id="saveCurr" onclick="saveCurr()">Overwrite</div>
+          <div id="deleteTrack" onclick="deleteTrack()">Delete</div>
 
           <!-- <button id="unmute"><img src="https://img.icons8.com/ios/100/000000/high-volume.png"/></button>
           <button id="mute"><img src="https://img.icons8.com/ios/100/000000/mute.png"/></button> -->
@@ -137,13 +139,13 @@
 
         <div class="dropbtn dropbtn2" id="share">
           <label id="label">Enter Friend Code:</label>
-          <input type="text" id="friendid" value="Enter the code" />
+          <input type="text" id="friendid" placeholder="Enter code" />
           <button onclick="loadshareable()"> Load </button>
        </div>
 
         <div id="saveTrack" class="dropbtn dropbtn2">
             <label id="label"> Save Project: </label>
-            <input type="text" id="candidate" value="Name" />
+            <input type="text" id="candidate" placeholder="Name" />
             <button onclick="saveSound()" class="saveNload"> Save </button>
             <button type="submit" id="playlist" onclick="playlist()" class="saveNload"> View My Tracks </button>
             <ul id="dynamic-list"></ul>
