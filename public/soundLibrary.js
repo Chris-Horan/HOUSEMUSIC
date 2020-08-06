@@ -85,9 +85,222 @@ function bpmUp() {
     }
 }
 
+function sharekey(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+/*
+async function shareSound() {
+    // TO DO: play added sound
+    var name = sessionStorage.getItem("name");
+    var code = sharekey(10);
+    var recName = document.getElementById('candidate').value;
+    var instruments = window.instrs;
+    var noInstr = window.nInst;
+    var beats = window.nBeat;
+    var bpmRate = window.BPM;
+    var soundArray = new Array(window.nInst);
+
+    for (k = 0; k < window.nInst; k++) {
+        soundArray[k] = new Array(window.nBeat);
+    }
+
+    for (i = 0; i < window.nInst; i++) {
+        for (j = 1; j <= window.nBeat; j++) {
+            if (document.getElementById("soundGrid").rows[i].cells[j].classList.contains('active')) {
+                soundArray[i][j - 1] = 1;
+            }
+            else {
+                soundArray[i][j - 1] = 0;
+            }
+        }
+    }
+    if (recName == '') {
+        document.getElementById("playlistError").style.display = 'none';
+        document.getElementById("recordingNotAdded").style.display = 'none';
+        document.getElementById("recordingAdded").style.display = 'none';
+        document.getElementById("recNameError").style.display = 'display';
+    }
+    else {
+        var data = { name, recName, soundArray, instruments, noInstr, beats, bpmRate, code }
+        var options = {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        var res = await fetch('/save', options);
+        if (res.status == 201) {
+            document.getElementById("recordingNotAdded").style.display = 'block';
+            document.getElementById("recordingAdded").style.display = 'none';
+            document.getElementById("playlistError").style.display = 'none';
+            document.getElementById("recNameError").style.display = 'none';
+        }
+        else if (res.status == 200) {
+            document.getElementById("recordingNotAdded").style.display = 'none';
+            document.getElementById("recordingAdded").style.display = 'block';
+            document.getElementById("playlistError").style.display = 'none';
+            document.getElementById("recNameError").style.display = 'none';
+        }
+    }
+    sessionStorage.setItem('codeid', code); 
+    addItem();
+    sendmessage();
+}
+*/
+
+async function saveSound() {
+    // TO DO: Added in a feature for updating
+    var code = sharekey(10);
+
+
+
+
+
+    var name = sessionStorage.getItem("name");
+
+    if (document.getElementById('candidate').value == '' || (sessionStorage.getItem('recName') != null && sessionStorage.getItem('recName') != 'null')) {
+        recName = sessionStorage.getItem("recName");
+    }
+    else {
+        var recName = document.getElementById('candidate').value;
+    }
+    document.getElementById('candidate').value = null;
+    var instruments = window.instrs;
+    var noInstr = window.nInst;
+    var beats = window.nBeat;
+    var bpmRate = window.BPM;
+    var soundArray = new Array(window.nInst);
+
+    // Before saving, check if something of the same name already exists
+    var data = { name, recName };
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    res = await fetch('/checkname', options);
+
+    if (res.status == 202) {
+        //Go here if you want to update the thing
+        code = sessionStorage.getItem('codeid'); //needs to be replaced
+
+        for (k = 0; k < window.nInst; k++) {
+            soundArray[k] = new Array(window.nBeat);
+        }
+
+        for (i = 0; i < window.nInst; i++) {
+            for (j = 1; j <= window.nBeat; j++) {
+                if (document.getElementById("soundGrid").rows[i].cells[j].classList.contains('active')) {
+                    soundArray[i][j - 1] = 1;
+                }
+                else {
+                    soundArray[i][j - 1] = 0;
+                }
+            }
+        }
+        if (recName == '') {
+            document.getElementById("playlistError").style.display = 'none';
+            document.getElementById("recordingNotAdded").style.display = 'none';
+            document.getElementById("recordingAdded").style.display = 'none';
+            document.getElementById("recNameError").style.display = 'display';
+        }
+        else {
+            document.getElementById("updated").innerHTML = sessionStorage.getItem('recName') + " has been updated.";
+            document.getElementById("updated").style.display = 'block';
+            var data = { name, recName, soundArray, instruments, noInstr, beats, bpmRate, code }
+            var options = {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            var res = await fetch('/update', options);
+
+        }
+        return;
+
+    }
+
+    //If you made it here, then no name already exists
+
+    //On the EXTREMELY RARE CHANCE of two codes being the same, just in case i am checking here:
+    var data = { code };
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    var res = await fetch('/codecheck', options);
+
+    if (res.status == 202) {
+        //The Code already exists for another music file
+        code = sharekey(10);
+    }
+
+
+    for (k = 0; k < window.nInst; k++) {
+        soundArray[k] = new Array(window.nBeat);
+    }
+
+    for (i = 0; i < window.nInst; i++) {
+        for (j = 1; j <= window.nBeat; j++) {
+            if (document.getElementById("soundGrid").rows[i].cells[j].classList.contains('active')) {
+                soundArray[i][j - 1] = 1;
+            }
+            else {
+                soundArray[i][j - 1] = 0;
+            }
+        }
+    }
+    if (recName == '') {
+        document.getElementById("playlistError").style.display = 'none';
+        document.getElementById("recordingNotAdded").style.display = 'none';
+        document.getElementById("recordingAdded").style.display = 'none';
+        document.getElementById("recNameError").style.display = 'display';
+    }
+    else {
+        var data = { name, recName, soundArray, instruments, noInstr, beats, bpmRate, code}
+        var options = {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        var res = await fetch('/save', options);
+        if (res.status == 201) {
+            document.getElementById("recordingNotAdded").style.display = 'block';
+            document.getElementById("recordingAdded").style.display = 'none';
+            document.getElementById("playlistError").style.display = 'none';
+            document.getElementById("recNameError").style.display = 'none';
+        }
+        else if (res.status == 200) {
+            document.getElementById("recordingNotAdded").style.display = 'none';
+            document.getElementById("recordingAdded").style.display = 'block';
+            document.getElementById("playlistError").style.display = 'none';
+            document.getElementById("recNameError").style.display = 'none';
+        }
+    }
+    sessionStorage.setItem('codeid', code);
+    addItem();
+}
+/*
 async function saveSound() {
     // TO DO: play added sound
-
     var name = sessionStorage.getItem("name");
     var recName = document.getElementById('candidate').value;
     var instruments = window.instrs;
@@ -141,7 +354,7 @@ async function saveSound() {
     }
     addItem();
 }
-
+*/
 async function addItem(){
     var name = sessionStorage.getItem("name");
     var data = {name}
@@ -185,6 +398,7 @@ async function addItem(){
     }
 }
 
+
 async function loadSound(recName) {
     var name = sessionStorage.getItem("name");
     var data = {name, recName};
@@ -205,6 +419,8 @@ async function loadSound(recName) {
     window.instrs = result.instruments;
     soundArray = result.soundArray;
     console.log(soundArray);
+    sessionStorage.setItem('codeid', result.code);
+    sessionStorage.setItem('recName', result.recName);
     buildTable();
     for(i = 0; i < window.nInst; i++) {
         for(j = 0; j <= window.nBeat; j++) {
@@ -215,6 +431,35 @@ async function loadSound(recName) {
     }
 }
 
+async function loadshareable(recName) {
+    var code = document.getElementById('friendid').value;
+    var data = {code};
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    //console.log("first");
+    var res = await fetch('/idload', options);
+    //console.log("first12");
+    var result = await res.json();
+    window.nInst = result.noInstr;
+    window.nBeat = result.beats;
+    window.bpm = result.bpmRate;
+    window.instrs = result.instruments;
+    soundArray = result.soundArray;
+    console.log(soundArray);
+    buildTable();
+    for (i = 0; i < window.nInst; i++) {
+        for (j = 0; j <= window.nBeat; j++) {
+            if (soundArray[i][j] == 1) {
+                document.getElementById("soundGrid").rows[i].cells[j + 1].classList.add('active');
+            }
+        }
+    }
+}
 
 async function playlist() {
     if(document.getElementById("dynamic-list").style.display == "block") {

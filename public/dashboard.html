@@ -14,10 +14,13 @@
     <script>
 
         function sendmessage() {
+
+            var sharecode = sessionStorage.getItem('codeid');
+
             var username = sessionStorage.getItem("name")
             document.getElementById("m").value = username + " wants to share his creation:";
             document.getElementById("sender").click();
-            document.getElementById("m").value = "Here is the code or link or whatever";
+            document.getElementById("m").value = sharecode;
             document.getElementById("sender").click();
             document.getElementById("m").value = "";
             document.getElementById("sender").click();
@@ -48,7 +51,7 @@
             }
         </style>
 </head>
-  <body id = 'elementshield'  style = "display:none" onload = 'loggedin();init();buildTable();dashboarddisplayUser()'>
+  <body id = 'elementshield'  style = "display:none" onload = 'loggedin(); init(); buildTable(); dashboarddisplayUser(); resetcodes()'>
     <p1>Hello! If you see this, your login was successful! </p1><br>
     <div class="div1">
         <nav class="topnav">
@@ -84,6 +87,7 @@
               <p1 id="recordingNotAdded" style="display:none">Error: Try again.....</p1>
               <p1 id="recNameError" style="display:none">Error: Enter any name to your recording. </p1>
               <p1 id="playlistError" style="display:none">Error: No playlist found. </p1>
+              <p1 id="updated" style="display:none; color:white">Your Project has been updated. </p1>
           </div>
 
           <br>
@@ -114,6 +118,10 @@
           <button class="dropbtn" onclick="deleterow()">Remove Instrument</button>
           <button class="dropbtn" onclick="deleteColumn()">Delete Column</button>
           <button class="dropbtn" onclick="sendmessage()">Share Project</button>
+          <label id="label">Enter Friend Code</label>
+          <input type="text" id="friendid" />
+          <button onclick="loadshareable()"> Load </button>
+
       </div>
       
       
