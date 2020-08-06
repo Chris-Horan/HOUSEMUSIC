@@ -215,6 +215,8 @@ async function deleteTrack() {
     else {
         init();
         buildTable();
+        playlist();
+        playlist();
     }
 }
 
@@ -229,13 +231,7 @@ async function saveSound() {
     }
 
     var name = sessionStorage.getItem("name");
-
-    if (document.getElementById('candidate').value == '' || (sessionStorage.getItem('recName') != null && sessionStorage.getItem('recName') != 'null')) {
-        recName = sessionStorage.getItem("recName");
-    }
-    else {
-        var recName = document.getElementById('candidate').value;
-    }
+    var recName = document.getElementById('candidate').value;
 
     document.getElementById('candidate').value = null;
     window.trackName = val;
@@ -246,6 +242,7 @@ async function saveSound() {
     var beats = window.nBeat;
     var bpmRate = window.BPM;
     var soundArray = new Array(window.nInst);
+
 
     // Before saving, check if something of the same name already exists
     var data = { name, recName };
