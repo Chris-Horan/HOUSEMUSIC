@@ -498,7 +498,6 @@ app.post('/checkname', (req, res) => {
         if (count == 0) {
            
             res.status(201);
-            console.log("Error: No Names");
             res.send("Error: Nothing in save names place.");
         }
         else {
