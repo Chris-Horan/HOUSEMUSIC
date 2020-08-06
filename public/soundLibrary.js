@@ -159,7 +159,10 @@ async function saveSound() {
     // TO DO: Added in a feature for updating
     var code = sharekey(10);
 
-
+    if (document.getElementById('candidate').value == '' || document.getElementById('candidate').value == null || document.getElementById('candidate').value == 'null') {
+        document.getElementById('recNameError').style.display = 'block';
+        return;
+    }
 
 
 
