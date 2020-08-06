@@ -323,19 +323,26 @@ html, body, .container
   font-family: "Source Sans Pro", Helvetica, sans-serif;
   /* border: 1px solid green; */
   margin-top: 0;
+  transform: translateY(-50%);
 }
 
 #bpmUp {
   font-size: 25px;
   display: inline-block;
   /* border: 1px solid green; */
+  transform: translateY(-20%);
   margin-left: 0;
 }
 #bpmDown {
-  font-size: 30px;
+  font-size: 25px;
   display: inline-block;
   /* border: 1px solid green; */
+  transform: translateY(-20%);
+}
 
+#bpmUp:hover, #bpmDown:hover {
+    border: 1px solid black;
+    font-size: 20px;
 }
 
 
@@ -644,4 +651,11 @@ ul{
 #recordingAdded, #recordingNotAdded, #recNameError, #playlistError {
   color: white;
   font-style: italic;
+}
+
+#trackName {
+  font-size: 30px;
+  margin-left: 30px;
+  display: inline-block;
+  transform: translateY(-10%);
 }

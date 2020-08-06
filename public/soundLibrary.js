@@ -158,13 +158,12 @@ async function shareSound() {
 async function saveSound() {
     // TO DO: Added in a feature for updating
     var code = sharekey(10);
+    var val = document.getElementById('candidate').value;
 
-    if (document.getElementById('candidate').value == '' || document.getElementById('candidate').value == null || document.getElementById('candidate').value == 'null') {
+    if (val.length > 20 || val.length < 4 || val == null || val == 'null') {
         document.getElementById('recNameError').style.display = 'block';
         return;
     }
-
-
 
     var name = sessionStorage.getItem("name");
 
@@ -174,7 +173,11 @@ async function saveSound() {
     else {
         var recName = document.getElementById('candidate').value;
     }
+
     document.getElementById('candidate').value = null;
+    window.trackName = val;
+    document.getElementById("trackName").innerHTML = window.trackName;
+    
     var instruments = window.instrs;
     var noInstr = window.nInst;
     var beats = window.nBeat;
@@ -195,7 +198,8 @@ async function saveSound() {
 
     if (res.status == 202) {
         //Go here if you want to update the thing
-        code = sessionStorage.getItem('codeid'); //needs to be replaced
+        code = sessionStorage.getItem('codeid');    document.getElementById("trackName").innerHTML = window.trackName;
+        //needs to be replaced
 
         for (k = 0; k < window.nInst; k++) {
             soundArray[k] = new Array(window.nBeat);
@@ -405,6 +409,7 @@ async function addItem(){
 async function loadSound(recName) {
     var name = sessionStorage.getItem("name");
     var data = {name, recName};
+    window.trackName = recName;
     var options = {
         method: 'POST',
         body: JSON.stringify(data),
@@ -452,6 +457,7 @@ async function loadshareable(recName) {
     window.nBeat = result.beats;
     window.bpm = result.bpmRate;
     window.instrs = result.instruments;
+    window.trackName = result.recName;
     soundArray = result.soundArray;
     console.log(soundArray);
     buildTable();
@@ -507,11 +513,13 @@ function init() {
     window.BPM = 120;
     window.playPos = 1;
     window.instrs = ['Kick', 'HiHat'];
+    window.trackName = "untitled";
 }
 
 function buildTable() {
   //find where is the table
     var table = document.getElementById("soundGrid");
+    document.getElementById("trackName").innerHTML = window.trackName;
     table.innerHTML = "";
     cntr = 3;
     for(i = 0; i < window.nInst; i++) {
