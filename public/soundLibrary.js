@@ -486,7 +486,7 @@ async function loadSound(recName) {
     var result = await res.json();
     window.nInst = result.noInstr;
     window.nBeat = result.beats;
-    window.bpm = result.bpmRate;
+    window.BPM = result.bpmRate;
     window.instrs = result.instruments;
     soundArray = result.soundArray;
     console.log(soundArray);
@@ -518,7 +518,7 @@ async function loadshareable(recName) {
     var result = await res.json();
     window.nInst = result.noInstr;
     window.nBeat = result.beats;
-    window.bpm = result.bpmRate;
+    window.BPM = result.bpmRate;
     window.instrs = result.instruments;
     window.trackName = result.recName;
     soundArray = result.soundArray;
@@ -584,6 +584,7 @@ function buildTable() {
     var table = document.getElementById("soundGrid");
     document.getElementById("trackName").innerHTML = window.trackName;
     table.innerHTML = "";
+    document.getElementById("bpm").innerHTML = window.BPM;
     cntr = 3;
     for(i = 0; i < window.nInst; i++) {
         table.insertRow();
