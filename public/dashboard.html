@@ -17,13 +17,23 @@
             saveSound();
             var sharecode = sessionStorage.getItem('codeid');
 
-            var username = sessionStorage.getItem("name")
-            document.getElementById("m").value = username + " wants to share his creation:";
-            document.getElementById("sender").click();
-            document.getElementById("m").value = sharecode;
-            document.getElementById("sender").click();
-            document.getElementById("m").value = "";
-            document.getElementById("sender").click();
+            if (sharecode != null && sharecode != 'null') {
+                var username = sessionStorage.getItem("name")
+                document.getElementById("m").value = username + " wants to share his creation:";
+                document.getElementById("sender").click();
+                document.getElementById("m").value = sharecode;
+                document.getElementById("sender").click();
+                document.getElementById("m").value = "";
+                document.getElementById("sender").click();
+                return;
+            }
+            document.getElementById('recNameError').style.display = 'block';
+            document.getElementById("playlistError").style.display = 'none';
+            document.getElementById("recordingNotAdded").style.display = 'none';
+            document.getElementById("recordingAdded").style.display = 'none';
+            return;
+
+
 
         }
         $(function () {
