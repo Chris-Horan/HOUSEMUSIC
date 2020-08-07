@@ -658,6 +658,7 @@ ul{
 #recordingAdded, #recordingNotAdded, #recNameError, #playlistError {
   color: white;
   font-style: italic;
+  padding-left: 50px;
 }
 
 #trackName {

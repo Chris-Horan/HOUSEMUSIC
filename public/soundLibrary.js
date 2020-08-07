@@ -227,6 +227,9 @@ async function saveSound() {
 
     if (val.length > 20 || val.length < 4 || val == null || val == 'null' || val == "untitled") {
         document.getElementById('recNameError').style.display = 'block';
+        document.getElementById("playlistError").style.display = 'none';
+        document.getElementById("recordingNotAdded").style.display = 'none';
+        document.getElementById("recordingAdded").style.display = 'none';
         return;
     }
 
